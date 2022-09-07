@@ -1,5 +1,5 @@
-import logoblanc from "@assets/logo-blanc.png"
-import "@components/styles/Header.css"
+import logoblanc from "@assets/logo-blanc.png";
+import "@components/styles/Header.css";
 
 function Header() {
   return (
