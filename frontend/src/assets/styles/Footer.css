@@ -1,0 +1,44 @@
+.footer {
+  background-color: #242b35;
+  padding-bottom: 1%;
+}
+
+.footer__container {
+  background-color: #242b35;
+  color: #8de8fe;
+  font-family: "Avenir-Black";
+  font-size: 3.5vw;
+  display: flex;
+  justify-content: space-between;
+}
+.footer__container__left {
+  margin-left: 2%;
+  margin-top: 2%;
+}
+.footer__container__middle {
+  margin-left: 2%;
+  margin-top: 2%;
+}
+.footer__container__right {
+  margin-right: 2%;
+  margin-top: 2%;
+}
+.footer__container__social__instagram {
+  width: 5%;
+  height: fit-content;
+  margin-left: 7%;
+  padding: 1%;
+  padding-top: 1.5%;
+}
+.footer__container__social__facebook {
+  width: 5%;
+  height: fit-content;
+  padding: 1%;
+  padding-top: 1.5%;
+}
+.footer__container__social__twitter {
+  width: 5%;
+  height: fit-content;
+  padding: 1%;
+  padding-top: 1.5%;
+}
