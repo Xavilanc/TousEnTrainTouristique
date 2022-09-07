@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "@components/styles/SearchTrains.css";
+import "@assets/styles/SearchTrains.css";
 
 const areas = [
   {
