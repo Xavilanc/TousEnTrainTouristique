@@ -1,0 +1,62 @@
+@font-face {
+    font-family: "Avenir-Roman";
+    src: url("/src/assets/fonts/Avenir-Roman.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Avenir-Black";
+    src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Avenir-Book";
+    src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* box principale du header contenant le logo et une autre box (liens et titre) */
+.header_main_container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #242B35;
+    padding: 3%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+/* logo de l'application */
+.header_logo {
+    width: 25%;
+    height: fit-content;
+}
+
+/* box contenant une autre box (liens) et le titre du site */
+.header_links_title_container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+/* box contenant les liens */
+.header_links_container {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 3%;
+}
+
+/* titre de l'application */
+.header_title {
+    padding-left: 3%;
+    font-size: 5vw;
+    font-family: "Avenir-Book";
+    color: white;
+    text-align: left;
+}
+
+/* liens dans le header */
+.header_links {
+    font-size: 3.5vw;
+    font-family: "Avenir-Book";
+    color: #8DE8FE;
+    padding: 2%;
+}
+
