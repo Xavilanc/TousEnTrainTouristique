@@ -1,0 +1,7 @@
+.area-select,
+.type-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 80%;
+    height: fit-content;
+}
