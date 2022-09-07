@@ -1,7 +1,57 @@
-.area-select,
-.type-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 80%;
+* {
+    margin: 0;
+}
+
+/* police pour texte en gras */
+@font-face {
+    font-family: "Avenir-Black";
+    src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+    font-family: "Avenir-Book";
+    src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* div contenant tout le formulaire de recherche */
+.train_search_form {
+    padding-top: 10%;
+    background-color: #F3F3F8;
+}
+
+/* champs de recherche région et type */
+.area_select,
+.type_select {
+  width: 80%;
+  height: fit-content;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  border-radius: 10px;
+  padding: 2%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  background-color: #F3F3F8;
+}
+
+/* label des champs de recherche région et type */
+.train_search_label {
+    text-align: left;
+    font-family: "Avenir-Book";
+    font-size: 4vw;
+    margin-left: 10%;
+}
+
+/* bouton je trouve */
+.train_search_button {
+    margin-left: 10%;
     height: fit-content;
+    font-family: "Avenir-Black";
+    font-size: 4vw;
+    border-radius: 25px;
+    padding: 2%;
+    width: 28%;
+    border: none;
+    color: white;
+    background-color: #127996;
 }

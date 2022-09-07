@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import epingle from "@assets/epingle.png"
-import "@components/styles/SearchTrains.css"
+import "@components/styles/SearchTrains.css";
 
 const areas = [
   {
@@ -18,34 +17,36 @@ const areas = [
 ];
 
 const types = [
-    {
-      id: 1,
-      name: "à la mer",
-    },
-    {
-      id: 2,
-      name: "à la montagne",
-    },
-    {
-      id: 3,
-      name: "à la campagne",
-    },
-  ];
+  {
+    id: 1,
+    name: "à la mer",
+  },
+  {
+    id: 2,
+    name: "à la montagne",
+  },
+  {
+    id: 3,
+    name: "à la campagne",
+  },
+];
 
 function SearchTrain() {
   const [area, setArea] = useState("");
   const [type, setType] = useState("");
   return (
-    <div>
-      <form id="train-search">
-        <label htmlFor="area-select">
-          Je vais<br />
-          <select className="area-select"
+    <div className="train_search_form">
+      <form id="train_search">
+        <label className="train_search_label" htmlFor="area_select">
+          Je vais
+          <br />
+          <select
+            className="area_select"
             value={area}
             id="area-select"
             onChange={(e) => setArea(e.target.value)}
           >
-            <option value="">Partout</option>
+            <option value="Partout">Partout</option>
             {areas &&
               areas.map((item) => (
                 <option value={item.name} key={item.id}>
@@ -53,15 +54,18 @@ function SearchTrain() {
                 </option>
               ))}
           </select>
-        </label> <br />
-        <label htmlFor="type-select">
-          Je recherche des idées<br />
-          <select className="type-select"
+        </label>{" "}
+        <br />
+        <label className="train_search_label" htmlFor="type-select">
+          Je recherche des idées
+          <br />
+          <select
+            className="type_select"
             value={type}
             id="type-select"
             onChange={(e) => setType(e.target.value)}
           >
-            <option value="">Pour tous les gouts</option>
+            <option value="Pour tous les gouts">Pour tous les gouts</option>
             {types &&
               types.map((item) => (
                 <option value={item.name} key={item.id}>
@@ -71,7 +75,14 @@ function SearchTrain() {
           </select>
         </label>
       </form>
-      <button type="submit" form="train-search" value="Je trouve !">Je trouve !</button>
+      <button
+        className="train_search_button"
+        type="submit"
+        form="train-search"
+        value="Je trouve !"
+      >
+        Je trouve !
+      </button>
     </div>
   );
 }
