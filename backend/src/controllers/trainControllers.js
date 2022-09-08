@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.train
-    .findAll()
+    .getJoin()
     .then(([rows]) => {
       res.send(rows);
     })
