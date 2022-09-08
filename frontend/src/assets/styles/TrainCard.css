@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+}
+
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* div contenant tous les éléments du composant TrainCard */
+.traincard_main_div {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f3f8;
+  padding: 3%;
+}
+
+/* div contenant tous les éléments du composant TrainCard sauf marge (pour fond blanc)*/
+.traincard_background_white_div {
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* titre du train */
+.traincard_train_title {
+  font-family: "Avenir-Black";
+  font-size: 5vw;
+  padding: 1.5%;
+  padding-bottom: 2%;
+}
+
+/* image d'illustration pour le train concerné */
+.train_card_train_image {
+  width: 100%;
+  height: fit-content;
+  border-radius: 10px;
+}
+
+/* box cliquable contenant lire la suite et le chevron */
+.traincard_subtitle_container {
+  display: flex;
+  padding: 2%;
+}
+
+/* sous-titre lire la suite */
+.traincard_subtitle {
+  color: #127996;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+}
+
+/* chevron pour lire la suite*/
+.traincard_chevron {
+  width: 6%;
+  height: fit-content;
+  padding-left: 2%;
+}
+
+/* box contenant les etoiles de notation */
+.traincard_notation_container {
+  display: flex;
+  justify-content: end;
+  padding-right: 6%;
+  padding-bottom: 2%;
+}
+
+/* etoile pour noter le train*/
+.traincard_notation_stars_full {
+  width: 5%;
+}
+
+.traincard_notation_stars_empty {
+  width: 4%;
+  padding-bottom: 0.6%;
+}

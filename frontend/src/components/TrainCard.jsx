@@ -1,23 +1,25 @@
-import etoilevide from "@assets/images/etoilevide.png";
-import etoilejaune from "@assets/images/etoilejaune.png";
+import React, { useState } from "react";
+import { Rating } from "react-simple-star-rating";
 import chevron from "@assets/images/chevron.png";
+import "@assets/styles/TrainCard.css";
 
-function TrainCard() {
+function TrainCard({ src, title }) {
+  const [rating, setRating] = useState(0); // valeur initiale de notation
+
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
   return (
-    <div>
-      <img src="https://placekitten.com/350/200" alt="miaou" />
-      <div>Titre du train</div>
-      <div>
-        <div>
-          <div>Lire la suite</div>
-          <img src={chevron} alt="chevron" />
+    <div className="traincard_main_div">
+      <div className="traincard_background_white_div">
+        <img className="train_card_train_image" src={src} alt={title} />
+        <div className="traincard_train_title">{title}</div>
+        <div className="traincard_subtitle_container">
+          <div className="traincard_subtitle">Lire la suite</div>
+          <img className="traincard_chevron" src={chevron} alt="chevron" />
         </div>
-        <div>
-          <img src={etoilejaune} alt="étoile jaune" />
-          <img src={etoilejaune} alt="étoile jaune" />
-          <img src={etoilejaune} alt="étoile jaune" />
-          <img src={etoilevide} alt="étoile vide" />
-          <img src={etoilevide} alt="étoile vide" />
+        <div className="traincard_notation_container">
+          <Rating onClick={handleRating} ratingValue={rating} />
         </div>
       </div>
     </div>
