@@ -37,9 +37,9 @@
 }
 
 /* image d'illustration pour le train concerné */
-.train_card_train_image {
+.traincard_train_image {
   width: 100%;
-  height: fit-content;
+  height: 100%;
   border-radius: 10px;
 }
 
@@ -59,7 +59,7 @@
 /* chevron pour lire la suite*/
 .traincard_chevron {
   width: 6%;
-  height: fit-content;
+  height: 6%;
   padding-left: 2%;
 }
 

@@ -12,7 +12,7 @@ function TrainCard({ src, title }) {
   return (
     <div className="traincard_main_div">
       <div className="traincard_background_white_div">
-        <img className="train_card_train_image" src={src} alt={title} />
+        <img className="traincard_train_image" src={src} alt={title} />
         <div className="traincard_train_title">{title}</div>
         <div className="traincard_subtitle_container">
           <div className="traincard_subtitle">Lire la suite</div>
