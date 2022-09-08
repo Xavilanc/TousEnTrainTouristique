@@ -1,3 +1,15 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
 .footer {
   background-color: #242b35;
   padding-bottom: 1%;
@@ -6,7 +18,7 @@
 .footer__container {
   background-color: #242b35;
   color: #8de8fe;
-  font-family: "Avenir-Black";
+  font-family: "Avenir-Book";
   font-size: 3.5vw;
   display: flex;
   justify-content: space-between;
@@ -23,6 +35,12 @@
   margin-right: 2%;
   margin-top: 2%;
 }
+
+.footer__container__social {
+  display: flex;
+  justify-content: center;
+}
+
 .footer__container__social__instagram {
   width: 5%;
   height: fit-content;
