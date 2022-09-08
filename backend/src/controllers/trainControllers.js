@@ -2,6 +2,18 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.train
+    .findAll()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const browseJoin = (req, res) => {
+  models.train
     .getJoin()
     .then(([rows]) => {
       res.send(rows);
@@ -84,6 +96,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
+  browseJoin,
   read,
   edit,
   add,
