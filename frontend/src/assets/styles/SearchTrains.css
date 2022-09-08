@@ -26,12 +26,15 @@
   width: 80%;
   height: fit-content;
   font-family: "Avenir-Book";
+  color: black;
   font-size: 4vw;
   border-radius: 10px;
   padding: 2%;
   margin-bottom: 5%;
   margin-left: 10%;
   background-color: #f3f3f8;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 /* label des champs de recherche région et type */
@@ -50,7 +53,7 @@
   font-size: 4vw;
   border-radius: 25px;
   padding: 2%;
-  width: 28%;
+  width: 30%;
   border: none;
   color: white;
   background-color: #127996;
