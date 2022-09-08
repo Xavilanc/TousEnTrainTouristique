@@ -1,4 +1,4 @@
-import logoblanc from "@assets/logo-blanc.png";
+import logoblanc from "@assets/images/logo-blanc.png";
 import "@components/styles/Header.css";
 
 function Header() {
