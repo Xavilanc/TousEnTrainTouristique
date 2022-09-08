@@ -1,13 +1,10 @@
-@font-face {
-  font-family: "Avenir-Roman";
-  src: url("/src/assets/fonts/Avenir-Roman.otf") format("opentype");
-}
-
+/* police pour texte en gras */
 @font-face {
   font-family: "Avenir-Black";
   src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
 }
 
+/* police pour texte normal */
 @font-face {
   font-family: "Avenir-Book";
   src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
