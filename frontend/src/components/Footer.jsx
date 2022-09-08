@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../assets/styles/Footer.css";
 import facebook from "../assets/images/facebook.png";
 import instagram from "../assets/images/instagram.png";
@@ -9,10 +10,9 @@ function Footer() {
       <div className="footer__container">
         <div className="footer__container__left">Plan du site</div>
         <div className="footer__container__middle">Suivez-nous</div>
-        <div className="footer__container__right">Contact</div>
-        {/* <Link to="/Plan du site" className="footer__container__Left__Link">Plan du site</Link> */}
-        {/* <Link to="/Suivez-nous" className="footer__container__Middle__Link">Suivez-nous</Link> */}
-        {/* <Link to="/Contact" className="footer__container__Right__Link">Contact</Link> */}
+        <Link to="/Contact">
+          <div className="footer__container__right">Contact</div>
+        </Link>
       </div>
       <div className="footer__container__social">
         <img
