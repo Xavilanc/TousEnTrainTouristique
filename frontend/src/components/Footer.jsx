@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div className="footer">
       <div className="footer__container">
-        <div className="footer__container__left">Plan du site</div>
+        <div className="footer__container__left">Copyright</div>
         <div className="footer__container__middle">Suivez-nous</div>
         <Link to="/Contact">
           <div className="footer__container__right">Contact</div>

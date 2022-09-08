@@ -23,7 +23,7 @@
 /* logo de l'application */
 .header_logo {
   width: 25%;
-  height: fit-content;
+  height: 25%;
 }
 
 /* box contenant une autre box (liens) et le titre du site */
