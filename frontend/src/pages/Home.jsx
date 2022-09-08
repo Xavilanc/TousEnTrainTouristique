@@ -2,6 +2,7 @@ import Header from "@components/Header";
 import SearchTrain from "@components/SearchTrains";
 import Footer from "@components/Footer";
 import TrainCard from "@components/TrainCard";
+import CreateUser from "./CreateUser"; // à supprimer avant le push
 
 const sampleTrains = [
   {
@@ -30,6 +31,7 @@ export default function Home() {
       <TrainCard src={sampleTrains[1].src} title={sampleTrains[1].title} />
       <TrainCard src={sampleTrains[2].src} title={sampleTrains[2].title} />
       <Footer />
+      <CreateUser />
     </div>
   );
 }
