@@ -31,7 +31,6 @@ export default function Home() {
       <TrainCard src={sampleTrains[1].src} title={sampleTrains[1].title} />
       <TrainCard src={sampleTrains[2].src} title={sampleTrains[2].title} />
       <Footer />
-      <ContactPage />
     </div>
   );
 }
