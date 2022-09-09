@@ -1,3 +1,8 @@
+* {
+  list-style-type: none;
+  text-decoration: none;
+}
+
 /* police pour texte en gras */
 @font-face {
   font-family: "Avenir-Black";
@@ -32,8 +37,8 @@
   margin-top: 2%;
 }
 .footer__container__right {
-  margin-right: 2%;
-  margin-top: 2%;
+  margin-right: 10px;
+  margin-top: 9px;
 }
 
 .footer__container__social {

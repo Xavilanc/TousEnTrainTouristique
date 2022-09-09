@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import "@assets/styles/Contact.css";
 import React, { useState } from "react";
 
