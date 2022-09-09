@@ -7,22 +7,25 @@ import CreateUser from "./pages/CreateUser";
 import Train from "./pages/Train";
 import UserConnection from "./pages/UserConnection";
 import User from "./pages/User";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Contact" element={<ContactPage />} />
-          <Route path="/Administrator" element={<Administrator />} />
-          <Route path="/CreateUser" element={<CreateUser />} />
-          <Route path="/Train" element={<Train />} />
-          <Route path="/UserConnection" element={<UserConnection />} />
-          <Route path="/User" element={<User />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/administrateur" element={<Administrator />} />
+          <Route path="/creation-de-compte" element={<CreateUser />} />
+          <Route path="/train" element={<Train />} />
+          <Route path="/connexion" element={<UserConnection />} />
+          <Route path="/utilisateur" element={<User />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

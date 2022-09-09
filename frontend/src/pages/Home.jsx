@@ -1,6 +1,6 @@
-import Header from "@components/Header";
+// eslint-disable-next-line import/no-unresolved
 import SearchTrain from "@components/SearchTrains";
-import Footer from "@components/Footer";
+// eslint-disable-next-line import/no-unresolved
 import TrainCard from "@components/TrainCard";
 
 const sampleTrains = [
@@ -24,12 +24,10 @@ const sampleTrains = [
 export default function Home() {
   return (
     <div>
-      <Header />
       <SearchTrain />
       <TrainCard src={sampleTrains[0].src} title={sampleTrains[0].title} />
       <TrainCard src={sampleTrains[1].src} title={sampleTrains[1].title} />
       <TrainCard src={sampleTrains[2].src} title={sampleTrains[2].title} />
-      <Footer />
     </div>
   );
 }
