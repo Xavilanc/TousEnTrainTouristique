@@ -10,9 +10,11 @@ function Footer() {
       <div className="footer__container">
         <div className="footer__container__left">Copyright</div>
         <div className="footer__container__middle">Suivez-nous</div>
-        <Link to="/Contact">
-          <div className="footer__container__right">Contact</div>
-        </Link>
+        <div className="footer__container__right">
+          <Link to="/Contact">
+            <span className="footer_contact">Contact</span>
+          </Link>
+        </div>
       </div>
       <div className="footer__container__social">
         <img
