@@ -4,6 +4,7 @@ const router = express.Router();
 
 const trainControllers = require("./controllers/trainControllers");
 const imageTrainControllers = require("./controllers/imageTrainControllers");
+const imageAvatarControllers = require("./controllers/imageAvatarControllers");
 
 router.get("/api/train", trainControllers.browseJoin);
 router.get("/api/train/:id", trainControllers.read);
@@ -16,5 +17,11 @@ router.get("/api/imagetrain/:id", imageTrainControllers.read);
 router.put("/api/imagetrain/:id", imageTrainControllers.edit);
 router.post("/api/imagetrain", imageTrainControllers.add);
 router.delete("/api/imagetrain/:id", imageTrainControllers.destroy);
+
+router.get("/api/imageavatar", imageAvatarControllers.browse);
+router.get("/api/imageavatar/:id", imageAvatarControllers.read);
+router.put("/api/imageavatar/:id", imageAvatarControllers.edit);
+router.post("/api/imageavatar", imageAvatarControllers.add);
+router.delete("/api/imageavatar/:id", imageAvatarControllers.destroy);
 
 module.exports = router;
