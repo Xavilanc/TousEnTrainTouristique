@@ -1,7 +1,11 @@
-import React from "react";
+import CreateUserForm from "@components/CreateUserForm";
 
 function CreateUser() {
-  return <div>CreateUser</div>;
+  return (
+    <div>
+      <CreateUserForm />
+    </div>
+  );
 }
 
 export default CreateUser;

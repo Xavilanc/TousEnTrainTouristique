@@ -1,7 +1,6 @@
 * {
   list-style-type: none;
   text-decoration: none;
-  color: #8de8fe;
 }
 
 /* police pour texte en gras */
@@ -38,8 +37,8 @@
   margin-top: 2%;
 }
 .footer__container__right {
-  margin-right: 10px;
-  margin-top: 9px;
+  margin-right: 4%;
+  margin-top: 2%;
 }
 
 .footer__container__social {
@@ -65,4 +64,8 @@
   height: 5%;
   padding: 1%;
   padding-top: 1.5%;
+}
+
+.footer_contact {
+  color: #8de8fe;
 }

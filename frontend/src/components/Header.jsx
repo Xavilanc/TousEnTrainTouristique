@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <div className="header_main_container">
-      <Link to="/">
-        <img className="header_logo" src={logoblanc} alt="logo du site" />
-      </Link>
+      <div className="header_logo">
+        <Link to="/">
+          <img className="header_logo_img" src={logoblanc} alt="logo du site" />
+        </Link>
+      </div>
       <div className="header_links_title_container">
         <div className="header_links_container">
           <div className="header_links">M'inscrire</div>
