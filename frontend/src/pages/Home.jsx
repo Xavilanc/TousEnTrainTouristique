@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
 import SearchTrain from "@components/SearchTrains";
+// eslint-disable-next-line import/no-unresolved
 import TrainCard from "@components/TrainCard";
 
 const sampleTrains = [

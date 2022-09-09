@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
 import logoblanc from "@assets/images/logo-blanc.png";
+// eslint-disable-next-line import/no-unresolved
 import "@assets/styles/Header.css";
 import { Link } from "react-router-dom";
 
