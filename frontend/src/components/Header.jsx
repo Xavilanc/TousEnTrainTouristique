@@ -1,10 +1,13 @@
 import logoblanc from "@assets/images/logo-blanc.png";
 import "@assets/styles/Header.css";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <div className="header_main_container">
-      <img className="header_logo" src={logoblanc} alt="logo du site" />
+      <Link to="/">
+        <img className="header_logo" src={logoblanc} alt="logo du site" />
+      </Link>
       <div className="header_links_title_container">
         <div className="header_links_container">
           <div className="header_links">M'inscrire</div>
