@@ -26,6 +26,11 @@
   height: 25%;
 }
 
+.header_logo_img {
+  width: 100%;
+  height: 100%;
+}
+
 /* box contenant une autre box (liens) et le titre du site */
 .header_links_title_container {
   display: flex;
