@@ -31,7 +31,7 @@ const models = fs
   .reduce((acc, file) => {
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const Manager = require(path.join(__dirname, file));
-
+    console.error(`acc : ${acc} files : ${file}`);
     const managerInstance = new Manager();
     managerInstance.setConnection(pool);
 
@@ -46,7 +46,7 @@ const handler = {
 
     const pascalize = (string) =>
       string.slice(0, 1).toUpperCase() + string.slice(1);
-
+    console.warn(prop);
     throw new ReferenceError(
       `models.${prop} is not defined. Did you create ${pascalize(
         prop

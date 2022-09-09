@@ -3,11 +3,18 @@ const express = require("express");
 const router = express.Router();
 
 const trainControllers = require("./controllers/trainControllers");
+const imageTrainControllers = require("./controllers/imageTrainControllers");
 
 router.get("/api/train", trainControllers.browseJoin);
 router.get("/api/train/:id", trainControllers.read);
 router.put("/api/train/:id", trainControllers.edit);
 router.post("/api/train", trainControllers.add);
 router.delete("/api/train/:id", trainControllers.destroy);
+
+router.get("/api/imagetrain", imageTrainControllers.browse);
+router.get("/api/imagetrain/:id", imageTrainControllers.read);
+router.put("/api/imagetrain/:id", imageTrainControllers.edit);
+router.post("/api/imagetrain", imageTrainControllers.add);
+router.delete("/api/imagetrain/:id", imageTrainControllers.destroy);
 
 module.exports = router;

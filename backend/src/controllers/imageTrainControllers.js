@@ -1,9 +1,9 @@
 const models = require("../models");
 
-// Le trainController sert à faire la liaision avec le AbstractManager et le TrainManager.
+// Le ImageTrainController sert à faire la liaision avec le AbstractManager et le ImageTrainController.
 
 const browse = (req, res) => {
-  models.train
+  models.image_train
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -14,21 +14,8 @@ const browse = (req, res) => {
     });
 };
 
-// Fonction ajouter pour utiliser la nouvelle fonction getJoin du fichier TrainManager.
-const browseJoin = (req, res) => {
-  models.train
-    .getJoin()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
 const read = (req, res) => {
-  models.train
+  models.image_train
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -44,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const train = req.body;
+  const imageTrain = req.body;
 
   // TODO validations (length, format...)
 
-  train.id = parseInt(req.params.id, 10);
+  imageTrain.id = parseInt(req.params.id, 10);
 
-  models.train
-    .update(train)
+  models.image_train
+    .update(imageTrain)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -66,14 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const train = req.body;
+  const imageTrain = req.body;
 
   // TODO validations (length, format...)
 
-  models.train
-    .insert(train)
+  models.image_train
+    .insert(imageTrain)
     .then(([result]) => {
-      res.location(`/train/${result.insertId}`).sendStatus(201);
+      res.location(`/imageTrain/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -82,7 +69,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.train
+  models.image_train
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -99,7 +86,6 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
-  browseJoin,
   read,
   edit,
   add,
