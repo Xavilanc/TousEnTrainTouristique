@@ -3,6 +3,8 @@ class AbstractManager {
     this.table = table;
   }
 
+  // Le Abstract manager est la pour les fonctions générique à toute les routes.
+  // Il devrait ne pas être modifier
   find(id) {
     return this.connection.query(`select * from  ${this.table} where id = ?`, [
       id,

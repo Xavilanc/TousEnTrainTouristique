@@ -1,3 +1,22 @@
+# Pour rajouter une route
+
+1. Copier les fichiers suivants:
+   /src/models/TrainManager.js
+   /src/controllers/trainControllers.js
+2. Renommer TrainManager.js par VOTRE_TABLEManager.js et trainControllers.js par VOTRE_TABLEControllers.js
+
+3. Dans le fichier VOTRE_TABLEManager.js modifier la ligne 10 train par votre table.
+
+4. Suivre les consignes en commentaire pour adapter a votre table
+
+5. Sur le fichier VOTRE_TABLEController.js changer toute reference à train par VOTRE_TABLE
+
+6. Dans le fichier /src/router.js
+
+7. Faire l'import du controller comme la ligne 5
+
+8. Copier les lignes de 7 à 11 pour faire les nouvelles routes.
+
 # MVC Express
 
 ## Description

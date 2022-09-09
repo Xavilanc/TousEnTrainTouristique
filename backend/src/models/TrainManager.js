@@ -1,14 +1,19 @@
 const AbstractManager = require("./AbstractManager");
 
+// Changer le nom de la class par VOTRE_TABLEManager
 class TrainManager extends AbstractManager {
   constructor() {
+    // Modifier la table en dessous en fonction de votre table en string
     super({ table: "train" });
   }
 
   // Post train data
+  // Partie à modifier en fonction de la table que vous visez
   insert(train) {
     return this.connection.query(
       `insert into ${this.table} (name, train_user_id, area_id, created_on, updated_on, published, description, description_info) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      // Dois correspondre à la table visé au dessus et en dessous,
+      // ne pas oublier de verifier que le nombre de ? est egale au nombre de champs dans la base
       [
         train.name,
         train.train_user_id,
@@ -23,11 +28,13 @@ class TrainManager extends AbstractManager {
   }
 
   // update train
+  // a changer en fonction de la table visé
   update(train) {
     return this.connection.query(
       `update ${this.table} set name = ?, train_user_id = ?, area_id = ?,
        created_on = ?, updated_on = ?, published = ?, description = ?,
        description_info = ? where id = ?`,
+      // Ne Surtout pas oublié l'id en dernier
       [
         train.name,
         train.train_user_id,
@@ -43,6 +50,7 @@ class TrainManager extends AbstractManager {
   }
 
   // Get all data from table train and join between train, image_train and area
+  // Fonction ajouter pour avoir toute les données avec les jointures.
   getJoin() {
     return this.connection
       .query(`SELECT t.name AS tname, t.description, t.created_on AS creat, t.updated_on AS updat,
