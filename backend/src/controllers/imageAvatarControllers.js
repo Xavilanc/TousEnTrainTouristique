@@ -1,9 +1,9 @@
 const models = require("../models");
 
-// Le trainController sert à faire la liaision avec le AbstractManager et le TrainManager.
+// Le ImageAvatarController sert à faire la liaision avec le AbstractManager et le ImageAvatarController.
 
 const browse = (req, res) => {
-  models.train
+  models.image_avatar
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -14,21 +14,8 @@ const browse = (req, res) => {
     });
 };
 
-// Fonction ajouter pour utiliser la nouvelle fonction getJoin du fichier TrainManager.
-const browseJoin = (req, res) => {
-  models.train
-    .getJoin()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
 const read = (req, res) => {
-  models.train
+  models.image_avatar
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -44,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const train = req.body;
+  const ImageAvatar = req.body;
 
   // TODO validations (length, format...)
 
-  train.id = parseInt(req.params.id, 10);
+  ImageAvatar.id = parseInt(req.params.id, 10);
 
-  models.train
-    .update(train)
+  models.image_avatar
+    .update(ImageAvatar)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -66,14 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const train = req.body;
+  const ImageAvatar = req.body;
 
   // TODO validations (length, format...)
 
-  models.train
-    .insert(train)
+  models.image_avatar
+    .insert(ImageAvatar)
     .then(([result]) => {
-      res.location(`/train/${result.insertId}`).sendStatus(201);
+      res.location(`/imageavatar/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -82,7 +69,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.train
+  models.image_avatar
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -99,7 +86,6 @@ const destroy = (req, res) => {
 
 module.exports = {
   browse,
-  browseJoin,
   read,
   edit,
   add,
