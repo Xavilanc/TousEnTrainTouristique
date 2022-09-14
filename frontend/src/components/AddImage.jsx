@@ -20,7 +20,7 @@ function AddImage() {
   const sendToDatabase = () => {
     if (sendData.path !== "") {
       axios
-        .post(`http://127.0.0.1:5000/api/imagetrain`, { ...sendData })
+        .post(`http://127.0.0.1:5000/api/trains/images`, { ...sendData })
         .then((data) => console.warn(`${data}added`))
         .catch((error) =>
           console.warn(`Authorization failed : ${error.message}`)
