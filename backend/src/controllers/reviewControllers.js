@@ -58,6 +58,23 @@ const read = (req, res) => {
     });
 };
 
+// Uniquement les commentaires publiés sur un train en particulier
+const getAllPublishedByTrainId = (req, res) => {
+  models.review
+    .findAllPublishedByTrainId(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Modifier un commentaire
 const edit = (req, res) => {
   const review = req.body;
@@ -119,6 +136,7 @@ module.exports = {
   getAll,
   getAllPublished,
   getAllNotPublished,
+  getAllPublishedByTrainId,
   read,
   edit,
   add,

@@ -21,6 +21,13 @@ class ReviewManager extends AbstractManager {
     );
   }
 
+  findAllPublishedByTrainId(id) {
+    return this.connection.query(
+      `select * from  ${this.table} where review_train_id = ? and published = 1`,
+      [id]
+    );
+  }
+
   // Partie à modifier en fonction de la table que vous visez
 
   // Ajouter un commentaire
