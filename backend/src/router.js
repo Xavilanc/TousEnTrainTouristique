@@ -25,10 +25,10 @@ router.put("/api/imageavatar/:id", imageAvatarControllers.edit);
 router.post("/api/imageavatar", imageAvatarControllers.add);
 router.delete("/api/imageavatar/:id", imageAvatarControllers.destroy);
 
-router.get("/api/contact", contactControllers.browse);
-router.get("/api/contact/:id", contactControllers.read);
-router.put("/api/contact/:id", contactControllers.edit);
-router.post("/api/contact", contactControllers.add);
-router.delete("/api/contact/:id", contactControllers.destroy);
+router.get("/api/contacts", contactControllers.browse);
+router.get("/api/contacts/:id", contactControllers.read);
+router.put("/api/contacts/:id", contactControllers.edit);
+router.post("/api/contacts", contactControllers.add);
+router.delete("/api/contacts/:id", contactControllers.destroy);
 
 module.exports = router;

@@ -3,8 +3,8 @@ const models = require("../models");
 const browse = (req, res) => {
   models.contact
     .findAll()
-    .then((contacts) => {
-      res.json(contacts);
+    .then(([contacts]) => {
+      res.send(contacts);
     })
     .catch((err) => {
       console.error(err);
@@ -15,11 +15,11 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.contact
     .find(req.params.id)
-    .then((contact) => {
-      if (contact == null) {
+    .then(([contacts]) => {
+      if (contacts[0] == null) {
         res.sendStatus(404);
       } else {
-        res.json(contact);
+        res.send(contacts);
       }
     })
     .catch((err) => {
@@ -29,13 +29,13 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const Contact = req.body;
+  const contact = req.body;
 
-  Contact.id = parseInt(req.params.id, 10);
+  contact.id = parseInt(req.params.id, 10);
 
   models.contact
-    .update(Contact)
-    .then((result) => {
+    .update(contact)
+    .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
@@ -49,12 +49,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const Contact = req.body;
+  const contact = req.body;
 
   models.contact
-    .insert(Contact)
-    .then((result) => {
-      res.location(`/contact/${result.insertId}`).sendStatus(201);
+    .insert(contact)
+    .then(([result]) => {
+      res.location(`/contacts/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -65,7 +65,7 @@ const add = (req, res) => {
 const destroy = (req, res) => {
   models.contact
     .delete(req.params.id)
-    .then((result) => {
+    .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
