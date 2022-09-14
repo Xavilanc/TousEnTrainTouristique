@@ -10,6 +10,7 @@ import Train from "./pages/Train";
 import UserConnection from "./pages/UserConnection";
 import User from "./pages/User";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
