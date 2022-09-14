@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../assets/styles/ReviewList.css";
 
 function ReviewList() {
   const [reviews, setReviews] = useState("");
@@ -12,31 +13,35 @@ function ReviewList() {
   }, []);
   return (
     <div>
-      <table>
-        <thead>
+      <table className="review_list_table">
+        <thead className="review_list_thead">
           <tr>
-            <th>id</th>
-            <th>review_user_id</th>
-            <th>review_train_id</th>
-            <th>review_note</th>
-            <th>review_comment</th>
-            <th>created_on</th>
-            <th>updated_on</th>
-            <th>published</th>
+            <th className="review_list_th review_list_id">id</th>
+            <th className="review_list_th">review_user_id</th>
+            <th className="review_list_th">review_train_id</th>
+            <th className="review_list_th">review_note</th>
+            <th className="review_list_th review_list_comment">
+              review_comment
+            </th>
+            <th className="review_list_th">created_on</th>
+            <th className="review_list_th">updated_on</th>
+            <th className="review_list_th">published</th>
           </tr>
         </thead>
         <tbody>
           {reviews &&
             reviews.map((review) => (
               <tr>
-                <td>{review.id}</td>
-                <td>{review.review_user_id}</td>
-                <td>{review.review_train_id}</td>
-                <td>{review.review_note}</td>
-                <td>{review.review_comment}</td>
-                <td>{review.created_on}</td>
-                <td>{review.updated_on}</td>
-                <td>{review.published}</td>
+                <td className="review_list_td">{review.id}</td>
+                <td className="review_list_td">{review.review_user_id}</td>
+                <td className="review_list_td">{review.review_train_id}</td>
+                <td className="review_list_td">{review.review_note}</td>
+                <td className="review_list_td">{review.review_comment}</td>
+                <td className="review_list_td">{review.created_on}</td>
+                <td className="review_list_td">{review.updated_on}</td>
+                <td className="review_list_td review_list_integer">
+                  {review.published}
+                </td>
               </tr>
             ))}
         </tbody>
