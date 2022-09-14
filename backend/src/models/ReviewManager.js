@@ -4,50 +4,60 @@ const AbstractManager = require("./AbstractManager");
 class ReviewManager extends AbstractManager {
   constructor() {
     // Modifier la table en dessous en fonction de votre table en string
-    super({ table: "image_train" });
+    super({ table: "review" });
   }
 
-  findAllPubliched() {
+  // Tous les commentaires publiés
+  findAllPublished() {
     return this.connection.query(
-      `select * from  ${this.table} where publiched=1`
+      `select * from  ${this.table} where published=1`
     );
   }
 
-  // Post ImageTrain data
-  // Partie à modifier en fonction de la table que vous visez
-  insert(ImageTrain) {
+  // Tous les commentaires non publiés
+  findAllNotPublished() {
     return this.connection.query(
-      `insert into ${this.table} (title, path, user_id, train_id, created_on, updated_on, published) values (?, ?, ?, ?, ?, ?, ?)`,
+      `select * from  ${this.table} where published=0`
+    );
+  }
+
+  // Partie à modifier en fonction de la table que vous visez
+
+  // Ajouter un commentaire
+  insert(review) {
+    return this.connection.query(
+      `insert into ${this.table} (review_user_id, review_train_id, review_note, review_comment, created_on, updated_on, published) values (?, ?, ?, ?, ?, ?, ?)`,
       // Dois correspondre à la table visé au dessus et en dessous,
       // ne pas oublier de verifier que le nombre de ? est egale au nombre de champs dans la base
       [
-        ImageTrain.title,
-        ImageTrain.path,
-        ImageTrain.user_id,
-        ImageTrain.train_id,
-        ImageTrain.created_on,
-        ImageTrain.updated_on,
-        ImageTrain.published,
+        review.review_user_id,
+        review.review_train_id,
+        review.review_note,
+        review.review_comment,
+        review.created_on,
+        review.updated_on,
+        review.published,
       ]
     );
   }
 
-  // update ImageTrain
   // a changer en fonction de la table visé
-  update(ImageTrain) {
+
+  // Modifier un commentaire
+  update(review) {
     return this.connection.query(
-      `update ${this.table} set title = ?, path = ?, user_id = ?, train_id = ?,
+      `update ${this.table} set review_user_id = ?, review_train_id = ?, review_note = ?, review_comment = ?,
        created_on = ?, updated_on = ?, published = ? where id = ?`,
       // Ne Surtout pas oublié l'id en dernier
       [
-        ImageTrain.title,
-        ImageTrain.path,
-        ImageTrain.user_id,
-        ImageTrain.train_id,
-        ImageTrain.created_on,
-        ImageTrain.updated_on,
-        ImageTrain.published,
-        ImageTrain.id,
+        review.review_user_id,
+        review.review_train_id,
+        review.review_note,
+        review.review_comment,
+        review.created_on,
+        review.updated_on,
+        review.published,
+        review.id,
       ]
     );
   }

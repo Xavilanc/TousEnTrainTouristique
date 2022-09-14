@@ -8,27 +8,33 @@ const imageAvatarControllers = require("./controllers/imageAvatarControllers");
 const reviewControllers = require("./controllers/reviewControllers");
 
 /* Routes concernant la table train */
-router.get("/api/train", trainControllers.browseJoin);
-router.get("/api/train/:id", trainControllers.read);
-router.put("/api/train/:id", trainControllers.edit);
-router.post("/api/train", trainControllers.add);
-router.delete("/api/train/:id", trainControllers.destroy);
+router.get("/api/trains", trainControllers.browseJoin);
+router.get("/api/trains/:id", trainControllers.read);
+router.put("/api/trains/:id", trainControllers.edit);
+router.post("/api/trains", trainControllers.add);
+router.delete("/api/trains/:id", trainControllers.destroy);
 
 /* Routes concernant la table image_train */
-router.get("/api/imagetrain", imageTrainControllers.browse);
-router.get("/api/imagetrain/:id", imageTrainControllers.read);
-router.put("/api/imagetrain/:id", imageTrainControllers.edit);
-router.post("/api/imagetrain", imageTrainControllers.add);
-router.delete("/api/imagetrain/:id", imageTrainControllers.destroy);
+router.get("/api/imagetrains", imageTrainControllers.browse);
+router.get("/api/imagetrains/:id", imageTrainControllers.read);
+router.put("/api/imagetrains/:id", imageTrainControllers.edit);
+router.post("/api/imagetrains", imageTrainControllers.add);
+router.delete("/api/imagetrains/:id", imageTrainControllers.destroy);
 
 /* Routes concernant la table image_avatar */
-router.get("/api/imageavatar", imageAvatarControllers.browse);
-router.get("/api/imageavatar/:id", imageAvatarControllers.read);
-router.put("/api/imageavatar/:id", imageAvatarControllers.edit);
-router.post("/api/imageavatar", imageAvatarControllers.add);
-router.delete("/api/imageavatar/:id", imageAvatarControllers.destroy);
+router.get("/api/imageavatars", imageAvatarControllers.browse);
+router.get("/api/imageavatars/:id", imageAvatarControllers.read);
+router.put("/api/imageavatars/:id", imageAvatarControllers.edit);
+router.post("/api/imageavatars", imageAvatarControllers.add);
+router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);
 
 /* Routes concernant la table review */
-router.get("/api/review", reviewControllers.getAll); // Tous les commentaires (publiés ou non)
-router.get("/api/review/publiched", reviewControllers.getAllPubliched); // Uniquement les commentaires publiés
+router.get("/api/reviews", reviewControllers.getAll); // Tous les commentaires (publiés ou non)
+router.get("/api/reviews/published", reviewControllers.getAllPublished); // Uniquement les commentaires publiés
+router.get("/api/reviews/:id", reviewControllers.read); // Un commentaire en particulier
+router.get("/api/reviews/notpublished", reviewControllers.getAllNotPublished); // Uniquement les commentaires non publiés
+router.put("/api/reviews/:id", reviewControllers.edit); // Éditer un commentaire
+router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
+router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
+
 module.exports = router;

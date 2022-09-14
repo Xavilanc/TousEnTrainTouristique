@@ -16,9 +16,9 @@ const getAll = (req, res) => {
 };
 
 // Uniquement les commentaires publiés
-const getAllPubliched = (req, res) => {
+const getAllPublished = (req, res) => {
   models.review
-    .findAllPubliched()
+    .findAllPublished()
     .then(([rows]) => {
       res.send(rows);
     })
@@ -28,6 +28,20 @@ const getAllPubliched = (req, res) => {
     });
 };
 
+// Uniquement les commentaires non publiés
+const getAllNotPublished = (req, res) => {
+  models.review
+    .findAllNotPublished()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Un commentaire en particulier
 const read = (req, res) => {
   models.review
     .find(req.params.id)
@@ -44,6 +58,7 @@ const read = (req, res) => {
     });
 };
 
+// Modifier un commentaire
 const edit = (req, res) => {
   const review = req.body;
 
@@ -66,6 +81,7 @@ const edit = (req, res) => {
     });
 };
 
+// Ajouter un commentaire
 const add = (req, res) => {
   const review = req.body;
 
@@ -82,6 +98,7 @@ const add = (req, res) => {
     });
 };
 
+// Supprimer un commentaire
 const destroy = (req, res) => {
   models.review
     .delete(req.params.id)
@@ -100,7 +117,8 @@ const destroy = (req, res) => {
 
 module.exports = {
   getAll,
-  getAllPubliched,
+  getAllPublished,
+  getAllNotPublished,
   read,
   edit,
   add,
