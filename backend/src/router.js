@@ -8,11 +8,11 @@ const imageAvatarControllers = require("./controllers/imageAvatarControllers");
 const reviewControllers = require("./controllers/reviewControllers");
 
 /* Routes concernant la table train */
-router.get("/api/trains", trainControllers.getAllJoin);
-router.get("/api/trains/:id", trainControllers.read);
-router.put("/api/trains/:id", trainControllers.edit);
-router.post("/api/trains", trainControllers.add);
-router.delete("/api/trains/:id", trainControllers.destroy);
+router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
+router.get("/api/trains/:id", trainControllers.readJoin); // Un train en particulier (avec jointures)
+router.put("/api/trains/:id", trainControllers.edit); // Modifier un train
+router.post("/api/trains", trainControllers.add); // Ajouter un train
+router.delete("/api/trains/:id", trainControllers.destroy); // Supprimer un train
 
 /* Routes concernant la table image_train */
 router.get("/api/imagetrains", imageTrainControllers.getAll);

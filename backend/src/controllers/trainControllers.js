@@ -43,6 +43,22 @@ const read = (req, res) => {
     });
 };
 
+const readJoin = (req, res) => {
+  models.train
+    .getJoinById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const edit = (req, res) => {
   const train = req.body;
 
@@ -101,6 +117,7 @@ module.exports = {
   getAll,
   getAllJoin,
   read,
+  readJoin,
   edit,
   add,
   destroy,

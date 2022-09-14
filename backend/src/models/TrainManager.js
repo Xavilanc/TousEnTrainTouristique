@@ -64,6 +64,21 @@ class TrainManager extends AbstractManager {
     ;
               `);
   }
+
+  // Un train en particulier avec les jointures
+  getJoinById(id) {
+    return this.connection.query(
+      `SELECT t.name AS tname, t.description, t.created_on AS creat, t.updated_on AS updat,
+    a.name AS areaName,
+    i.title AS titl, i.path, i.created_on, i.updated_on,train_type.type_id,type.title AS types
+    FROM train AS t
+    LEFT JOIN image_train AS i ON i.train_id=t.id
+    LEFT JOIN area AS a ON a.id=t.area_id
+    LEFT JOIN train_type  ON t.id = train_type.train_id
+    LEFT JOIN type ON type.id = train_type.type_id where t.id = ?`,
+      [id]
+    );
+  }
 }
 
 module.exports = TrainManager;
