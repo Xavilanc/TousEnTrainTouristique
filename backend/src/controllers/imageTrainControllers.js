@@ -2,7 +2,7 @@ const models = require("../models");
 
 // Le ImageTrainController sert à faire la liaision avec le AbstractManager et le ImageTrainController.
 
-const browse = (req, res) => {
+const getAll = (req, res) => {
   models.image_train
     .findAll()
     .then(([rows]) => {
@@ -85,7 +85,7 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  browse,
+  getAll,
   read,
   edit,
   add,
