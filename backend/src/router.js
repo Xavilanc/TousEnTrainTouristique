@@ -50,10 +50,10 @@ router.put("/api/contacts/:id", contactControllers.edit); // Éditer un message
 router.post("/api/contacts", contactControllers.add); // Envoyer un message
 router.delete("/api/contacts/:id", contactControllers.destroy); // Supprimer un message
 
-router.get("/api/areas", areaControllers.getAll);
-router.get("/api/areas/:id", areaControllers.read);
-router.put("/api/areas/:id", areaControllers.edit);
-router.post("/api/areas", areaControllers.add);
-router.delete("/api/areas/:id", areaControllers.destroy);
+router.get("/api/areas", areaControllers.getAll); // Toutes les régions
+router.get("/api/areas/:id", areaControllers.read); // Une région en particulier
+router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
+router.post("/api/areas", areaControllers.add); // Créer une région
+router.delete("/api/areas/:id", areaControllers.destroy); // Supprimer une région
 
 module.exports = router;
