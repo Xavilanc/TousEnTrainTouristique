@@ -1,9 +1,7 @@
 const models = require("../models");
 
-// Le ImageTrainController sert à faire la liaision avec le AbstractManager et le ImageTrainController.
-
 const getAll = (req, res) => {
-  models.image_train
+  models.area
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -15,7 +13,7 @@ const getAll = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.image_train
+  models.area
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -31,14 +29,12 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const imageTrain = req.body;
+  const area = req.body;
 
-  // TODO validations (length, format...)
+  area.id = parseInt(req.params.id, 10);
 
-  imageTrain.id = parseInt(req.params.id, 10);
-
-  models.image_train
-    .update(imageTrain)
+  models.area
+    .update(area)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -53,14 +49,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const imageTrain = req.body;
+  const area = req.body;
 
-  // TODO validations (length, format...)
-
-  models.image_train
-    .insert(imageTrain)
+  models.area
+    .insert(area)
     .then(([result]) => {
-      res.location(`/imageTrain/${result.insertId}`).sendStatus(201);
+      res.location(`/areas/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -69,7 +63,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.image_train
+  models.area
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {

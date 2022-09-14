@@ -1,9 +1,10 @@
 const models = require("../models");
 
-// Le trainController sert à faire la liaision avec le AbstractManager et le TrainManager.
+// Le reviewController sert à faire la liaision avec le AbstractManager et le ReviewManager.
 
+// Tous les commentaires (publiés ou non)
 const getAll = (req, res) => {
-  models.train
+  models.review
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -14,10 +15,10 @@ const getAll = (req, res) => {
     });
 };
 
-// Fonction ajouter pour utiliser la nouvelle fonction getJoin du fichier TrainManager.
-const getAllJoin = (req, res) => {
-  models.train
-    .getJoin()
+// Uniquement les commentaires publiés
+const getAllPublished = (req, res) => {
+  models.review
+    .findAllPublished()
     .then(([rows]) => {
       res.send(rows);
     })
@@ -27,8 +28,22 @@ const getAllJoin = (req, res) => {
     });
 };
 
+// Uniquement les commentaires non publiés
+const getAllNotPublished = (req, res) => {
+  models.review
+    .findAllNotPublished()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Un commentaire en particulier
 const read = (req, res) => {
-  models.train
+  models.review
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -43,9 +58,10 @@ const read = (req, res) => {
     });
 };
 
-const readJoin = (req, res) => {
-  models.train
-    .getJoinById(req.params.id)
+// Uniquement les commentaires publiés sur un train en particulier
+const getAllPublishedByTrainId = (req, res) => {
+  models.review
+    .findAllPublishedByTrainId(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -59,15 +75,16 @@ const readJoin = (req, res) => {
     });
 };
 
+// Modifier un commentaire
 const edit = (req, res) => {
-  const train = req.body;
+  const review = req.body;
 
   // TODO validations (length, format...)
 
-  train.id = parseInt(req.params.id, 10);
+  review.id = parseInt(req.params.id, 10);
 
-  models.train
-    .update(train)
+  models.review
+    .update(review)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -81,15 +98,16 @@ const edit = (req, res) => {
     });
 };
 
+// Ajouter un commentaire
 const add = (req, res) => {
-  const train = req.body;
+  const review = req.body;
 
   // TODO validations (length, format...)
 
-  models.train
-    .insert(train)
+  models.review
+    .insert(review)
     .then(([result]) => {
-      res.location(`/train/${result.insertId}`).sendStatus(201);
+      res.location(`/imageTrain/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -97,8 +115,9 @@ const add = (req, res) => {
     });
 };
 
+// Supprimer un commentaire
 const destroy = (req, res) => {
-  models.train
+  models.review
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -115,9 +134,10 @@ const destroy = (req, res) => {
 
 module.exports = {
   getAll,
-  getAllJoin,
+  getAllPublished,
+  getAllNotPublished,
+  getAllPublishedByTrainId,
   read,
-  readJoin,
   edit,
   add,
   destroy,
