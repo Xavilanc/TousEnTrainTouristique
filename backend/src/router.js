@@ -25,7 +25,7 @@ router.put("/api/imageavatar/:id", imageAvatarControllers.edit);
 router.post("/api/imageavatar", imageAvatarControllers.add);
 router.delete("/api/imageavatar/:id", imageAvatarControllers.destroy);
 
-router.get("/api/contacts", contactControllers.browse);
+router.get("/api/contacts", contactControllers.getAll);
 router.get("/api/contacts/:id", contactControllers.read);
 router.put("/api/contacts/:id", contactControllers.edit);
 router.post("/api/contacts", contactControllers.add);
