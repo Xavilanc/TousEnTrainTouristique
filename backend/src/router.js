@@ -29,12 +29,15 @@ router.post("/api/imageavatars", imageAvatarControllers.add);
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);
 
 /* Routes concernant la table review */
-router.get("/api/reviews", reviewControllers.getAll); // Tous les commentaires (publiés ou non)
-router.get("/api/reviews/published", reviewControllers.getAllPublished); // Uniquement les commentaires publiés
-router.get("/api/reviews/:id", reviewControllers.read); // Un commentaire en particulier
-router.get("/api/reviews/notpublished", reviewControllers.getAllNotPublished); // Uniquement les commentaires non publiés
-router.put("/api/reviews/:id", reviewControllers.edit); // Éditer un commentaire
-router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
-router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
+router.get("/api/trains/comments", reviewControllers.getAll); // Tous les commentaires (publiés ou non)
+router.get("/api/trains/comments/published", reviewControllers.getAllPublished); // Uniquement les commentaires publiés
+router.get("/api/trains/comments/:id", reviewControllers.read); // Un commentaire en particulier
+router.get(
+  "/api/trains/comments/notpublished",
+  reviewControllers.getAllNotPublished
+); // Uniquement les commentaires non publiés
+router.put("/api/trains/comments/:id", reviewControllers.edit); // Éditer un commentaire
+router.post("/api/trains/comments", reviewControllers.add); // Ajouter un commentaire
+router.delete("/api/trains/comments/:id", reviewControllers.destroy); // Supprimer un commentaire
 
 module.exports = router;
