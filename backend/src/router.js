@@ -7,6 +7,8 @@ const imageTrainControllers = require("./controllers/imageTrainControllers");
 const imageAvatarControllers = require("./controllers/imageAvatarControllers");
 const reviewControllers = require("./controllers/reviewControllers");
 const contactControllers = require("./controllers/contactControllers");
+// eslint-disable-next-line import/no-unresolved
+const areaControllers = require("./controllers/areaControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
@@ -47,5 +49,11 @@ router.get("/api/contacts/:id", contactControllers.read); // Un message en parti
 router.put("/api/contacts/:id", contactControllers.edit); // Éditer un message
 router.post("/api/contacts", contactControllers.add); // Envoyer un message
 router.delete("/api/contacts/:id", contactControllers.destroy); // Supprimer un message
+
+router.get("/api/areas", areaControllers.getAll);
+router.get("/api/areas/:id", areaControllers.read);
+router.put("/api/areas/:id", areaControllers.edit);
+router.post("/api/areas", areaControllers.add);
+router.delete("/api/areas/:id", areaControllers.destroy);
 
 module.exports = router;
