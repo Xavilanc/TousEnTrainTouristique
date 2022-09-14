@@ -6,6 +6,7 @@ const trainControllers = require("./controllers/trainControllers");
 const imageTrainControllers = require("./controllers/imageTrainControllers");
 const imageAvatarControllers = require("./controllers/imageAvatarControllers");
 const reviewControllers = require("./controllers/reviewControllers");
+const contactControllers = require("./controllers/contactControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
@@ -39,5 +40,11 @@ router.get(
 router.put("/api/trains/comments/:id", reviewControllers.edit); // Éditer un commentaire
 router.post("/api/trains/comments", reviewControllers.add); // Ajouter un commentaire
 router.delete("/api/trains/comments/:id", reviewControllers.destroy); // Supprimer un commentaire
+
+router.get("/api/contacts", contactControllers.getAll);
+router.get("/api/contacts/:id", contactControllers.read);
+router.put("/api/contacts/:id", contactControllers.edit);
+router.post("/api/contacts", contactControllers.add);
+router.delete("/api/contacts/:id", contactControllers.destroy);
 
 module.exports = router;
