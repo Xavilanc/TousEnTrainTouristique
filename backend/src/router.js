@@ -7,8 +7,8 @@ const imageTrainControllers = require("./controllers/imageTrainControllers");
 const imageAvatarControllers = require("./controllers/imageAvatarControllers");
 const reviewControllers = require("./controllers/reviewControllers");
 const contactControllers = require("./controllers/contactControllers");
-// eslint-disable-next-line import/no-unresolved
 const areaControllers = require("./controllers/areaControllers");
+const typeControllers = require("./controllers/typeControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
@@ -55,5 +55,11 @@ router.get("/api/areas/:id", areaControllers.read); // Une région en particulie
 router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
 router.post("/api/areas", areaControllers.add); // Créer une région
 router.delete("/api/areas/:id", areaControllers.destroy); // Supprimer une région
+
+router.get("/api/types", typeControllers.getAll); // Tous les types de trains
+router.get("/api/types/:id", typeControllers.read); // Un type de train en particulier
+router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
+router.post("/api/types", typeControllers.add); // Créer un type de train
+router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
 
 module.exports = router;
