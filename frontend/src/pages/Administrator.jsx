@@ -1,7 +1,11 @@
-import React from "react";
+import ReviewList from "../components/ReviewList";
 
 const administrator = () => {
-  return <div>administrator</div>;
+  return (
+    <div>
+      <ReviewList />
+    </div>
+  );
 };
 
 export default administrator;
