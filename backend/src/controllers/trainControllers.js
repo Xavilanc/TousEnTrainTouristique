@@ -2,7 +2,7 @@ const models = require("../models");
 
 // Le trainController sert à faire la liaision avec le AbstractManager et le TrainManager.
 
-const browse = (req, res) => {
+const getAll = (req, res) => {
   models.train
     .findAll()
     .then(([rows]) => {
@@ -15,7 +15,7 @@ const browse = (req, res) => {
 };
 
 // Fonction ajouter pour utiliser la nouvelle fonction getJoin du fichier TrainManager.
-const browseJoin = (req, res) => {
+const getAllJoin = (req, res) => {
   models.train
     .getJoin()
     .then(([rows]) => {
@@ -98,8 +98,8 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  browseJoin,
+  getAll,
+  getAllJoin,
   read,
   edit,
   add,
