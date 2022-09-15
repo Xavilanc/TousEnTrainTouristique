@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "../assets/styles/AdminReview.css";
 import CreateReview from "@components/CreateReview";
-import "../assets/styles/ReviewDetails.css";
 
 function ReviewDetails() {
   const params = useParams();
@@ -96,10 +96,16 @@ function ReviewDetails() {
   };
 
   return (
-    <div>
+    <div className="Admin_Review_Main_Div">
       <div className="review_details_title_box">
-        <div>{review.user_name}</div>
-        <div>{review.train_name}</div>
+        <div className="review_details_user_name">
+          {" "}
+          Utilisateur:{" "}
+          <span className="user_name_span">{review.user_name}</span>
+        </div>
+        <div className="review_details_train_name">
+          Train : <span className="train_name_span">{review.train_name}</span>
+        </div>
       </div>
       <form
         className="review_details_form"

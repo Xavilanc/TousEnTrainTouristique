@@ -14,8 +14,9 @@ function ReviewsList() {
       .then((response) => response.data)
       .then((data) => setReviews(data));
   }, []);
+
   return (
-    <div>
+    <div className="review_list_main_div">
       <table className="review_list_table">
         <thead className="review_list_thead">
           <tr>
@@ -33,6 +34,7 @@ function ReviewsList() {
           {reviews &&
             reviews.map((review) => (
               <tr
+                id="review_list_map_tr"
                 key={review.review_id}
                 onClick={() =>
                   navigate(`/administrateur/reviews/${review.review_id}`)
@@ -44,9 +46,11 @@ function ReviewsList() {
                 <td className="review_list_td">{review.note}</td>
                 <td className="review_list_td">{review.comment}</td>
                 <td className="review_list_td">{review.created_on}</td>
-                <td className="review_list_td">{review.updated_on}</td>
+                <td className="review_list_td">
+                  {review.updated_on ? review.updated_on : "null"}
+                </td>
                 <td className="review_list_td review_list_integer">
-                  {review.published}
+                  {review.published === 1 ? "oui" : "non"}
                 </td>
               </tr>
             ))}

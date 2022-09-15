@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import "../assets/styles/ReviewDetails.css";
 
 function CreateReview() {
   const [posted, setPosted] = useState(false);

@@ -10,6 +10,11 @@
   src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
 }
 
+/* div principale du composant ReviewList*/
+.review_list_main_div {
+  background-color: #f3f3f8;
+}
+
 .review_list_table {
   border-collapse: collapse;
   table-layout: fixed;
@@ -33,6 +38,7 @@
 .review_list_td {
   border: black solid 1px;
   font-family: "Avenir-Book";
+  font-size: 1.5vw;
   padding: 1%;
 }
 
@@ -47,4 +53,9 @@
 
 .review_list_train {
   width: 20%;
+}
+
+#review_list_map_tr:hover {
+  background-color: darkgrey;
+  cursor: pointer;
 }
