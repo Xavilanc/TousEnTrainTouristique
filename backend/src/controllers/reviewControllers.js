@@ -15,6 +15,19 @@ const getAll = (req, res) => {
     });
 };
 
+// Tous les commentaires avec jointures (publiés ou non)
+const getAllJoin = (req, res) => {
+  models.review
+    .findAllJoin()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Uniquement les commentaires publiés
 const getAllPublished = (req, res) => {
   models.review
@@ -134,6 +147,7 @@ const destroy = (req, res) => {
 
 module.exports = {
   getAll,
+  getAllJoin,
   getAllPublished,
   getAllNotPublished,
   getAllPublishedByTrainId,

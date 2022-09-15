@@ -7,6 +7,15 @@ class ReviewManager extends AbstractManager {
     super({ table: "review" });
   }
 
+  // Tous les commentaires (avec jointures)
+  findAllJoin() {
+    return this.connection
+      .query(`SELECT r.review_comment comment, r.created_on created_on, r.updated_on updated_on, r.published published, 
+    u.name user_name, t.name train_name FROM review r
+    JOIN user u ON u.id = r.review_user_id
+    JOIN train t on t.id = r.review_train_id;`);
+  }
+
   // Tous les commentaires publiés
   findAllPublished() {
     return this.connection.query(
@@ -21,6 +30,7 @@ class ReviewManager extends AbstractManager {
     );
   }
 
+  // Tous les commentaires d'un train en particulier
   findAllPublishedByTrainId(id) {
     return this.connection.query(
       `select * from  ${this.table} where review_train_id = ? and published = 1`,
