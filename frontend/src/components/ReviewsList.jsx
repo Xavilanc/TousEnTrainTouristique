@@ -4,7 +4,7 @@ import axios from "axios";
 import "../assets/styles/ReviewList.css";
 
 function ReviewsList() {
-  const [reviews, setReviews] = useState("");
+  const [reviews, setReviews] = useState([]);
 
   const navigate = useNavigate();
 
