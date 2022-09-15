@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/styles/ReviewList.css";
 
-function ReviewList() {
+function ReviewsList() {
   const [reviews, setReviews] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`)
       .then((response) => response.data)
       .then((data) => setReviews(data));
   }, []);
@@ -29,8 +32,13 @@ function ReviewList() {
         <tbody>
           {reviews &&
             reviews.map((review) => (
-              <tr>
-                <td className="review_list_td">{review.id}</td>
+              <tr
+                key={review.review_id}
+                onClick={() =>
+                  navigate(`/administrateur/reviews/${review.review_id}`)
+                }
+              >
+                <td className="review_list_td">{review.review_id}</td>
                 <td className="review_list_td">{review.user_name}</td>
                 <td className="review_list_td">{review.train_name}</td>
                 <td className="review_list_td">{review.note}</td>
@@ -48,4 +56,4 @@ function ReviewList() {
   );
 }
 
-export default ReviewList;
+export default ReviewsList;

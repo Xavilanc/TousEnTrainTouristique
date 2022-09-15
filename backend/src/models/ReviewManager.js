@@ -16,6 +16,17 @@ class ReviewManager extends AbstractManager {
     JOIN train t on t.id = r.review_train_id;`);
   }
 
+  // Un commentaire en particulier (avec jointures)
+  findJoinById(id) {
+    return this.connection.query(
+      `SELECT  r.review_user_id user_id, r.review_train_id train_id, r.id review_id, r.review_comment comment, r.review_note note, r.created_on created_on, r.updated_on updated_on, r.published published, 
+    u.name user_name, t.name train_name FROM review r
+    JOIN user u ON u.id = r.review_user_id
+    JOIN train t on t.id = r.review_train_id where r.id = ?`,
+      [id]
+    );
+  }
+
   // Tous les commentaires publiés
   findAllPublished() {
     return this.connection.query(

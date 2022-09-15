@@ -1,9 +1,9 @@
-import ReviewList from "../components/ReviewList";
+import ReviewsList from "../components/ReviewsList";
 
 const administrator = () => {
   return (
     <div>
-      <ReviewList />
+      <ReviewsList />
     </div>
   );
 };

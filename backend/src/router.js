@@ -42,7 +42,7 @@ router.get(
   "/api/reviews/unpublished",
   reviewControllers.getAllJoinNotPublished
 ); // Uniquement les commentaires non publiés
-router.get("/api/reviews/:id", reviewControllers.read); // Un commentaire en particulier
+router.get("/api/reviews/:id", reviewControllers.getJoinById); // Un commentaire en particulier
 router.put("/api/reviews/:id", reviewControllers.edit); // Éditer un commentaire
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire

@@ -96,6 +96,23 @@ const read = (req, res) => {
     });
 };
 
+// Un commentaire en particulier
+const getJoinById = (req, res) => {
+  models.review
+    .findJoinById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Uniquement les commentaires publiés sur un train en particulier
 const getAllPublishedByTrainId = (req, res) => {
   models.review
@@ -196,6 +213,7 @@ module.exports = {
   getAllNotPublished,
   getAllJoinPublishedByTrainId,
   getAllPublishedByTrainId,
+  getJoinById,
   read,
   edit,
   add,
