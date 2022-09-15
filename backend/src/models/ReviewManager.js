@@ -10,7 +10,7 @@ class ReviewManager extends AbstractManager {
   // Tous les commentaires (avec jointures)
   findAllJoin() {
     return this.connection
-      .query(`SELECT r.review_comment comment, r.created_on created_on, r.updated_on updated_on, r.published published, 
+      .query(`SELECT r.review_comment comment, r.review_note note, r.created_on created_on, r.updated_on updated_on, r.published published, 
     u.name user_name, t.name train_name FROM review r
     JOIN user u ON u.id = r.review_user_id
     JOIN train t on t.id = r.review_train_id;`);
@@ -23,10 +23,30 @@ class ReviewManager extends AbstractManager {
     );
   }
 
+  // Tous les commentaires publiés (avec jointures)
+  findAllJoinPublished() {
+    return this.connection.query(
+      `SELECT r.review_comment comment, r.review_note note, r.created_on created_on, r.updated_on updated_on, r.published published, 
+    u.name user_name, t.name train_name FROM review r
+    JOIN user u ON u.id = r.review_user_id
+    JOIN train t on t.id = r.review_train_id where r.published=1;`
+    );
+  }
+
   // Tous les commentaires non publiés
   findAllNotPublished() {
     return this.connection.query(
-      `select * from  ${this.table} where published=0`
+      `select * from  ${this.table} where published=0;`
+    );
+  }
+
+  // Tous les commentaires non publiés (avec jointures)
+  findAllJoinNotPublished() {
+    return this.connection.query(
+      `SELECT r.review_comment comment, r.review_note note, r.created_on created_on, r.updated_on updated_on, r.published published, 
+    u.name user_name, t.name train_name FROM review r
+    JOIN user u ON u.id = r.review_user_id
+    JOIN train t on t.id = r.review_train_id where r.published=0;`
     );
   }
 
@@ -34,6 +54,17 @@ class ReviewManager extends AbstractManager {
   findAllPublishedByTrainId(id) {
     return this.connection.query(
       `select * from  ${this.table} where review_train_id = ? and published = 1`,
+      [id]
+    );
+  }
+
+  // Tous les commentaires d'un train en particulier (avec jointures)
+  findAllJoinPublishedByTrainId(id) {
+    return this.connection.query(
+      `SELECT r.review_comment comment, r.review_note note, r.created_on created_on, r.updated_on updated_on, r.published published, 
+    u.name user_name, t.name train_name FROM review r
+    JOIN user u ON u.id = r.review_user_id
+    JOIN train t on t.id = r.review_train_id where r.review_train_id = ? and r.published=1;`,
       [id]
     );
   }

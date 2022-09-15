@@ -33,13 +33,16 @@ router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);
 
 /* Routes concernant la table review */
 router.get("/api/reviews", reviewControllers.getAllJoin); // Tous les commentaires (publiés ou non)
-router.get("/api/reviews/published", reviewControllers.getAllPublished); // Uniquement les commentaires publiés
+router.get("/api/reviews/published", reviewControllers.getAllJoinPublished); // Uniquement les commentaires publiés
 router.get(
   "/api/trains/:id/reviews",
-  reviewControllers.getAllPublishedByTrainId
+  reviewControllers.getAllJoinPublishedByTrainId
 ); // Uniquement les commentaires d'un train en particulier
+router.get(
+  "/api/reviews/unpublished",
+  reviewControllers.getAllJoinNotPublished
+); // Uniquement les commentaires non publiés
 router.get("/api/reviews/:id", reviewControllers.read); // Un commentaire en particulier
-router.get("/api/reviews/notpublished", reviewControllers.getAllNotPublished); // Uniquement les commentaires non publiés
 router.put("/api/reviews/:id", reviewControllers.edit); // Éditer un commentaire
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire

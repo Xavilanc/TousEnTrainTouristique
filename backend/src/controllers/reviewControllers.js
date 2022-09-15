@@ -2,7 +2,7 @@ const models = require("../models");
 
 // Le reviewController sert à faire la liaision avec le AbstractManager et le ReviewManager.
 
-// Tous les commentaires (publiés ou non)
+// Tous les commentaires
 const getAll = (req, res) => {
   models.review
     .findAll()
@@ -15,7 +15,7 @@ const getAll = (req, res) => {
     });
 };
 
-// Tous les commentaires avec jointures (publiés ou non)
+// Tous les commentaires (avec jointures)
 const getAllJoin = (req, res) => {
   models.review
     .findAllJoin()
@@ -41,6 +41,19 @@ const getAllPublished = (req, res) => {
     });
 };
 
+// Uniquement les commentaires publiés (avec jointures)
+const getAllJoinPublished = (req, res) => {
+  models.review
+    .findAllJoinPublished()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Uniquement les commentaires non publiés
 const getAllNotPublished = (req, res) => {
   models.review
@@ -54,6 +67,18 @@ const getAllNotPublished = (req, res) => {
     });
 };
 
+// Uniquement les commentaires non publiés (avec jointures)
+const getAllJoinNotPublished = (req, res) => {
+  models.review
+    .findAllJoinNotPublished()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 // Un commentaire en particulier
 const read = (req, res) => {
   models.review
@@ -75,6 +100,23 @@ const read = (req, res) => {
 const getAllPublishedByTrainId = (req, res) => {
   models.review
     .findAllPublishedByTrainId(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Uniquement les commentaires publiés sur un train en particulier
+const getAllJoinPublishedByTrainId = (req, res) => {
+  models.review
+    .findAllJoinPublishedByTrainId(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -148,8 +190,11 @@ const destroy = (req, res) => {
 module.exports = {
   getAll,
   getAllJoin,
+  getAllJoinPublished,
   getAllPublished,
+  getAllJoinNotPublished,
   getAllNotPublished,
+  getAllJoinPublishedByTrainId,
   getAllPublishedByTrainId,
   read,
   edit,

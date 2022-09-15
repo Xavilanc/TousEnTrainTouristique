@@ -17,15 +17,13 @@ function ReviewList() {
         <thead className="review_list_thead">
           <tr>
             <th className="review_list_th review_list_id">id</th>
-            <th className="review_list_th">review_user_id</th>
-            <th className="review_list_th">review_train_id</th>
+            <th className="review_list_th">Utilisateur</th>
+            <th className="review_list_th">Train</th>
             <th className="review_list_th">review_note</th>
-            <th className="review_list_th review_list_comment">
-              review_comment
-            </th>
-            <th className="review_list_th">created_on</th>
-            <th className="review_list_th">updated_on</th>
-            <th className="review_list_th">published</th>
+            <th className="review_list_th review_list_comment">Commentaire</th>
+            <th className="review_list_th">Création</th>
+            <th className="review_list_th">Modification</th>
+            <th className="review_list_th">Publié</th>
           </tr>
         </thead>
         <tbody>
@@ -33,10 +31,10 @@ function ReviewList() {
             reviews.map((review) => (
               <tr>
                 <td className="review_list_td">{review.id}</td>
-                <td className="review_list_td">{review.review_user_id}</td>
-                <td className="review_list_td">{review.review_train_id}</td>
+                <td className="review_list_td">{review.user_name}</td>
+                <td className="review_list_td">{review.train_name}</td>
                 <td className="review_list_td">{review.review_note}</td>
-                <td className="review_list_td">{review.review_comment}</td>
+                <td className="review_list_td">{review.comment}</td>
                 <td className="review_list_td">{review.created_on}</td>
                 <td className="review_list_td">{review.updated_on}</td>
                 <td className="review_list_td review_list_integer">
