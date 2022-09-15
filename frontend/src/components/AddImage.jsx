@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getDate } from "./DateManager";
+import { getDate, transDate } from "../services/DateManager";
 
 function AddImage() {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-  const [trainId, setTrainId] = useState("");
+  const [trainId, setTrainId] = useState(0);
+  const [oldUrl, setOldUrl] = useState("");
   const [sendData] = useState({
     title: "",
     path: "",
@@ -16,9 +17,10 @@ function AddImage() {
     updated_on: "",
     published: 0,
   });
+  console.warn(transDate("2022-09-07T08:50:56.000Z"));
   // Fonction sendToDatabase sert à envoyer les données dans la table image_train
   const sendToDatabase = () => {
-    if (sendData.path !== "") {
+    if (sendData.path !== "" && url !== oldUrl) {
       axios
         .post(`http://127.0.0.1:5000/api/trains/images`, { ...sendData })
         .then((data) => console.warn(`${data}added`))
@@ -33,6 +35,7 @@ function AddImage() {
       sendData.created_on = "";
       sendData.updated_on = "";
       sendData.published = 0;
+      setOldUrl(url);
       setImage("");
       setTitle("");
       setTrainId(0);
@@ -72,7 +75,13 @@ function AddImage() {
       <p>AddImage</p>
 
       <div className="addImage">
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+        <input
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+          // eslint-disable-next-line no-return-assign
+          onClick={(e) => (e.target.value = null)}
+          key={url}
+        />
         <p>Title</p>
         <input
           type="text"
