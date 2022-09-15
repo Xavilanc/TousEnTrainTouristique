@@ -32,7 +32,7 @@ router.post("/api/imageavatars", imageAvatarControllers.add);
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);
 
 /* Routes concernant la table review */
-router.get("/api/reviews", reviewControllers.getAllJoin); // Tous les commentaires (publiés ou non)
+router.get("/api/reviews", reviewControllers.getAll); // Tous les commentaires (publiés ou non)
 router.get("/api/reviews/published", reviewControllers.getAllJoinPublished); // Uniquement les commentaires publiés
 router.get(
   "/api/trains/:id/reviews",
