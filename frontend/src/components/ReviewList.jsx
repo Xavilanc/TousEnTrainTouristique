@@ -18,8 +18,8 @@ function ReviewList() {
           <tr>
             <th className="review_list_th review_list_id">id</th>
             <th className="review_list_th">Utilisateur</th>
-            <th className="review_list_th">Train</th>
-            <th className="review_list_th">review_note</th>
+            <th className="review_list_th review_list_train">Train</th>
+            <th className="review_list_th">Note</th>
             <th className="review_list_th review_list_comment">Commentaire</th>
             <th className="review_list_th">Création</th>
             <th className="review_list_th">Modification</th>
@@ -33,7 +33,7 @@ function ReviewList() {
                 <td className="review_list_td">{review.id}</td>
                 <td className="review_list_td">{review.user_name}</td>
                 <td className="review_list_td">{review.train_name}</td>
-                <td className="review_list_td">{review.review_note}</td>
+                <td className="review_list_td">{review.note}</td>
                 <td className="review_list_td">{review.comment}</td>
                 <td className="review_list_td">{review.created_on}</td>
                 <td className="review_list_td">{review.updated_on}</td>
