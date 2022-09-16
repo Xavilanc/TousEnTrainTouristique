@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "../assets/styles/CreateReview.css";
 
 function CreateReview() {
   const [posted, setPosted] = useState(false);
@@ -80,7 +81,10 @@ function CreateReview() {
   if (posted === true) {
     return (
       <div>
-        <div>Nous avons bien reçu votre commentaire</div>
+        <div className="create_review_send">
+          Nous avons bien reçu votre commentaire. Il sera validé dans quelques
+          heures.
+        </div>
       </div>
     );
   }
