@@ -8,15 +8,45 @@ function ReviewsList() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const getReviews = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`)
       .then((response) => response.data)
       .then((data) => setReviews(data));
+  };
+
+  const getReviewsUnpublished = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/unpublished`)
+      .then((response) => response.data)
+      .then((data) => setReviews(data));
+  };
+
+  const getReviewsPublished = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/published`)
+      .then((response) => response.data)
+      .then((data) => setReviews(data));
+  };
+
+  useEffect(() => {
+    getReviews();
   }, []);
 
   return (
     <div className="review_list_main_div">
+      <div>
+        <div>Filtrer</div>
+        <button type="button" onClick={() => getReviewsUnpublished()}>
+          Non publiés
+        </button>
+        <button type="button" onClick={() => getReviewsPublished()}>
+          Publiés
+        </button>
+        <button type="button" onClick={() => getReviews()}>
+          Tous
+        </button>
+      </div>
       <table className="review_list_table">
         <thead className="review_list_thead">
           <tr>
