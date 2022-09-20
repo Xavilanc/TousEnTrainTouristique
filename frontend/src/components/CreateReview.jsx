@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Rating } from "react-simple-star-rating";
 import "../assets/styles/CreateReview.css";
 
 function CreateReview() {
@@ -8,6 +9,14 @@ function CreateReview() {
     note: "",
     comment: "",
   });
+  const [rating, setRating] = useState(0); // valeur initiale de notation
+  const [readOnly, setReadOnly] = useState(false); // pour bloquer les étoiles
+
+  const handleRating = (rate, event) => {
+    event.preventDefault();
+    setRating(rate);
+    setReadOnly(true);
+  };
 
   const postReview = () => {
     setPosted(true);
@@ -15,7 +24,7 @@ function CreateReview() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
         review_user_id: 1,
         review_train_id: 1,
-        review_note: review.note,
+        review_note: rating,
         review_comment: review.comment,
         created_on: "2022-09-09",
         updated_on: "2022-09-09",
@@ -43,14 +52,11 @@ function CreateReview() {
         >
           <div className="review_details_note">
             <label htmlFor="note">Note</label>
-            <input
-              className="review_details_input"
-              type="number"
-              name="note"
-              id="note"
-              value={review.note}
-              placeholder="note"
-              onChange={(e) => setReview({ ...review, note: e.target.value })}
+            <Rating
+              onClick={handleRating}
+              ratingValue={rating}
+              readonly={readOnly}
+              allowHover={false}
             />
           </div>
           <div className="review_details_comment">
