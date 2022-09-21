@@ -12,6 +12,8 @@ import ModifyPasswordPage from "./pages/ModifyPasswordPage";
 import AdminReviews from "./pages/AdminReviews";
 import AdminReview from "./pages/AdminReview";
 import "./App.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
