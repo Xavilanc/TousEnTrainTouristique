@@ -1,4 +1,6 @@
-import React from "react";
+// import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
 import CreateReview from "../components/CreateReview";
 import TrainActivity from "../components/TrainActivity";
 import TrainInformations from "../components/TrainInformations";
@@ -36,6 +38,21 @@ const sampletrain = {
   types: "A la mer",
 };
 function Train() {
+  // const params = useParams();
+
+  // const [train, setTrain] = useState("");
+
+  // const getTrain = () => {
+  //   axios
+  //     .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`)
+  //     .then((response) => response.data)
+  //     .then((data) => setTrain(data));
+  // };
+
+  // useEffect(() => {
+  //   getTrain();
+  // }, []);
+
   return (
     <div className="train_main_div">
       <div className="train_title_favoris_box">

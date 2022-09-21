@@ -25,7 +25,7 @@ function App() {
           <Route path="/administrateur/reviews" element={<AdminReviews />} />
           <Route path="/administrateur/reviews/:id" element={<AdminReview />} />
           <Route path="/creation-de-compte" element={<CreateUser />} />
-          <Route path="/train" element={<Train />} />
+          <Route path="/train/:id" element={<Train />} />
           <Route path="/connexion" element={<UserConnection />} />
           <Route path="/utilisateur" element={<User />} />
         </Routes>

@@ -52,30 +52,34 @@ class TrainManager extends AbstractManager {
   // Get all data from table train and join between train, image_train and area
   // Fonction ajouter pour avoir toute les données avec les jointures.
   getJoin() {
-    return this.connection
-      .query(`SELECT t.name AS tname, t.description, t.created_on AS creat, t.updated_on AS updat,
-    a.name AS areaName,
-    i.title AS titl, i.path, i.created_on, i.updated_on,train_type.type_id,type.title AS types
-    FROM train AS t
-    LEFT JOIN image_train AS i ON i.train_id=t.id
-    LEFT JOIN area AS a ON a.id=t.area_id
-    LEFT JOIN train_type  ON t.id = train_type.train_id
-    LEFT JOIN type ON type.id = train_type.type_id
-    ;
-              `);
+    return this.connection.query(
+      `SELECT t.name AS tname, t.id as id, t.description, t.created_on AS creat, t.updated_on AS updat, a.name AS areaName,
+      JSON_OBJECTAGG(i.id,i.path) AS images_path,
+      JSON_OBJECTAGG(i.id,i.title) AS images_title, 
+      JSON_OBJECTAGG(type.id,type.title) AS types       
+      FROM train AS t       
+      JOIN image_train AS i ON i.train_id=t.id       
+      JOIN area AS a ON a.id=t.area_id       
+      JOIN train_type  ON t.id = train_type.train_id       
+      LEFT JOIN type ON type.id = train_type.type_id    
+      GROUP BY t.id;`
+    );
   }
 
   // Un train en particulier avec les jointures
   getJoinById(id) {
     return this.connection.query(
-      `SELECT t.name AS tname, t.description, t.created_on AS creat, t.updated_on AS updat,
-    a.name AS areaName,
-    i.title AS titl, i.path, i.created_on, i.updated_on,train_type.type_id,type.title AS types
-    FROM train AS t
-    LEFT JOIN image_train AS i ON i.train_id=t.id
-    LEFT JOIN area AS a ON a.id=t.area_id
-    LEFT JOIN train_type  ON t.id = train_type.train_id
-    LEFT JOIN type ON type.id = train_type.type_id where t.id = ?`,
+      `SELECT t.name AS tname, t.id as id, t.description, t.created_on AS creat, t.updated_on AS updat, a.name AS areaName,
+      JSON_OBJECTAGG(i.id,i.path) AS images_path,
+      JSON_OBJECTAGG(i.id,i.title) AS images_title, 
+      JSON_OBJECTAGG(type.id,type.title) AS types       
+      FROM train AS t       
+      JOIN image_train AS i ON i.train_id=t.id       
+      JOIN area AS a ON a.id=t.area_id       
+      JOIN train_type  ON t.id = train_type.train_id       
+      LEFT JOIN type ON type.id = train_type.type_id
+      WHERE t.id = ?    
+      GROUP BY t.id;`,
       [id]
     );
   }
