@@ -1,0 +1,67 @@
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* div principale de la page AdminReview*/
+.Admin_Review_Main_Div {
+  background-color: #f3f3f8;
+}
+
+/* box contenant le nom de l'utilisateur et le nom du train */
+.review_details_title_box {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* formulaire contenant la note et le commentaire */
+.review_details_form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* box contenant les 3 boutons pour publier, modifier ou supprimer un commentaire */
+.review_details_buttons_box {
+  display: flex;
+  justify-content: space-around;
+  padding: 2%;
+}
+
+/* input avec la note */
+.review_details_note {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  margin-right: 92%;
+  margin-bottom: 2%;
+}
+
+/* input avec le commentaire */
+.review_details_comment {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.review_details_input {
+  padding: 1%;
+}
+
+/* --- Nom d'utilisateur et du train ---*/
+
+.review_details_user_name,
+.review_details_train_name {
+  color: #127996;
+  font-family: "Avenir-Book";
+  font-weight: bold;
+  font-size: 4.5vw;
+}
+
+.user_name_span,
+.train_name_span {
+  color: black;
+  font-weight: lighter;
+  font-family: "Avenir-Book";
+}
