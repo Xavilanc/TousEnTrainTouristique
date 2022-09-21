@@ -1,0 +1,61 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* div principale du composant ReviewList*/
+.review_list_main_div {
+  background-color: #f3f3f8;
+}
+
+.review_list_table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: solid 3px black;
+  text-align: center;
+  margin: 5%;
+}
+
+.review_list_thead {
+  border: solid 3px black;
+}
+
+.review_list_th {
+  border: black solid 3px;
+  background-color: #127996;
+  font-family: "Avenir-Black";
+  font-size: 1.5vw;
+  color: white;
+}
+
+.review_list_td {
+  border: black solid 1px;
+  font-family: "Avenir-Book";
+  font-size: 1.5vw;
+  padding: 1%;
+}
+
+.review_list_comment {
+  width: 25%;
+}
+
+.review_list_id {
+  width: 4%;
+  font-size: 1.5vw;
+}
+
+.review_list_train {
+  width: 20%;
+}
+
+#review_list_map_tr:hover {
+  background-color: darkgrey;
+  cursor: pointer;
+}
