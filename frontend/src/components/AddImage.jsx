@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getDate, transDate } from "../services/DateManager";
+import { getDate } from "../services/DateManager";
 
 function AddImage() {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
+  const [selectedDatabase, setSelectedDatabase] = useState("trains/images");
   const [trainId, setTrainId] = useState(0);
   const [oldUrl, setOldUrl] = useState("");
   const [sendData] = useState({
@@ -17,12 +18,11 @@ function AddImage() {
     updated_on: "",
     published: 0,
   });
-  console.warn(transDate("2022-09-07T08:50:56.000Z"));
   // Fonction sendToDatabase sert à envoyer les données dans la table image_train
   const sendToDatabase = () => {
     if (sendData.path !== "" && url !== oldUrl) {
       axios
-        .post(`http://127.0.0.1:5000/api/trains/images`, { ...sendData })
+        .post(`http://127.0.0.1:5000/api/${selectedDatabase}`, { ...sendData })
         .then((data) => console.warn(`${data}added`))
         .catch((error) =>
           console.warn(`Authorization failed : ${error.message}`)
@@ -88,12 +88,22 @@ function AddImage() {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
+        <p>Table</p>
+        <select
+          id="selectTable"
+          onChange={(e) => setSelectedDatabase(e.target.value)}
+        >
+          <option value="trains/images">Image Train</option>
+
+          <option value="imageavatars">Avatar</option>
+        </select>
         <p>Train ID</p>
         <input
           type="number"
           onChange={(e) => setTrainId(e.target.value)}
           value={trainId}
         />
+        <br />
         <button type="button" className="btn btn-primary" onClick={uploadImage}>
           Upload
         </button>
