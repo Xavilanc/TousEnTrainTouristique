@@ -9,6 +9,7 @@ const reviewControllers = require("./controllers/reviewControllers");
 const contactControllers = require("./controllers/contactControllers");
 const areaControllers = require("./controllers/areaControllers");
 const typeControllers = require("./controllers/typeControllers");
+const userControllers = require("./controllers/userControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
@@ -64,5 +65,8 @@ router.get("/api/types/:id", typeControllers.read); // Un type de train en parti
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.post("/api/types", typeControllers.add); // Créer un type de train
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
+
+router.get("/api/users", userControllers.getAll); // Tous les types de trains
+router.get("/api/users/:id", userControllers.read); // Un type de train en particulier
 
 module.exports = router;
