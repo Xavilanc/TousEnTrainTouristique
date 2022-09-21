@@ -12,8 +12,7 @@ function CreateReview() {
   const [rating, setRating] = useState(0); // valeur initiale de notation
   const [readOnly, setReadOnly] = useState(false); // pour bloquer les étoiles
 
-  const handleRating = (rate, event) => {
-    event.preventDefault();
+  const handleRating = (rate) => {
     setRating(rate);
     setReadOnly(true);
   };
