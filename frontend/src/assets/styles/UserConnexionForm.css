@@ -26,9 +26,15 @@ font-face {
   font-style: normal;
   font-size: 3vw;
 }
-.connect_container {
-  display: flex;
-  flex-direction: column;
+.MDP {
+  border: none;
+  color: #127996;
+  margin-left: 55%;
+  text-align: right;
+  padding-right: 12%;
+  font-family: "Avenir-Book";
+  font-style: normal;
+  font-size: 3vw;
 }
 .connect_mail,
 .connect_password {

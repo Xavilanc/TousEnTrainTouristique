@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "@assets/styles/UserConnexionForm.css";
+import { useNavigate } from "react-router-dom";
 
 function UserConnectionForm() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   return (
     <div className="connect1">
       <div className="connect">
@@ -28,6 +29,13 @@ function UserConnectionForm() {
               placeholder="Mot de passe*"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <button
+              type="button"
+              className="MDP"
+              onClick={() => navigate("/modification")}
+            >
+              *mot de passe oublié
+            </button>
           </div>
           <div className="buttonsContainer">
             <button className="buttonForm" type="submit">
