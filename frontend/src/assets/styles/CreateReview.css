@@ -1,0 +1,15 @@
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* message de réponse quand un commentaire a été envoyé */
+.create_review_send {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  font-weight: bold;
+  text-align: center;
+  color: #127996;
+  padding: 2%;
+}
