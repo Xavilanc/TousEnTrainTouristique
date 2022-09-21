@@ -7,7 +7,7 @@ import ContactPage from "./pages/ContactPage";
 import Administrator from "./pages/Administrator";
 import CreateUser from "./pages/CreateUser";
 import Train from "./pages/Train";
-import UserConnection from "./pages/UserConnection";
+import UserConnexion from "./pages/UserConnexion";
 import User from "./pages/User";
 import "./App.css";
 
@@ -22,7 +22,7 @@ function App() {
           <Route path="/administrateur" element={<Administrator />} />
           <Route path="/creation-de-compte" element={<CreateUser />} />
           <Route path="/train" element={<Train />} />
-          <Route path="/connexion" element={<UserConnection />} />
+          <Route path="/connexion" element={<UserConnexion />} />
           <Route path="/utilisateur" element={<User />} />
         </Routes>
         <Footer />

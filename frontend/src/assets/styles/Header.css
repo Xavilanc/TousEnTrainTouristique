@@ -56,6 +56,8 @@
 
 /* liens dans le header */
 .header_links {
+  background-color:#242b35;
+  border: none;
   font-size: 3.5vw;
   font-family: "Avenir-Book";
   color: #8de8fe;
