@@ -1,0 +1,26 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* paragraphes sur le composant TrainActivity */
+.activity_paragraphe {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  padding: 2%;
+}
+
+/* titre d'une activité */
+.activity_title {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  padding-left: 2%;
+}

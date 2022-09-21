@@ -1,7 +1,17 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
 /* police pour texte normal */
 @font-face {
   font-family: "Avenir-Book";
   src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+.train_main_div {
+  background-color: #f3f3f8;
 }
 
 /* box contenant le titre et l'icone favoris */
@@ -31,9 +41,8 @@
 
 /* sous-titre informations et activitées */
 .train_h3_title {
-  font-family: "Avenir-Book";
+  font-family: "Avenir-Black";
   font-size: 5vw;
-  font-weight: bold;
   color: #127996;
   padding: 2%;
 }
@@ -43,14 +52,6 @@
   font-family: "Avenir-Book";
   font-size: 4vw;
   padding: 2%;
-}
-
-/* titre d'une activité */
-.train_activity_title {
-  font-weight: bold;
-  font-family: "Avenir-Book";
-  font-size: 4vw;
-  padding-left: 2%;
 }
 
 /* titre de la partie commentaires */
