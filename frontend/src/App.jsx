@@ -27,7 +27,7 @@ function App() {
           <Route path="/creation-de-compte" element={<CreateUser />} />
           <Route path="/train" element={<Train />} />
           <Route path="/connexion" element={<UserConnexion />} />
-          <Route path="/modification" element={<ModifyPasswordPage />} />
+          <Route path="/modification/:id" element={<ModifyPasswordPage />} />
         </Routes>
         <Footer />
       </div>
