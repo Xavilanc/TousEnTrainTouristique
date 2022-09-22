@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line import/no-unresolved
 import "@assets/styles/CreateUserForm.css";
 
 function CreateUserForm() {
