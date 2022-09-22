@@ -42,3 +42,16 @@
   overflow: visible;
   padding: 1%;
 }
+
+/* bouton envoyer */
+.create_review_submit_btn {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  border-radius: 25px;
+  padding: 2%;
+  border: 2px solid white;
+  width: 28%;
+  background-color: #127996;
+  color: #f3f3f8;
+}

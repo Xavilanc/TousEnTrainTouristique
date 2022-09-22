@@ -77,7 +77,11 @@ function CreateReview() {
             />
           </div>
           <div className="review_details_buttons_box">
-            <input type="submit" value="Envoyer" />
+            <input
+              className="create_review_submit_btn"
+              type="submit"
+              value="Envoyer"
+            />
             {posted ? <input type="submit" value="Modifier" /> : ""}
           </div>
         </form>
