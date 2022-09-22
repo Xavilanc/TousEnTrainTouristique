@@ -13,3 +13,32 @@
   color: #127996;
   padding: 2%;
 }
+
+/* affichage de la note dans le formulaire de création de commentaire */
+.create_review_note {
+  display: flex;
+  justify-content: right;
+}
+
+/* box contenant le label et l'input pour le commentaire */
+.create_review_comment {
+  display: flex;
+  flex-direction: column;
+}
+
+/* label du champ commentaire */
+.create_review_comment_label {
+  font-size: 4vw;
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  color: #127996;
+}
+
+/* input pour le commentaire */
+.create_review_input {
+  height: 15vh;
+  border-radius: 10px;
+  border: #127996 solid 2px;
+  overflow: visible;
+  padding: 1%;
+}

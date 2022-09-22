@@ -97,8 +97,10 @@ function Train() {
       <h3 className="train_h3_title">Activitées</h3>
       <TrainActivity activities={activities.activity} />
       <div className="train_review_title">commentaires</div>
-      <ReviewTrainList reviews={reviews} />
-      <CreateReview />
+      <div className="train_review_box">
+        <ReviewTrainList reviews={reviews} />
+        <CreateReview />
+      </div>
     </div>
   );
 }

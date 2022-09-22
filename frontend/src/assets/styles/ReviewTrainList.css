@@ -1,0 +1,32 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+.review_train_list_rating {
+  display: flex;
+  justify-content: right;
+}
+
+.review_train_list_username {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 3vw;
+}
+
+.review_train_list_comment {
+  font-family: "Avenir-Book";
+  font-size: 3vw;
+}
+
+.star-svg {
+  width: 3vw;
+  height: 3vh;
+}
