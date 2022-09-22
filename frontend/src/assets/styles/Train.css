@@ -1,0 +1,56 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+.train_main_div {
+  background-color: #f3f3f8;
+}
+
+/* box contenant le titre et l'icone favoris */
+.train_title_favoris_box {
+  display: flex;
+  justify-content: center;
+  font-family: "Avenir-Book";
+}
+
+/* titre du train */
+.train_title {
+  font-weight: bold;
+  font-size: 6vw;
+}
+
+/* div contenant les images du train */
+.train_image_div {
+  padding: 2%;
+}
+
+/* sous-titre informations et activitées */
+.train_h3_title {
+  font-family: "Avenir-Book";
+  font-size: 5vw;
+  color: #127996;
+  padding: 2%;
+}
+
+/* paragraphes sur la page train */
+.train_paragraphe {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  padding: 2%;
+}
+
+/* titre de la partie commentaires */
+.train_review_title {
+  text-align: center;
+  font-family: "Avenir-Book";
+  font-weight: bold;
+  font-size: 4vw;
+}

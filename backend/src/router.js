@@ -12,7 +12,16 @@ const typeControllers = require("./controllers/typeControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
+router.get("/api/trains/:id/images", trainControllers.getAllJoinWithImagesById); // Un train en particulier avec les images et la région
+router.get(
+  "/api/trains/:id/activities",
+  trainControllers.getAllJoinWithActivitiesById
+); // Un train en particulier avec les activitées
 router.get("/api/trains/:id", trainControllers.readJoin); // Un train en particulier (avec jointures)
+router.get(
+  "/api/trains/filter/:area/:type",
+  trainControllers.readWithAreaAndId
+); // Un train avec une région et un type particulier
 router.put("/api/trains/:id", trainControllers.edit); // Modifier un train
 router.post("/api/trains", trainControllers.add); // Ajouter un train
 router.delete("/api/trains/:id", trainControllers.destroy); // Supprimer un train
