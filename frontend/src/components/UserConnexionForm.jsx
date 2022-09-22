@@ -41,14 +41,14 @@ function UserConnectionForm() {
           <div className="connect_button_container">
             <button
               type="button"
-              className="connexion"
+              className="buttonForm"
               onClick={() => navigate("/profil")}
             >
               Connexion
             </button>
             <button
               type="button"
-              className="annuler"
+              className="buttonForm1"
               onClick={() => navigate("/")}
             >
               Annuler
