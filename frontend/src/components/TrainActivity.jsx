@@ -1,10 +1,15 @@
 import "../assets/styles/TrainActivity.css";
 
-function TrainActivity({ activity }) {
+function TrainActivity({ activities }) {
   return (
     <div>
-      <div className="activity_title">{activity.activity_title}</div>
-      <div className="activity_paragraphe">{activity.activity_description}</div>
+      {activities &&
+        activities.map((activity) => (
+          <div key={activity.id}>
+            <div className="activity_title">{activity.title}</div>
+            <div className="activity_paragraphe">{activity.description}</div>
+          </div>
+        ))}
     </div>
   );
 }
