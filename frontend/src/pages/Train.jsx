@@ -4,6 +4,7 @@ import axios from "axios";
 import CreateReview from "../components/CreateReview";
 import TrainActivity from "../components/TrainActivity";
 import TrainInformations from "../components/TrainInformations";
+import TrainImages from "../components/TrainImages";
 import "../assets/styles/Train.css";
 
 const sampletrain = {
@@ -44,7 +45,7 @@ function Train() {
 
   const getTrain = () => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}/images`)
       .then((response) => response.data)
       .then((data) => setTrain(data));
   };
@@ -60,11 +61,7 @@ function Train() {
         <div>favoris</div>
       </div>
       <div className="train_image_div">
-        <img
-          className="train_image"
-          src={sampletrain.path}
-          alt={sampletrain.title}
-        />
+        <TrainImages images={train.images} />
       </div>
       <h3 className="train_h3_title">Informations</h3>
       <TrainInformations train={train} />

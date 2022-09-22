@@ -27,16 +27,9 @@
   font-size: 6vw;
 }
 
-/* div contenant l'image du train */
+/* div contenant les images du train */
 .train_image_div {
   padding: 2%;
-}
-
-/* image d'illustration du train */
-.train_image {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
 }
 
 /* sous-titre informations et activitées */
