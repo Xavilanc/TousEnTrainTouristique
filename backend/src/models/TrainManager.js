@@ -80,7 +80,7 @@ class TrainManager extends AbstractManager {
   getJoinWithActivityById(id) {
     return this.connection.query(
       `SELECT t.name AS tname, t.id as id, t.description,t.description_info, t.created_on AS creat, t.updated_on AS updat,
-      JSON_ARRAYAGG(JSON_OBJECT("id", act.id, "title", act.title)) AS activity    
+      JSON_ARRAYAGG(JSON_OBJECT("id", act.id, "title", act.title, "description", act.description)) AS activity    
       FROM train AS t                  
       JOIN activity AS act  ON t.id = act.train_id
       WHERE t.id = ?       

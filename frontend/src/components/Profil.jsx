@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// eslint-disable-next-line import/no-unresolved
-// eslint-disable-next-line import/no-unresolved
-import "@assets/styles/TrainCard.css";
-// eslint-disable-next-line import/no-unresolved
-import "@assets/styles/Profil.css";
+import "../assets/styles/TrainCard.css";
+import "../assets/styles/Profil.css";
 
 function Profil() {
   const [userInformation, setUserInformation] = useState("");

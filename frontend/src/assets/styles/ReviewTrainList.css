@@ -10,15 +10,23 @@
   src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
 }
 
-/* image d'illustration du train */
-.train_image {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+.review_train_list_rating {
+  display: flex;
+  justify-content: right;
 }
 
-.train_image_title {
+.review_train_list_username {
+  font-weight: bold;
   font-family: "Avenir-Book";
   font-size: 3vw;
-  text-align: center;
+}
+
+.review_train_list_comment {
+  font-family: "Avenir-Book";
+  font-size: 3vw;
+}
+
+.star-svg {
+  width: 3vw;
+  height: 3vh;
 }

@@ -7,7 +7,7 @@ function TrainImages({ images }) {
         images.map((image) => (
           <div key={image.id}>
             <img className="train_image" src={image.path} alt={image.title} />
-            <div>{image.title}</div>
+            <div className="train_image_title">{image.title}</div>
           </div>
         ))}
     </div>

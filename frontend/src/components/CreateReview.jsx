@@ -49,8 +49,7 @@ function CreateReview() {
             postReview();
           }}
         >
-          <div className="review_details_note">
-            <label htmlFor="note">Note</label>
+          <div className="create_review_note">
             <Rating
               onClick={handleRating}
               ratingValue={rating}
@@ -58,10 +57,12 @@ function CreateReview() {
               allowHover={false}
             />
           </div>
-          <div className="review_details_comment">
-            <label htmlFor="comment">Commentaire</label>
-            <input
-              className="review_details_input"
+          <div className="create_review_comment">
+            <label className="create_review_comment_label" htmlFor="comment">
+              Ajouter un commentaire
+            </label>
+            <textarea
+              className="create_review_input"
               type="text"
               name="comment"
               id="comment"
@@ -76,7 +77,11 @@ function CreateReview() {
             />
           </div>
           <div className="review_details_buttons_box">
-            <input type="submit" value="Envoyer" />
+            <input
+              className="create_review_submit_btn"
+              type="submit"
+              value="Envoyer"
+            />
             {posted ? <input type="submit" value="Modifier" /> : ""}
           </div>
         </form>
