@@ -30,22 +30,26 @@ const read = (req, res) => {
 
 const edit = (req, res) => {
   const user = req.body;
+  const id = parseInt(req.params.id, 10);
 
-  user.id = parseInt(req.params.id, 10);
-
-  models.type
-    .update(user)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.payload.sub !== id) {
+    res.sendStatus(403);
+    console.warn("user not autorised");
+  } else {
+    models.type
+      .update(user)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
 const postUser = (req, res) => {
   const user = req.body;
@@ -81,20 +85,27 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
 };
 
 const deleteUser = (req, res) => {
-  models.user
-    .delete(req.params.id)
-    .then(([result]) => {
-      console.warn(result.affectedRows);
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  const id = parseInt(req.params.id, 2);
+
+  if (req.payload.sub !== id) {
+    res.sendStatus(403);
+    console.warn("user not autorised");
+  } else {
+    models.user
+      .delete(req.params.id)
+      .then(([result]) => {
+        console.warn(result.affectedRows);
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
 
 module.exports = {
