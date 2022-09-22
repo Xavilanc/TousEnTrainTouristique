@@ -1,13 +1,13 @@
-// import { useParams } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import CreateReview from "../components/CreateReview";
 import TrainActivity from "../components/TrainActivity";
 import TrainInformations from "../components/TrainInformations";
 import "../assets/styles/Train.css";
 
 const sampletrain = {
-  tname: "Train des chatons",
+  tname: "Train des minou",
   description:
     "Trait d’union entre plaine et montagne, Suisse et France, le Mont-Blanc Express relie Martigny à Chamonix depuis plus d'un siècle.",
   description_info:
@@ -30,7 +30,7 @@ const sampletrain = {
   creat: "2022-09-07T08:50:56.000Z",
   updat: "2022-09-07T09:50:56.000Z",
   areaName: "Auvergne-Rhône-Alpes",
-  titl: "toto",
+  title: "toto",
   path: "https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/arriv%C3%A9e-dun-chaton-%C3%A0-la-maison.jpeg",
   created_on: "2022-09-07T09:50:56.000Z",
   updated_on: "2022-09-07T09:50:56.000Z",
@@ -38,36 +38,36 @@ const sampletrain = {
   types: "A la mer",
 };
 function Train() {
-  // const params = useParams();
+  const params = useParams();
 
-  // const [train, setTrain] = useState("");
+  const [train, setTrain] = useState("");
 
-  // const getTrain = () => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`)
-  //     .then((response) => response.data)
-  //     .then((data) => setTrain(data));
-  // };
+  const getTrain = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`)
+      .then((response) => response.data)
+      .then((data) => setTrain(data));
+  };
 
-  // useEffect(() => {
-  //   getTrain();
-  // }, []);
+  useEffect(() => {
+    getTrain();
+  }, []);
 
   return (
     <div className="train_main_div">
       <div className="train_title_favoris_box">
-        <h2 className="train_title">{sampletrain.tname}</h2>
+        <h2 className="train_title">{train.tname}</h2>
         <div>favoris</div>
       </div>
       <div className="train_image_div">
         <img
           className="train_image"
           src={sampletrain.path}
-          alt={sampletrain.tname}
+          alt={sampletrain.title}
         />
       </div>
       <h3 className="train_h3_title">Informations</h3>
-      <TrainInformations train={sampletrain} />
+      <TrainInformations train={train} />
       <h3 className="train_h3_title">Activitées</h3>
       {sampletrain.activities &&
         sampletrain.activities.map((activity) => (

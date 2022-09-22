@@ -27,6 +27,40 @@ const getAllJoin = (req, res) => {
     });
 };
 
+// Tous les trains avec la région et les images
+const getAllJoinWithImagesById = (req, res) => {
+  models.train
+    .getJoinWithImagesById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+// Tous les trains avec les activités
+const getAllJoinWithActivitiesById = (req, res) => {
+  models.train
+    .getJoinWithActivityById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   models.train
     .find(req.params.id)
@@ -46,6 +80,22 @@ const read = (req, res) => {
 const readJoin = (req, res) => {
   models.train
     .getJoinById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const readWithAreaAndId = (req, res) => {
+  models.train
+    .getJoinByAreaAndType(req.params.area, req.params.type)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -116,8 +166,11 @@ const destroy = (req, res) => {
 module.exports = {
   getAll,
   getAllJoin,
+  getAllJoinWithImagesById,
+  getAllJoinWithActivitiesById,
   read,
   readJoin,
+  readWithAreaAndId,
   edit,
   add,
   destroy,
