@@ -55,7 +55,7 @@ class TrainManager extends AbstractManager {
     return this.connection
       .query(`SELECT t.name AS tname, t.id as id, t.description, t.created_on AS creat, t.updated_on AS updat,
       a.name AS areaName,
-      JSON_OBJECTAGG(i.id,i.path) AS path, JSON_OBJECTAGG(type.id,type.title) AS types
+      JSON_OBJECTAGG(i.title,i.path) AS path, JSON_OBJECTAGG(type.id,type.title) AS types
       FROM train AS t
       JOIN image_train AS i ON i.train_id=t.id
       JOIN area AS a ON a.id=t.area_id

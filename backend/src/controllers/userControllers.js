@@ -47,14 +47,13 @@ const edit = (req, res) => {
       res.sendStatus(500);
     });
 };
-
-const add = (req, res) => {
+const postUser = (req, res) => {
   const user = req.body;
 
   models.user
     .insert(user)
     .then(([result]) => {
-      res.location(`/types/${result.insertId}`).sendStatus(201);
+      res.location(`/api/users/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -62,10 +61,30 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
-  models.type
+const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
+  const { mail } = req.body;
+  models.user
+    .getAllUserFromMail(mail)
+    .then(([users]) => {
+      if (users[0] == null) {
+        res.sendStatus(404);
+      } else {
+        // eslint-disable-next-line prefer-destructuring
+        req.user = users[0];
+        next();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const deleteUser = (req, res) => {
+  models.user
     .delete(req.params.id)
     .then(([result]) => {
+      console.warn(result.affectedRows);
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
@@ -82,6 +101,7 @@ module.exports = {
   getAll,
   read,
   edit,
-  add,
-  destroy,
+  postUser,
+  getUserByEmailWithPasswordAndPassToNext,
+  deleteUser,
 };
