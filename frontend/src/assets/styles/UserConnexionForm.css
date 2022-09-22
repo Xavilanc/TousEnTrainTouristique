@@ -1,0 +1,102 @@
+font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+.user {
+  font-family: "Avenir-Black";
+  font-size: 5vw;
+  color: #000000;
+  text-align: center;
+  margin-top: -5%;
+  margin-bottom: 7%;
+}
+.connect1 {
+  background-color: #f3f3f8;
+  padding-top: 10%;
+  padding-bottom: 105%;
+}
+.connect_subtitle {
+  text-align: right;
+  padding-right: 12%;
+  font-family: "Avenir-Book";
+  font-style: normal;
+  font-size: 3vw;
+}
+.MDP {
+  border: none;
+  color: #127996;
+  margin-left: 55%;
+  text-align: right;
+  padding-right: 12%;
+  font-family: "Avenir-Book";
+  font-style: normal;
+  font-size: 3vw;
+}
+.connect_mail,
+.connect_password {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  align-items: right;
+  justify-content: center;
+  margin-top: 1%;
+  margin-bottom: 5%;
+  margin-left: 9%;
+  width: 70%;
+  padding: 5%;
+  border-radius: 2px;
+  border: 2px solid #127996;
+}
+.message {
+  font-family: "Avenir-Book";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15%;
+  margin-bottom: 5%;
+  margin-left: 9%;
+  width: 70%;
+  padding: 5%;
+  height: 200px;
+  border-radius: 2px;
+  border: 2px solid #127996;
+}
+.connect_button {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  align-items: right;
+  justify-content: center;
+  margin-top: 1%;
+  margin-bottom: 5%;
+  margin-left: 9%;
+  width: 70%;
+  padding: 5%;
+  border-radius: 2px;
+  border: 2px solid #127996;
+  background-color: #127996;
+  color: #ffffff;
+}
+.connect_button:hover {
+  background-color: #ffffff;
+  color: #127996;
+}
+.connect_button:active {
+  background-color: #127996;
+  color: #ffffff;
+}
+.connect_button:focus {
+  background-color: #ffffff;
+  color: #127996;
+}
+.connect_button:visited {
+  background-color: #127996;
+  color: #ffffff;
+}
+.connect_button:link {
+  background-color: #127996;
+  color: #ffffff;
+}
