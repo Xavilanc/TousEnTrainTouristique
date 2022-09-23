@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line import/no-unresolved
 import "@assets/styles/UserConnexionForm.css";
 import { useNavigate } from "react-router-dom";
 
@@ -37,11 +38,19 @@ function UserConnectionForm() {
               *mot de passe oublié
             </button>
           </div>
-          <div className="buttonsContainer">
-            <button className="buttonForm" type="submit">
+          <div className="connect_button_container">
+            <button
+              type="button"
+              className="buttonForm"
+              onClick={() => navigate("/profil")}
+            >
               Connexion
             </button>
-            <button className="buttonForm1" type="submit">
+            <button
+              type="button"
+              className="buttonForm1"
+              onClick={() => navigate("/")}
+            >
               Annuler
             </button>
           </div>

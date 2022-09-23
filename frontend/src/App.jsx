@@ -9,6 +9,7 @@ import CreateUser from "./pages/CreateUser";
 import Train from "./pages/Train";
 import UserConnexion from "./pages/UserConnexion";
 import ModifyPasswordPage from "./pages/ModifyPasswordPage";
+import ProfilPage from "./pages/ProfilPage";
 import AdminReviews from "./pages/AdminReviews";
 import AdminReview from "./pages/AdminReview";
 import "./App.css";
@@ -27,10 +28,11 @@ function App() {
           <Route path="/administrateur/reviews" element={<AdminReviews />} />
           <Route path="/administrateur/reviews/:id" element={<AdminReview />} />
           <Route path="/creation-de-compte" element={<CreateUser />} />
-          <Route path="/train" element={<Train />} />
+          <Route path="/train/:id" element={<Train />} />
           <Route path="/connexion" element={<UserConnexion />} />
           <Route path="/modification/" element={<ModifyPasswordPage />} />
           <Route path="/modification/:id" element={<ModifyPasswordPage />} />
+          <Route path="/profil/" element={<ProfilPage />} />
         </Routes>
         <Footer />
       </div>

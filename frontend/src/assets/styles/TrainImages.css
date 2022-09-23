@@ -1,0 +1,24 @@
+/* police pour texte en gras */
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* image d'illustration du train */
+.train_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.train_image_title {
+  font-family: "Avenir-Book";
+  font-size: 3vw;
+  text-align: center;
+}

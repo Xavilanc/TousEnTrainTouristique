@@ -80,23 +80,51 @@ font-face {
   background-color: #127996;
   color: #ffffff;
 }
-.connect_button:hover {
-  background-color: #ffffff;
+.connexion {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  align-items: right;
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  margin-left: 9%;
+  border-radius: 8px;
+  border: 2px solid;
+  background-color: #127996;
+  color: white;
+}
+.annuler {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  align-items: right;
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  margin-left: 25%;
+  border-radius: 8px;
+  border: 2px solid #127996;
+  background-color: #f3f3f8;
   color: #127996;
 }
-.connect_button:active {
+
+.buttonForm {
+  font-family: "Avenir-Black";
+  font-size: 4vw;
+  line-height: 18px;
+  border-radius: 25px;
+  padding: 2%;
+  border: 2px solid white;
+  width: 28%;
   background-color: #127996;
-  color: #ffffff;
+  color: #f3f3f8;
 }
-.connect_button:focus {
-  background-color: #ffffff;
+.buttonForm1 {
+  font-family: "Avenir-Black";
+  font-size: 4vw;
+  border-radius: 25px;
+  padding: 2%;
+  border: 2px solid #127996;
+  width: 28%;
   color: #127996;
-}
-.connect_button:visited {
-  background-color: #127996;
-  color: #ffffff;
-}
-.connect_button:link {
-  background-color: #127996;
-  color: #ffffff;
+  background-color: white;
 }
