@@ -1,13 +1,67 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-expressions */
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line import/no-unresolved
 import "@assets/styles/CreateUserForm.css";
+import axios from "axios";
+import { getDate } from "../services/DateManager";
 
 function CreateUserForm() {
-  const [mail, setMail] = useState("");
+  const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [pass, setPass] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [regBool, setRegBool] = useState(true);
+  const [equalTest, setEqualTest] = useState(false);
+  const [userExist, setUserExist] = useState(false);
 
+  const navigate = useNavigate();
+
+  const validatePassword = () => {
+    // test regex: lettre capital, normal,un chiffre, un charactere spécial et 8 de long
+    const regExTest =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*.]).{8,}$/;
+    setRegBool(!regExTest.test(pass));
+    setEqualTest(pass === confirmPassword);
+  };
+
+  useEffect(() => {
+    validatePassword();
+  }, [equalTest, pass, confirmPassword]);
+
+  const sendSignin = (e) => {
+    e.preventDefault();
+    validatePassword();
+    setUserExist(false);
+    console.warn(
+      `equalTest :${!equalTest} regBool :${!regBool} userName !== ${
+        userName !== ""
+      } email !== ${email !== ""}`
+    );
+    if (equalTest && userName !== "" && email !== "") {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/api/users/`, {
+          name: userName,
+          password: pass,
+          mail: email,
+          user_right: 0,
+          created_on: getDate(),
+          updated_on: getDate(),
+        })
+        .then((response) => {
+          // console.error(response);
+          console.warn(response.data);
+          navigate("/connexion");
+        })
+        .catch((error) =>
+          error.response.status === 409
+            ? setUserExist(true)
+            : setUserExist(false)
+        );
+    } else {
+      console.warn("input error");
+    }
+  };
   return (
     <div className="contact1">
       <div className="Contact">
@@ -17,11 +71,12 @@ function CreateUserForm() {
           <div className="createruser_container">
             <input
               className="createuser_mail"
-              type="text"
-              id=";createuser_mail"
-              value={mail}
+              type="mail"
+              id="createuser_mail"
+              value={email}
               placeholder="Adresse e-mail(exemple@mail.fr*"
-              onChange={(e) => setMail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
+              required="required"
             />
             <input
               className="createuser_username"
@@ -30,29 +85,43 @@ function CreateUserForm() {
               value={userName}
               placeholder="Identifiant*"
               onChange={(e) => setUserName(e.target.value)}
+              required="required"
             />
             <input
               className="createuser_password"
-              type="text"
+              type="password"
               id="createuser_password"
-              value={password}
+              value={pass}
               placeholder="Mot de passe*"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPass(e.target.value);
+              }}
+              required="required"
             />
             <input
               className="createuser_confirm_password"
-              type="text"
+              type="password"
               id="createuser_confirm_password"
               value={confirmPassword}
               placeholder="Confirmez le mot de passe*"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+              required="required"
             />
+            {equalTest ? "" : <p>Mot de passe différent</p>}
+            {regBool ? <p>Mot de passe ne respectant pas les critères</p> : ""}
+            {userExist ? <p>Utilisateur déjà enregistré</p> : ""}
           </div>
           <div className="buttonsContainer">
-            <button className="buttonForm" type="submit">
+            <button
+              className="buttonForm"
+              type="submit"
+              onClick={(e) => sendSignin(e)}
+            >
               Envoyer
             </button>
-            <button className="buttonForm1" type="submit">
+            <button className="buttonForm1" type="button">
               Annuler
             </button>
           </div>

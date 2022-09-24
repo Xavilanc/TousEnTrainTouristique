@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const models = require("../models");
 
 const getAll = (req, res) => {
@@ -60,8 +61,8 @@ const postUser = (req, res) => {
       res.location(`/api/users/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
+      console.error(err.code);
+      err.code === "ER_DUP_ENTRY" ? res.sendStatus(409) : res.sendStatus(500);
     });
 };
 
