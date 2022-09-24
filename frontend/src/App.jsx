@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -17,10 +17,14 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  const [refresh, setRefresh] = useState(false);
+  function handleUpdate() {
+    setRefresh(!refresh);
+  }
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header refresh={refresh} setRefresh={setRefresh} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<ContactPage />} />

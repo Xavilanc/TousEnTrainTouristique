@@ -1,19 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/TrainCard.css";
 import "../assets/styles/Profil.css";
+import jwtDecode from "jwt-decode";
+import Header from "./Header";
 
 function Profil() {
   const [userInformation, setUserInformation] = useState("");
   const [changePassword, setChangePassword] = useState("");
   const [addTrain, setAddTrain] = useState("");
+  const [userName, setUserName] = useState("");
+  const [token, setToken] = useState("");
+  const [userRight, setUserRight] = useState(0);
   const navigate = useNavigate();
+  useEffect(() => {
+    setUserName(window.localStorage.getItem("name"));
+    setToken(window.localStorage.getItem("token"));
+
+    if (token) {
+      const decoded = jwtDecode(token);
+      setUserRight(decoded.userRight);
+    }
+    // setRefresh(!refresh);
+    // console.log(decoded);
+  }, [token]);
+
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("mail");
+    window.localStorage.removeItem("name");
+    navigate("/connexion");
+  };
 
   return (
     <div className="profil">
       <div className="profil_header">
-        <h2 className="account_title">Mon compte</h2>
         <form>
+          <h2 className="account_title">Mon compte</h2>
+          <h3>{userName}</h3>
+          <p>
+            {parseInt(userRight, 2) === 0 ? "Utilisateur" : "Administrateur"}
+          </p>
           <div className="information_container">
             <input
               className="user_information"
@@ -55,7 +82,7 @@ function Profil() {
         <button
           type="button"
           className="deconnecter_button"
-          onClick={() => navigate("/connexion")}
+          onClick={() => logout()}
         >
           Se déconnecter
         </button>

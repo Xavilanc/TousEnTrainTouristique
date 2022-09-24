@@ -27,8 +27,11 @@ const verifyPassword = (req, res) => {
     .verify(req.user.hashedPassword, req.body.password)
     .then((isVerified) => {
       if (isVerified) {
-        const payload = { sub: req.user.id };
-
+        const payload = {
+          sub: req.user.id,
+          user: req.user.name,
+          userRight: req.user.user_right,
+        };
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "48h",
         });
