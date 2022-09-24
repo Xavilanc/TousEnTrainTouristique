@@ -7,15 +7,15 @@ class TypeManager extends AbstractManager {
 
   insert(type) {
     return this.connection.query(
-      `insert into ${this.table} (name) values ( ?, ?)`,
-      [type.name]
+      `insert into ${this.table} (title) values ( ?)`,
+      [type.title]
     );
   }
 
   update(type) {
     return this.connection.query(
-      `update ${this.table} set name = ? where id = ?`,
-      [type.name, type.id]
+      `update ${this.table} set title = ? where id = ?`,
+      [type.title, type.id]
     );
   }
 }

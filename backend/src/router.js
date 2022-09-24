@@ -75,7 +75,21 @@ router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.post("/api/types", typeControllers.add); // Créer un type de train
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
 
-router.get("/api/users", userControllers.getAll); // Tous les types de trains
-router.get("/api/users/:id", userControllers.read); // Un type de train en particulier
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./controllers/auth");
+
+router.get("/api/users", userControllers.getAll);
+router.get("/api/users/:id", userControllers.read);
+router.post("/api/users", hashPassword, userControllers.postUser);
+router.post(
+  "/api/login",
+  userControllers.getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword
+);
+router.use(verifyToken);
+router.delete("/api/users/:id", userControllers.deleteUser);
 
 module.exports = router;

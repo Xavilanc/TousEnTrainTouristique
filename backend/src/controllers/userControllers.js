@@ -30,31 +30,34 @@ const read = (req, res) => {
 
 const edit = (req, res) => {
   const user = req.body;
+  const id = parseInt(req.params.id, 10);
 
-  user.id = parseInt(req.params.id, 10);
-
-  models.type
-    .update(user)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.payload.sub !== id) {
+    res.sendStatus(403);
+    console.warn("user not autorised");
+  } else {
+    models.type
+      .update(user)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
-
-const add = (req, res) => {
+const postUser = (req, res) => {
   const user = req.body;
 
   models.user
     .insert(user)
     .then(([result]) => {
-      res.location(`/types/${result.insertId}`).sendStatus(201);
+      res.location(`/api/users/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -62,26 +65,54 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
-  models.type
-    .delete(req.params.id)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
+const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
+  const { mail } = req.body;
+  models.user
+    .getAllUserFromMail(mail)
+    .then(([users]) => {
+      if (users[0] == null) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        // eslint-disable-next-line prefer-destructuring
+        req.user = users[0];
+        next();
       }
     })
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
     });
+};
+
+const deleteUser = (req, res) => {
+  const id = parseInt(req.params.id, 2);
+
+  if (req.payload.sub !== id) {
+    res.sendStatus(403);
+    console.warn("user not autorised");
+  } else {
+    models.user
+      .delete(req.params.id)
+      .then(([result]) => {
+        console.warn(result.affectedRows);
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
 
 module.exports = {
   getAll,
   read,
   edit,
-  add,
-  destroy,
+  postUser,
+  getUserByEmailWithPasswordAndPassToNext,
+  deleteUser,
 };
