@@ -54,10 +54,10 @@ class UserManager extends AbstractManager {
     );
   }
 
-  updatePassword(user) {
+  updatePassword(user, id) {
     return this.connection.query(
       `update ${this.table} set hashedPassword = ? where id = ?`,
-      [user.hashedPassword, user.id]
+      [user.hashedPassword, id]
     );
   }
 }

@@ -1,6 +1,6 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
-// const { mailRecover } = require("./sendEmail");
+const { mailRecover } = require("./sendEmail");
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -80,27 +80,24 @@ const verifyToken = (req, res, next) => {
   }
 };
 const modifyPassword = (req, res) => {
-  // console.log(req.user);
   const payload = { sub: req.user.id, reset: "reset" };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: "15m",
   });
-  // message = { id: req.user.id, token, mail: req.user.email };
-  // mailRecover(message);
-  // delete req.user.hashedPassword;
+  const message = { id: req.user.id, token, mail: req.user.mail };
+  mailRecover(message);
+  delete req.user.hashedPassword;
   res.send({ token, user: req.user });
 };
 
 const hashPasswordForReset = (req, res, next) => {
   // Récupère l'id via un parametre d'url
-  // const id = parseInt(req.params.id, 2);
-  // Recupère le token envoyer en auth
-  const token = req.headers.authorization.split(" ")[1];
+  const { token } = req.params;
   // console.log(`auto : ${req.headers.authorization.split(" ")[1]}`);
   // Décode le token
   req.payload = jwt.verify(token, process.env.JWT_SECRET);
-  // Verification que l'id en parametre correspond bien a l'id du token
+  // Verification que le payload est bien un payload de reset
   if (req.payload.reset === "reset") {
     argon2
       .hash(req.body.password, hashingOptions)
