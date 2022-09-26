@@ -28,7 +28,7 @@ router.post("/api/trains", trainControllers.add); // Ajouter un train
 router.delete("/api/trains/:id", trainControllers.destroy); // Supprimer un train
 
 /* Routes concernant la table image_train */
-router.get("/api/trains/images", imageTrainControllers.getAll); // Toutes les images de trains
+router.get("/api/trains/images/", imageTrainControllers.getAll); // Toutes les images de trains
 router.get("/api/trains/images/:id", imageTrainControllers.read); // Une image de train de particulier
 router.put("/api/trains/images/:id", imageTrainControllers.edit); // Modifier une image d'un train
 router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une image d'un train

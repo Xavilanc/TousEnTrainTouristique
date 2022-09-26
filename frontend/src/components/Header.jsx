@@ -10,7 +10,6 @@ function Header() {
   const [isLogged, setIsLogged] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    // setUserName(window.localStorage.getItem("name"));
     setToken(window.localStorage.getItem("token"));
 
     if (token) {

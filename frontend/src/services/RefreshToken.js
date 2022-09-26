@@ -6,7 +6,7 @@ function isAuthenticated() {
   try {
     jwtDecode(token);
     const { exp } = jwtDecode(token);
-    if (exp < (new Date().getTime() + 1) / 1000) {
+    if (Date.now() >= exp * 1000) {
       return false;
     }
   } catch (err) {

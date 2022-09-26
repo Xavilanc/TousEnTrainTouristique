@@ -53,5 +53,12 @@ class UserManager extends AbstractManager {
       ]
     );
   }
+
+  updatePassword(user) {
+    return this.connection.query(
+      `update ${this.table} set hashedPassword = ? where id = ?`,
+      [user.hashedPassword, user.id]
+    );
+  }
 }
 module.exports = UserManager;

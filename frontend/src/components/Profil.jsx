@@ -3,12 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../assets/styles/TrainCard.css";
 import "../assets/styles/Profil.css";
 import jwtDecode from "jwt-decode";
-import Header from "./Header";
 
 function Profil() {
-  const [userInformation, setUserInformation] = useState("");
-  const [changePassword, setChangePassword] = useState("");
-  const [addTrain, setAddTrain] = useState("");
   const [userName, setUserName] = useState("");
   const [token, setToken] = useState("");
   const [userRight, setUserRight] = useState(0);
@@ -21,10 +17,9 @@ function Profil() {
       const decoded = jwtDecode(token);
       setUserRight(decoded.userRight);
     }
-    // setRefresh(!refresh);
-    // console.log(decoded);
   }, [token]);
 
+  // Efface les données stocker en local pour déconnecter
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("mail");
@@ -44,27 +39,22 @@ function Profil() {
           <div className="information_container">
             <input
               className="user_information"
-              type="text"
+              type="button"
               id="user_information"
-              value={userInformation}
-              placeholder="Mes informations"
-              onChange={(e) => setUserInformation(e.target.value)}
+              value="Mes informations"
             />
             <input
               className="change_password"
-              type="text"
+              type="button"
               id="change_password"
-              value={changePassword}
-              placeholder="Changer de mot de passe"
-              onChange={(e) => setChangePassword(e.target.value)}
+              value="Changer de mot de passe"
             />
             <input
               className="add_train"
               type="text"
               id="add_train"
-              value={addTrain}
-              placeholder="Ajouter un train"
-              onChange={(e) => setAddTrain(e.target.value)}
+              value="Ajouter un train"
+              // placeholder="Ajouter un train"
             />
           </div>
         </form>

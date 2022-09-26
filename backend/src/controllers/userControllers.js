@@ -1,7 +1,9 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-unused-expressions */
 const models = require("../models");
 
 const getAll = (req, res) => {
+  console.warn(req);
   models.user
     .getAllUser()
     .then(([rows]) => {
@@ -74,7 +76,6 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
       if (users[0] == null) {
         res.sendStatus(404);
       } else {
-        // eslint-disable-next-line prefer-destructuring
         req.user = users[0];
         next();
       }
@@ -83,6 +84,31 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
       console.error(err);
       res.sendStatus(500);
     });
+};
+// updatePassword
+const updateUserForChangePassword = (req, res) => {
+  console.warn(req + res);
+  // const token = req.params.tokens;
+  // const decoded = jwt_decode(token);
+  // console.log(`decoded: ${decoded}`);
+  // getMyUserForSecu(req,res,id)
+  // const { hashedPassword } = req.body;
+  // database
+  //   .query("UPDATE users SET hashedPassword = ? WHERE id = ?", [
+  //     hashedPassword,
+  //     id,
+  //   ])
+  //   .then(([result]) => {
+  //     if (result.affectedRows === 0) {
+  //       res.status(404).send("Not Found");
+  //     } else {
+  //       res.status(204).send("User password edited");
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //     res.status(500).send("Error editing the user");
+  //   });
 };
 
 const deleteUser = (req, res) => {
@@ -115,5 +141,6 @@ module.exports = {
   edit,
   postUser,
   getUserByEmailWithPasswordAndPassToNext,
+  updateUserForChangePassword,
   deleteUser,
 };

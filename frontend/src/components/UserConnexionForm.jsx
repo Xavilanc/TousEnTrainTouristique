@@ -11,29 +11,41 @@ function UserConnectionForm() {
   const [loginFail, setLoginFail] = useState(false);
   const [passFail, setPassFail] = useState(false);
   const navigate = useNavigate();
+  // const inputMail = document.querySelector("#user_mail");
+  // const inputPass = document.querySelector("#connect_password");
 
   const login = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/`, {
-        mail,
-        password,
-      })
-      .then((response) => {
-        // console.error(response);
-        console.warn(response.data);
-        window.localStorage.setItem("token", response.data.token);
-        window.localStorage.setItem("mail", response.data.user.mail);
-        window.localStorage.setItem("name", response.data.user.name);
 
-        navigate("/profil");
-      })
-      .catch((error) => {
-        error.response.status === 404
-          ? setLoginFail(true)
-          : setLoginFail(false);
-        error.response.status === 401 ? setPassFail(true) : setPassFail(false);
-      });
+    mail !== "" &&
+      password !== "" &&
+      setTimeout(() => {
+        console.warn(password);
+
+        axios
+          .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/`, {
+            mail,
+            password,
+          })
+          .then((response) => {
+            // console.error(response);
+            console.warn(response.data);
+            window.localStorage.setItem("token", response.data.token);
+            window.localStorage.setItem("mail", response.data.user.mail);
+            window.localStorage.setItem("name", response.data.user.name);
+
+            navigate("/profil");
+          })
+          .catch((error) => {
+            console.error(mail);
+            error.response.status === 404
+              ? setLoginFail(true)
+              : setLoginFail(false);
+            error.response.status === 401
+              ? setPassFail(true)
+              : setPassFail(false);
+          });
+      }, 100);
   };
 
   return (
@@ -50,6 +62,7 @@ function UserConnectionForm() {
               value={mail}
               placeholder=" e-mail*"
               onChange={(e) => setMail(e.target.value)}
+              autoComplete="username"
             />
             <input
               className="connect_password"
@@ -57,7 +70,10 @@ function UserConnectionForm() {
               id="connect_password"
               value={password}
               placeholder="Mot de passe*"
-              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <button
               type="button"

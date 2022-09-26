@@ -30,7 +30,8 @@ font-face {
   margin-left: 2%;
   margin-right: 2%;
 }
-.profil_header p, .profil_header h3{
+.profil_header p,
+.profil_header h3 {
   color: azure;
 }
 .information_container {

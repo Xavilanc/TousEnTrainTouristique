@@ -1,5 +1,6 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+// const { mailRecover } = require("./sendEmail");
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -9,10 +10,13 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
+  console.warn(`password ${req.body.password}`);
   argon2
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
       req.body.hashedPassword = hashedPassword;
+      console.warn(req.body.password);
+      console.warn(hashedPassword);
       delete req.body.password;
 
       next();
@@ -23,6 +27,8 @@ const hashPassword = (req, res, next) => {
     });
 };
 const verifyPassword = (req, res) => {
+  console.warn(`password ${req.body.password}`);
+  console.warn(req.user);
   argon2
     .verify(req.user.hashedPassword, req.body.password)
     .then((isVerified) => {
@@ -73,9 +79,49 @@ const verifyToken = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+const modifyPassword = (req, res) => {
+  // console.log(req.user);
+  const payload = { sub: req.user.id, reset: "reset" };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "15m",
+  });
+  // message = { id: req.user.id, token, mail: req.user.email };
+  // mailRecover(message);
+  // delete req.user.hashedPassword;
+  res.send({ token, user: req.user });
+};
+
+const hashPasswordForReset = (req, res, next) => {
+  // Récupère l'id via un parametre d'url
+  // const id = parseInt(req.params.id, 2);
+  // Recupère le token envoyer en auth
+  const token = req.headers.authorization.split(" ")[1];
+  // console.log(`auto : ${req.headers.authorization.split(" ")[1]}`);
+  // Décode le token
+  req.payload = jwt.verify(token, process.env.JWT_SECRET);
+  // Verification que l'id en parametre correspond bien a l'id du token
+  if (req.payload.reset === "reset") {
+    argon2
+      .hash(req.body.password, hashingOptions)
+      .then((hashedPassword) => {
+        req.body.hashedPassword = hashedPassword;
+        delete req.body.password;
+        next();
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.status(401).send("Not Good User for modify password");
+  }
+};
 
 module.exports = {
   hashPassword,
   verifyPassword,
   verifyToken,
+  modifyPassword,
+  hashPasswordForReset,
 };

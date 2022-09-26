@@ -11,7 +11,7 @@ function CreateUserForm() {
   const [userName, setUserName] = useState("");
   const [pass, setPass] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [regBool, setRegBool] = useState(true);
+  const [regBool, setRegBool] = useState(false);
   const [equalTest, setEqualTest] = useState(false);
   const [userExist, setUserExist] = useState(false);
 
@@ -77,6 +77,7 @@ function CreateUserForm() {
               placeholder="Adresse e-mail(exemple@mail.fr*"
               onChange={(e) => setEmail(e.target.value)}
               required="required"
+              autoComplete="off"
             />
             <input
               className="createuser_username"
@@ -86,6 +87,7 @@ function CreateUserForm() {
               placeholder="Identifiant*"
               onChange={(e) => setUserName(e.target.value)}
               required="required"
+              autoComplete="new-password"
             />
             <input
               className="createuser_password"
@@ -97,6 +99,7 @@ function CreateUserForm() {
                 setPass(e.target.value);
               }}
               required="required"
+              autoComplete="new-password"
             />
             <input
               className="createuser_confirm_password"
@@ -108,6 +111,7 @@ function CreateUserForm() {
                 setConfirmPassword(e.target.value);
               }}
               required="required"
+              autoComplete="off"
             />
             {equalTest ? "" : <p>Mot de passe différent</p>}
             {regBool ? <p>Mot de passe ne respectant pas les critères</p> : ""}
