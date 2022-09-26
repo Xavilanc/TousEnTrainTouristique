@@ -9,6 +9,7 @@ function Profil() {
   const [token, setToken] = useState("");
   const [userRight, setUserRight] = useState(0);
   const navigate = useNavigate();
+
   useEffect(() => {
     setUserName(window.localStorage.getItem("name"));
     setToken(window.localStorage.getItem("token"));
