@@ -1,11 +1,11 @@
 import AddImage from "@components/AddImage";
 import React from "react";
 import ReviewsList from "../components/ReviewsList";
+import "../assets/styles/Administrator.css";
 
 const administrator = () => {
   return (
-    <div>
-      <p>Admin Area</p>
+    <div className="administrator_main_div">
       <ReviewsList />
       <AddImage />
     </div>

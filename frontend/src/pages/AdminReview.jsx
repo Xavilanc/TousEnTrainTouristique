@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 import "../assets/styles/AdminReview.css";
-import CreateReview from "@components/CreateReview";
+import { getDate } from "../services/DateManager";
 
 function ReviewDetails() {
   const params = useParams();
+  const navigate = useNavigate();
+  const readOnly = true;
 
   const [published, setPublished] = useState(false);
   const [review, setReview] = useState({
@@ -13,7 +16,7 @@ function ReviewDetails() {
     train_id: 1,
     note: "",
     comment: "",
-    created_on: "2022-07-09",
+    created_on: "",
     updated_on: null,
     published: "",
   });
@@ -32,14 +35,14 @@ function ReviewDetails() {
         review_train_id: review.train_id,
         review_note: review.note,
         review_comment: review.comment,
-        created_on: "2022-09-19",
-        updated_on: "2022-09-09",
+        updated_on: getDate(),
         published: review.published,
       })
       .then((response) => {
         console.error(response);
         console.error(response.data);
       });
+    navigate("/administrateur");
   };
 
   const deleteReview = () => {
@@ -47,6 +50,7 @@ function ReviewDetails() {
       axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}/api/reviews/${params.id}`
       );
+      navigate("/administrateur");
     }
   };
 
@@ -116,14 +120,10 @@ function ReviewDetails() {
       >
         <div className="review_details_note">
           <label htmlFor="note">Note</label>
-          <input
-            className="review_details_input"
-            type="number"
-            name="note"
-            id="note"
-            value={review.note}
-            placeholder="note"
-            onChange={(e) => setReview({ ...review, note: e.target.value })}
+          <Rating
+            ratingValue={review.note}
+            readonly={readOnly}
+            className="react-simple-star-rating"
           />
         </div>
         <div className="review_details_comment">
@@ -153,7 +153,6 @@ function ReviewDetails() {
           </button>
         </div>
       </form>
-      <CreateReview />
     </div>
   );
 }

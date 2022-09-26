@@ -87,7 +87,6 @@ function Train() {
     <div className="train_main_div">
       <div className="train_title_favoris_box">
         <h2 className="train_title">{train.tname}</h2>
-        <div>favoris</div>
       </div>
       <div className="train_image_div">
         <TrainImages images={train.images} />
@@ -99,7 +98,7 @@ function Train() {
       <div className="train_review_title">commentaires</div>
       <div className="train_review_box">
         <ReviewTrainList reviews={reviews} />
-        <CreateReview />
+        <CreateReview id={params.id} />
       </div>
     </div>
   );

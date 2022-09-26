@@ -12,6 +12,7 @@ const typeControllers = require("./controllers/typeControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
+router.get("/api/trains/images/", imageTrainControllers.getAll); // Toutes les images de trains
 router.get("/api/trains/:id/images", trainControllers.getAllJoinWithImagesById); // Un train en particulier avec les images et la région
 router.get(
   "/api/trains/:id/activities",
@@ -27,7 +28,6 @@ router.post("/api/trains", trainControllers.add); // Ajouter un train
 router.delete("/api/trains/:id", trainControllers.destroy); // Supprimer un train
 
 /* Routes concernant la table image_train */
-router.get("/api/trains/images", imageTrainControllers.getAll); // Toutes les images de trains
 router.get("/api/trains/images/:id", imageTrainControllers.read); // Une image de train de particulier
 router.put("/api/trains/images/:id", imageTrainControllers.edit); // Modifier une image d'un train
 router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une image d'un train
@@ -52,7 +52,7 @@ router.get(
   reviewControllers.getAllJoinNotPublished
 ); // Uniquement les commentaires non publiés
 router.get("/api/reviews/:id", reviewControllers.getJoinById); // Un commentaire en particulier
-router.put("/api/reviews/:id", reviewControllers.edit); // Éditer un commentaire
+router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
 

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
+import { getDate } from "../services/DateManager";
 import "../assets/styles/CreateReview.css";
 
-function CreateReview() {
+function CreateReview({ id }) {
   const [posted, setPosted] = useState(false);
   const [review, setReview] = useState({
     note: "",
@@ -22,11 +23,11 @@ function CreateReview() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
         review_user_id: 1,
-        review_train_id: 1,
+        review_train_id: id,
         review_note: rating,
         review_comment: review.comment,
-        created_on: "2022-09-09",
-        updated_on: "2022-09-09",
+        created_on: getDate(),
+        updated_on: null,
         published: 0,
       })
       .then((response) => {

@@ -10,7 +10,6 @@ import Train from "./pages/Train";
 import UserConnexion from "./pages/UserConnexion";
 import ModifyPasswordPage from "./pages/ModifyPasswordPage";
 import ProfilPage from "./pages/ProfilPage";
-import AdminReviews from "./pages/AdminReviews";
 import AdminReview from "./pages/AdminReview";
 import "./App.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -25,7 +24,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/administrateur" element={<Administrator />} />
-          <Route path="/administrateur/reviews" element={<AdminReviews />} />
           <Route path="/administrateur/reviews/:id" element={<AdminReview />} />
           <Route path="/creation-de-compte" element={<CreateUser />} />
           <Route path="/train/:id" element={<Train />} />
