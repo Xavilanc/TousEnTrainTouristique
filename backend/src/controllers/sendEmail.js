@@ -1,24 +1,22 @@
-// const mailer = require("./mailer");
+const mailer = require("./mailer");
 
-// const mailRecover = (data) => {
-//   console.log(data);
-//   console.log(data.id);
-//   id = data.id;
-//   tok = data.token;
-//   mailer.sendMail(
-//     {
-//       from: process.env.MAIL,
-//       to: data.mail,
-//       subject: "This is a test email",
-//       text: "Hello world",
-//       html: `<p>Hello <em>world</em></p><a href="http://localhost:5000/api/mail/${data.id}/${data.token}">ResetPassword</a>`,
-//     },
-//     (err, info) => {
-//       if (err) console.error(err);
-//       else console.log(info);
-//     }
-//   );
-// };
-// module.exports = {
-//   mailRecover,
-// };
+const mailRecover = (data) => {
+  console.warn(data);
+  const tokenModified = data.token.split(".").join("$");
+  mailer.sendMail(
+    {
+      from: process.env.MAIL,
+      to: data.mail,
+      subject: "Reset du mot de passe de TousEnTrainTouristique",
+      text: "Voici le lien pour reset le mot de passe",
+      html: `<p>Voici le lien pour reset le mot de passe /p><a href="http://localhost:3000/modification/${tokenModified}">ResetPassword</a>`,
+    },
+    (err, info) => {
+      if (err) console.error(err);
+      else console.warn(info);
+    }
+  );
+};
+module.exports = {
+  mailRecover,
+};

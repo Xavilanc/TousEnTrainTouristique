@@ -79,7 +79,16 @@ const {
   hashPassword,
   verifyPassword,
   verifyToken,
+  modifyPassword,
+  hashPasswordForReset,
 } = require("./controllers/auth");
+
+router.post("/api/mail", userControllers.getUserByEmail, modifyPassword);
+router.put(
+  "/api/mail/:token",
+  hashPasswordForReset,
+  userControllers.updateUserForChangePassword
+);
 
 router.get("/api/users", userControllers.getAll);
 router.get("/api/users/:id", userControllers.read);

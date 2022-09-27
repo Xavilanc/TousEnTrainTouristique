@@ -1,10 +1,27 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 function ModifyPassword() {
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [mail, setMail] = useState("");
+  const [userExist, setUserExist] = useState("");
+  const [mailSent, setMailSent] = useState("");
 
+  const sendMail = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/mail/`, {
+        mail,
+      })
+      .then((response) => {
+        // console.error(response);
+        console.warn(response.data);
+        setMailSent(true);
+        setUserExist(false);
+      })
+      .catch((error) =>
+        error.response.status === 404 ? setUserExist(true) : setUserExist(false)
+      );
+  };
   return (
     <div className="contact1">
       <div className="Contact">
@@ -12,33 +29,24 @@ function ModifyPassword() {
         <form>
           <div className="createuser_subtitle">*champs obligatoires</div>
           <div className="createruser_container">
+            <p>Entrez votre mail</p>
             <input
               className="createuser_password"
-              type="text"
+              type="email"
               id="createuser_password"
-              value={oldPassword}
-              placeholder="Ancien mot de passe*"
-              onChange={(e) => setOldPassword(e.target.value)}
+              value={mail}
+              placeholder="Mail *"
+              onChange={(e) => setMail(e.target.value)}
             />
-            <input
-              className="createuser_password"
-              type="text"
-              id="createuser_password"
-              value={newPassword}
-              placeholder="Nouveau mot de passe*"
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <input
-              className="createuser_confirm_password"
-              type="text"
-              id="createuser_confirm_password"
-              value={confirmNewPassword}
-              placeholder="Confirmez le nouveau mot de passe*"
-              onChange={(e) => setConfirmNewPassword(e.target.value)}
-            />
+            {userExist ? <p>Utilisateur non existant</p> : ""}
+            {mailSent ? <p>Mail envoyé</p> : ""}
           </div>
           <div className="buttonsContainer">
-            <button className="buttonForm" type="submit">
+            <button
+              className="buttonForm"
+              type="submit"
+              onClick={(e) => sendMail(e)}
+            >
               Valider
             </button>
             <button className="buttonForm1" type="submit">
