@@ -115,7 +115,8 @@ const updateUserForChangePassword = (req, res) => {
       if (result.affectedRows === 0) {
         res.status(404).send("Not Found");
       } else {
-        res.status(204).send("User password edited");
+        res.send("success");
+        res.sendStatus(204).send("User password edited");
       }
     })
     .catch((err) => {

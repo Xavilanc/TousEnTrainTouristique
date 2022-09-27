@@ -8,29 +8,28 @@ const hashingOptions = {
   timeCost: 5,
   parallelism: 1,
 };
-
+// Fonction de hashage du mot de passe
 const hashPassword = (req, res, next) => {
-  console.warn(`password ${req.body.password}`);
   argon2
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
+      // stock le hashed password dans le req.body
       req.body.hashedPassword = hashedPassword;
-      console.warn(req.body.password);
-      console.warn(hashedPassword);
+      // Pour la sécurité efface le mot de passe non haché
       delete req.body.password;
-
       next();
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 };
+
+// Fonction de verification du mot de passe
 const verifyPassword = (req, res) => {
-  console.warn(`password ${req.body.password}`);
-  console.warn(req.user);
   argon2
+    // Verifie que le hashed password correspond au mot de passe envoyé
     .verify(req.user.hashedPassword, req.body.password)
+    // Continue si verifié
     .then((isVerified) => {
       if (isVerified) {
         const payload = {
@@ -53,24 +52,20 @@ const verifyPassword = (req, res) => {
       res.sendStatus(500);
     });
 };
-const print = (data) => {
-  console.warn(data);
-};
-
+// Verifie que le token à bien été generer par le back
 const verifyToken = (req, res, next) => {
   try {
     const authorizationHeader = req.get("Authorization");
-    print(authorizationHeader);
     if (authorizationHeader == null) {
       throw new Error("Authorization header is missing");
     }
-
+    // Récupère le type d'authorization et le token qui suis.
     const [type, token] = authorizationHeader.split(" ");
-
+    // Si le token n'est pas de type Bearer, ça ne continue pas.
     if (type !== "Bearer") {
       throw new Error("Authorization header has not the 'Bearer' type");
     }
-
+    // Vérifie que le token a été écrit par le back
     req.payload = jwt.verify(token, process.env.JWT_SECRET);
 
     next();
@@ -79,22 +74,24 @@ const verifyToken = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
+// Fonction de creation du token spécial pour reset le password
 const modifyPassword = (req, res) => {
   const payload = { sub: req.user.id, reset: "reset" };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: "15m",
   });
-  const message = { id: req.user.id, token, mail: req.user.mail };
+  // Envoie du mail avec différente info
+  const message = { token, mail: req.user.mail };
   mailRecover(message);
   delete req.user.hashedPassword;
   res.send({ token, user: req.user });
 };
 
 const hashPasswordForReset = (req, res, next) => {
-  // Récupère l'id via un parametre d'url
+  // Récupère le token via un parametre d'url
   const { token } = req.params;
-  // console.log(`auto : ${req.headers.authorization.split(" ")[1]}`);
   // Décode le token
   req.payload = jwt.verify(token, process.env.JWT_SECRET);
   // Verification que le payload est bien un payload de reset

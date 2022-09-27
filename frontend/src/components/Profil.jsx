@@ -42,20 +42,19 @@ function Profil() {
               className="user_information"
               type="button"
               id="user_information"
-              value="Mes informations"
+              defaultValue="Mes informations"
             />
             <input
               className="change_password"
               type="button"
               id="change_password"
-              value="Changer de mot de passe"
+              defaultValue="Changer de mot de passe"
             />
             <input
               className="add_train"
               type="text"
               id="add_train"
-              value="Ajouter un train"
-              // placeholder="Ajouter un train"
+              defaultValue="Ajouter un train"
             />
           </div>
         </form>

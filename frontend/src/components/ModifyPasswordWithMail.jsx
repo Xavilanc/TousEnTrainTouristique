@@ -1,24 +1,37 @@
+/* eslint-disable no-unused-expressions */
 import axios from "axios";
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 function ModifyPasswordWithMail() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [regBool, setRegBool] = useState(false);
+  const [equalTest, setEqualTest] = useState(false);
+  const [passChangeSuccess, setpassChangeSuccess] = useState(true);
   const { token } = useParams();
   const tokenCorrected = token.split("$").join(".");
-  const editPass = (e) => {
-    e.preventDefault();
+  const nav = useNavigate();
+  useEffect(() => {
+    // test regex: lettre capital, normal,un chiffre, un charactere spécial et 8 de long
+    const regExTest =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*.]).{8,}$/;
+    setRegBool(!regExTest.test(newPassword));
+    setEqualTest(newPassword === confirmNewPassword);
+  }, [newPassword, confirmNewPassword]);
+
+  const editPass = () => {
     const password = newPassword;
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/api/mail/${tokenCorrected}`, {
         password,
       })
       .then((response) => {
-        // console.error(response);
-        console.warn(response.data);
+        response === "success" ? nav("/login") : setpassChangeSuccess(false);
+        console.warn(response);
       })
       .catch((error) => {
+        setpassChangeSuccess(false);
         console.warn(error);
         // error.response.status === 404
         //   ? setUserExist(true)
@@ -34,7 +47,7 @@ function ModifyPasswordWithMail() {
           <div className="createruser_container">
             <input
               className="createuser_password"
-              type="text"
+              type="password"
               id="createuser_password"
               value={newPassword}
               placeholder="Nouveau mot de passe*"
@@ -42,18 +55,24 @@ function ModifyPasswordWithMail() {
             />
             <input
               className="createuser_confirm_password"
-              type="text"
+              type="password"
               id="createuser_confirm_password"
               value={confirmNewPassword}
               placeholder="Confirmez le nouveau mot de passe*"
               onChange={(e) => setConfirmNewPassword(e.target.value)}
             />
           </div>
+          {passChangeSuccess ? "" : <p>Echec de mise a jour du mot de passe</p>}
+          {equalTest ? "" : <p>Mot de passe différent</p>}
+          {regBool ? <p>Mot de passe ne respectant pas les critères</p> : ""}
           <div className="buttonsContainer">
             <button
               className="buttonForm"
               type="submit"
-              onClick={(e) => editPass(e)}
+              onClick={(e) => {
+                e.preventDefault();
+                equalTest === true ? editPass(e) : "";
+              }}
             >
               Valider
             </button>

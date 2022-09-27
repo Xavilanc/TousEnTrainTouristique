@@ -33,11 +33,7 @@ function CreateUserForm() {
     e.preventDefault();
     validatePassword();
     setUserExist(false);
-    console.warn(
-      `equalTest :${!equalTest} regBool :${!regBool} userName !== ${
-        userName !== ""
-      } email !== ${email !== ""}`
-    );
+
     if (equalTest && userName !== "" && email !== "") {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/api/users/`, {

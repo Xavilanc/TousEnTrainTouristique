@@ -5,10 +5,10 @@ function isAuthenticated() {
 
   try {
     jwtDecode(token);
-    const { exp } = jwtDecode(token);
-    if (Date.now() >= exp * 1000) {
-      return false;
-    }
+    // const { exp } = jwtDecode(token);
+    // if ( exp * 1000 = new Date().getTime()) {
+    //   return false;
+    // }
   } catch (err) {
     return false;
   }
