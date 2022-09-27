@@ -9,6 +9,7 @@ const reviewControllers = require("./controllers/reviewControllers");
 const contactControllers = require("./controllers/contactControllers");
 const areaControllers = require("./controllers/areaControllers");
 const typeControllers = require("./controllers/typeControllers");
+const userControllers = require("./controllers/userControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
@@ -27,7 +28,7 @@ router.post("/api/trains", trainControllers.add); // Ajouter un train
 router.delete("/api/trains/:id", trainControllers.destroy); // Supprimer un train
 
 /* Routes concernant la table image_train */
-router.get("/api/trains/images", imageTrainControllers.getAll); // Toutes les images de trains
+router.get("/api/trains/images/", imageTrainControllers.getAll); // Toutes les images de trains
 router.get("/api/trains/images/:id", imageTrainControllers.read); // Une image de train de particulier
 router.put("/api/trains/images/:id", imageTrainControllers.edit); // Modifier une image d'un train
 router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une image d'un train
@@ -73,5 +74,31 @@ router.get("/api/types/:id", typeControllers.read); // Un type de train en parti
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.post("/api/types", typeControllers.add); // Créer un type de train
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
+
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+  modifyPassword,
+  hashPasswordForReset,
+} = require("./controllers/auth");
+
+router.post("/api/mail", userControllers.getUserByEmail, modifyPassword);
+router.put(
+  "/api/mail/:token",
+  hashPasswordForReset,
+  userControllers.updateUserForChangePassword
+);
+
+router.get("/api/users", userControllers.getAll);
+router.get("/api/users/:id", userControllers.read);
+router.post("/api/users", hashPassword, userControllers.postUser);
+router.post(
+  "/api/login",
+  userControllers.getUserByEmailWithPasswordAndPassToNext,
+  verifyPassword
+);
+router.use(verifyToken);
+router.delete("/api/users/:id", userControllers.deleteUser);
 
 module.exports = router;

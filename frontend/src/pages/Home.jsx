@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
+import Header from "@components/Header";
 import SearchTrain from "@components/SearchTrains";
 // eslint-disable-next-line import/no-unresolved
 import TrainCard from "@components/TrainCard";
@@ -24,6 +25,7 @@ const sampleTrains = [
 export default function Home() {
   return (
     <div>
+      <Header />
       <SearchTrain />
       <TrainCard src={sampleTrains[0].src} title={sampleTrains[0].title} />
       <TrainCard src={sampleTrains[1].src} title={sampleTrains[1].title} />

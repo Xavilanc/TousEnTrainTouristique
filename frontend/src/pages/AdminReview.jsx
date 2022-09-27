@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../assets/styles/AdminReview.css";
 import CreateReview from "@components/CreateReview";
+import Header from "@components/Header";
 
 function ReviewDetails() {
   const params = useParams();
@@ -97,6 +98,7 @@ function ReviewDetails() {
 
   return (
     <div className="Admin_Review_Main_Div">
+      <Header />
       <div className="review_details_title_box">
         <div className="review_details_user_name">
           {" "}
