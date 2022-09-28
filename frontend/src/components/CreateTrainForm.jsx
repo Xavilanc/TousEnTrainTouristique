@@ -3,16 +3,27 @@ import React, { useState, useEffect } from "react";
 import "@assets/styles/CreateUserForm.css";
 import axios from "axios";
 import Select from "react-select";
+import jwtDecode from "jwt-decode";
 
 export default function CreateTrainForm() {
-  const [train, setTrain] = useState("");
+  const [name, setName] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
   const [areas, setAreas] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState("");
   const [types, setTypes] = useState([]);
   const [description, setDescription] = useState("");
   const [information, setInformation] = useState("");
+  const [token, setToken] = useState("");
+  const [userId, setUserId] = useState("");
 
+  useEffect(() => {
+    setToken(window.localStorage.getItem("token"));
+
+    if (token) {
+      const decoded = jwtDecode(token);
+      setUserId(decoded.sub);
+    }
+  }, [token]);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/areas/`)
@@ -40,29 +51,35 @@ export default function CreateTrainForm() {
       });
   }, []);
 
-  const postTrain = () => {
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/trains/`, {
-      train_user_id: 1,
-      train_area_id: train.area_id,
-      area_id: selectedArea,
-      type_id: selectedTypes,
-      description,
-      information,
-    });
+  const postTrain = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/trains/`, {
+        name,
+        train_user_id: userId,
+        area_id: selectedArea,
+        created_on: "2022-05-05",
+        updated_on: "2022-05-05",
+        type_id: selectedTypes,
+        published: 0,
+        description,
+        description_info: information,
+      })
+      .then((res) => console.warn(res));
   };
 
   return (
     <div className="contact1">
       <div className="Contact">
         <h1>Ajouter un train</h1>
-        <form onSubmit={postTrain}>
+        <form onSubmit={(e) => postTrain(e)}>
           <input
             className="name"
             type="text"
             id="train"
-            value={train}
+            value={name}
             placeholder="Nom du train"
-            onChange={(e) => setTrain(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           <select
             className="area_select"
@@ -73,7 +90,7 @@ export default function CreateTrainForm() {
             <option value="Partout">Partout</option>
             {areas &&
               areas.map((item) => (
-                <option value={item.name} key={item.id}>
+                <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
               ))}
@@ -106,9 +123,9 @@ export default function CreateTrainForm() {
           />
           <div className="buttonsContainer">
             <button className="buttonForm" type="submit">
-              Envoyer
+              Ajouter
             </button>
-            <button className="buttonForm1" type="submit">
+            <button className="buttonForm1" type="button">
               Annuler
             </button>
           </div>
