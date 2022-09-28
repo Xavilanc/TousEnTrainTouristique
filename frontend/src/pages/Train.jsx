@@ -19,6 +19,7 @@ import favorisVide from "../assets/images/favoris-vide.png";
 function Train() {
   const params = useParams();
   const userId = window.localStorage.getItem("id");
+  const token = window.localStorage.getItem("token");
 
   const [isFavorite, setIsFavorite] = useState("");
   const getFavorite = () => {
@@ -107,24 +108,28 @@ function Train() {
   return (
     <div className="train_main_div">
       <Header />
-      <div className="train_favoris_box">
-        {isFavorite && (
-          <img
-            className={favoriteClass}
-            src={favoris}
-            onClick={() => deleteFavorite()}
-            alt="favoris"
-          />
-        )}
-        {!isFavorite && (
-          <img
-            className={noFavoriteClass}
-            src={favorisVide}
-            onClick={() => addFavorite()}
-            alt="non favoris"
-          />
-        )}
-      </div>
+      {token ? (
+        <div className="train_favoris_box">
+          {isFavorite && (
+            <img
+              className={favoriteClass}
+              src={favoris}
+              onClick={() => deleteFavorite()}
+              alt="favoris"
+            />
+          )}
+          {!isFavorite && (
+            <img
+              className={noFavoriteClass}
+              src={favorisVide}
+              onClick={() => addFavorite()}
+              alt="non favoris"
+            />
+          )}
+        </div>
+      ) : (
+        ""
+      )}
       <div className="train_title_favoris_box">
         <h2 className="train_title">{train.tname}</h2>
       </div>
@@ -138,7 +143,7 @@ function Train() {
       <div className="train_review_title">commentaires</div>
       <div className="train_review_box">
         <ReviewTrainList reviews={reviews} />
-        <CreateReview id={params.id} />
+        {token ? <CreateReview id={params.id} /> : ""}
       </div>
     </div>
   );

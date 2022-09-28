@@ -47,6 +47,7 @@
   font-family: "Avenir-Book";
   font-size: 4vw;
   padding-left: 3%;
+  cursor: pointer;
 }
 
 .favorite_list_title {
@@ -54,4 +55,8 @@
   font-family: "Avenir-Book";
   font-style: 5vw;
   text-align: center;
+}
+
+.favorite_item_chevron {
+  width: 10%;
 }

@@ -38,7 +38,7 @@ router.delete("/api/trains/images/:id", imageTrainControllers.destroy); // Suppr
 
 /* Routes concernant la table image_avatar */
 router.get("/api/imageavatars", imageAvatarControllers.getAll);
-router.get("/api/imageavatars/:id", imageAvatarControllers.read);
+router.get("/api/imageavatars/:id", imageAvatarControllers.read); // tri par user_id
 router.put("/api/imageavatars/:id", imageAvatarControllers.edit);
 router.post("/api/imageavatars", imageAvatarControllers.add);
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);

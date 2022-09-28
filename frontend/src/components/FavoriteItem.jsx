@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import chevron from "../assets/images/chevron.png";
 
 function FavoriteItem({ favorite }) {
   const navigate = useNavigate();
@@ -23,6 +24,11 @@ function FavoriteItem({ favorite }) {
                     className="favorite_item_link"
                     onClick={() => navigate(`/train/${item.train_id}`)}
                   >
+                    <img
+                      className="favorite_item_chevron"
+                      src={chevron}
+                      alt="chevron"
+                    />
                     Lire la suite
                   </div>
                 </div>
