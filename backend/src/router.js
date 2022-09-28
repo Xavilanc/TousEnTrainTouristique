@@ -10,6 +10,7 @@ const contactControllers = require("./controllers/contactControllers");
 const areaControllers = require("./controllers/areaControllers");
 const typeControllers = require("./controllers/typeControllers");
 const userControllers = require("./controllers/userControllers");
+const favoriteControllers = require("./controllers/favoriteControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
@@ -76,6 +77,11 @@ router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.post("/api/types", typeControllers.add); // Créer un type de train
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
 
+router.get("/api/favorites", favoriteControllers.getAll);
+router.get("/api/users/:id/favorites", favoriteControllers.read);
+router.post("/api/favorites", favoriteControllers.add);
+router.delete("/api/favorites/:id", favoriteControllers.destroy);
+
 const {
   hashPassword,
   verifyPassword,
@@ -83,6 +89,7 @@ const {
   modifyPassword,
   hashPasswordForReset,
 } = require("./controllers/auth");
+// const { route } = require("./app");
 
 router.post("/api/mail", userControllers.getUserByEmail, modifyPassword);
 router.put(
