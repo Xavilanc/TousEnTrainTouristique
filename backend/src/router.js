@@ -78,7 +78,8 @@ router.post("/api/types", typeControllers.add); // Créer un type de train
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
 
 router.get("/api/favorites", favoriteControllers.getAll);
-router.get("/api/users/:id/favorites", favoriteControllers.read);
+router.get("/api/users/:id/favorites", favoriteControllers.readByUser);
+router.get("/api/trains/:id/favorite", favoriteControllers.readByTrain);
 router.post("/api/favorites", favoriteControllers.add);
 router.delete("/api/favorites/:id", favoriteControllers.destroy);
 

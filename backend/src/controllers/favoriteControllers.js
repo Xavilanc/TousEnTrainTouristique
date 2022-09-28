@@ -12,9 +12,25 @@ const getAll = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readByUser = (req, res) => {
   models.favorite
-    .findFavorites(req.params.id)
+    .findFavoritesByUserId(req.params.id)
+    .then((favorite) => {
+      if (favorite == null) {
+        res.sendStatus(404);
+      } else {
+        res.json(favorite[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const readByTrain = (req, res) => {
+  models.favorite
+    .findFavoritesByTrainId(req.params.id)
     .then((favorite) => {
       if (favorite == null) {
         res.sendStatus(404);
@@ -60,7 +76,8 @@ const destroy = (req, res) => {
 
 module.exports = {
   getAll,
-  read,
+  readByUser,
+  readByTrain,
   add,
   destroy,
 };

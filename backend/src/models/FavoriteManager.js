@@ -5,9 +5,16 @@ class FavoriteManager extends AbstractManager {
     super({ table: "favorite" });
   }
 
-  findFavorites(id) {
+  findFavoritesByUserId(id) {
     return this.connection.query(
       `select id, user_id, train_id, added_on from  ${this.table} where user_id = ?`,
+      [id]
+    );
+  }
+
+  findFavoritesByTrainId(id) {
+    return this.connection.query(
+      `select id, user_id, train_id, added_on from  ${this.table} where train_id = ?`,
       [id]
     );
   }
