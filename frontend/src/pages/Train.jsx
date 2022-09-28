@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -75,13 +77,7 @@ function Train() {
   return (
     <div className="train_main_div">
       <Header />
-      <div
-        className="train_favoris_box"
-        onClick={() => {}}
-        role="button"
-        tabIndex={0}
-        onKeyDown={handleFavorite()}
-      >
+      <div className="train_favoris_box" onClick={() => handleFavorite()}>
         <img className={favoriteClass} src={favoris} alt="favoris" />
         <img className={noFavoriteClass} src={favorisVide} alt="non favoris" />
       </div>
