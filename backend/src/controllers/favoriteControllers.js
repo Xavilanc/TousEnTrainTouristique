@@ -44,7 +44,7 @@ const add = (req, res) => {
 
 const destroy = (req, res) => {
   models.favorite
-    .delete(req.params.id)
+    .deleteFavorite(req.params.id)
     .then((result) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
