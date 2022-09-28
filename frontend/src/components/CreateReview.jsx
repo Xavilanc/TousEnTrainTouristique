@@ -23,7 +23,7 @@ function CreateReview({ id }) {
     setPosted(true);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
-        review_user_id: userId, // je suis ici
+        review_user_id: userId, // récupéré avec localstorage
         review_train_id: id, // récuperé avec useParams
         review_note: rating, // valeur du state mise à jour avec le composant Rating
         review_comment: review.comment, // valeur du state mise à jour avec le formulaire

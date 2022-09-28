@@ -56,6 +56,24 @@
   font-size: 4vw;
 }
 
+/* box contenant les commentaires*/
 .train_review_box {
   padding: 2%;
+}
+
+/* box contenant les icones favoris */
+.train_favoris_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.train_favoris_image {
+  width: 5%;
+}
+
+.invisible {
+  display: none;
 }

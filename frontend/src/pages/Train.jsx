@@ -8,44 +8,32 @@ import TrainInformations from "../components/TrainInformations";
 import TrainImages from "../components/TrainImages";
 import ReviewTrainList from "../components/ReviewTrainList";
 import "../assets/styles/Train.css";
+import favoris from "../assets/images/favoris.png";
+import favorisVide from "../assets/images/favoris-vide.png";
 
-// const sampletrain = {
-//   tname: "Train des minou",
-//   description:
-//     "Trait d’union entre plaine et montagne, Suisse et France, le Mont-Blanc Express relie Martigny à Chamonix depuis plus d'un siècle.",
-//   description_info:
-//     "Embarquez à bord de rames panoramiques pour une traversée magique de la Vallée du Trient, entre rocs et forêts, gorges sauvages et villages alpins authentiques. Savourez des paysages grandioses au cœur d’une nature préservée. La promesse d’une spectaculaire évasion.",
-//   activities: [
-//     {
-//       activity_id: 1,
-//       activity_title: "Téléphérique de l'Aiguille du Midi",
-//       activity_description:
-//         "Découvrez le téléphérique de l'aiguille du midi, accessible depuis la gare de Chamonix. Qui n'a jamais rêvé de vivre une expérience exceptionnelle au coeur de la très haute montagne ? Ne rêvez plus, vivez-la à l'Aiguille du Midi, le plus haut téléphérique de France ! Facile d'accès, un grand parking vous attend à l'entrée de Chamonix.",
-//     },
-//     {
-//       activity_id: 2,
-//       activity_title: "Téléphérique du Brévent",
-//       activity_description:
-//         "Bienvenue au Brévent, face au Mont-Blanc ! Facilement accessible depuis le centre de la station, une télécabine vous conduit en toute sécurité jusqu'à Plan Praz (2000 m).",
-//     },
-//   ],
-
-//   creat: "2022-09-07T08:50:56.000Z",
-//   updat: "2022-09-07T09:50:56.000Z",
-//   areaName: "Auvergne-Rhône-Alpes",
-//   title: "toto",
-//   path: "https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/arriv%C3%A9e-dun-chaton-%C3%A0-la-maison.jpeg",
-//   created_on: "2022-09-07T09:50:56.000Z",
-//   updated_on: "2022-09-07T09:50:56.000Z",
-//   type_id: 1,
-//   types: "A la mer",
-// };
 function Train() {
   const params = useParams();
 
-  const [train, setTrain] = useState("");
-  const [activities, setActivities] = useState("");
-  const [reviews, setReviews] = useState("");
+  const [train, setTrain] = useState(""); // état gérant l'affichage du train, sa description et ses images
+  const [activities, setActivities] = useState(""); // état gérant l'affichage des activités de ce même train
+  const [reviews, setReviews] = useState(""); // état gérant l'affichage des commentaires liés à ce train
+  const [favoriteClass, setFavoriteClass] = useState(
+    "train_favoris_image invisible"
+  ); // état gérant l'affichage de l'image favoris
+  const [noFavoriteClass, setNoFavoriteClass] = useState("train_favoris_image"); // état gérant l'affichage de l'image non favoris
+  const [favorite, setFavorite] = useState(false); // état vérifiant si
+
+  const handleFavorite = () => {
+    if (favorite === false) {
+      setFavoriteClass("train_favoris_image");
+      setNoFavoriteClass("train_favoris_image invisible");
+      setFavorite(true);
+    } else {
+      setFavoriteClass("train_favoris_image invisible");
+      setNoFavoriteClass("train_favoris_image");
+      setFavorite(false);
+    }
+  };
 
   const getTrain = () => {
     axios
@@ -87,6 +75,16 @@ function Train() {
   return (
     <div className="train_main_div">
       <Header />
+      <div
+        className="train_favoris_box"
+        onClick={() => {}}
+        role="button"
+        tabIndex={0}
+        onKeyDown={handleFavorite()}
+      >
+        <img className={favoriteClass} src={favoris} alt="favoris" />
+        <img className={noFavoriteClass} src={favorisVide} alt="non favoris" />
+      </div>
       <div className="train_title_favoris_box">
         <h2 className="train_title">{train.tname}</h2>
       </div>
