@@ -15,6 +15,7 @@ import ModifyPasswordPage from "./pages/ModifyPasswordPage";
 import ProfilPage from "./pages/ProfilPage";
 import AdminReview from "./pages/AdminReview";
 import UserContext from "./services/UserContext";
+import CreateTrain from "./pages/CreateTrain";
 import "./App.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -44,6 +45,7 @@ function App() {
               element={<ModifyPasswordPageBis />}
             />
             <Route path="/profil/" element={<ProfilPage />} />
+            <Route path="/creation-de-train" element={<CreateTrain />} />
           </Routes>
           <Footer />
         </UserContext.Provider>
