@@ -1,0 +1,57 @@
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+/* box avant le .map des favoris */
+.favorite_list_box {
+  background-color: #f3f3f8;
+  padding: 2%;
+}
+
+/* div principale dans FavoriteList */
+.favorite_list_main_div {
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+  background-color: #f3f3f8;
+}
+
+/* image dans la liste des favoris */
+.favorite_list_image {
+  width: 40vw;
+  height: fit-content;
+  border-radius: 10px;
+}
+
+.favorite_item_title {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  padding-left: 3%;
+}
+
+.favorite_list_second_div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 2%;
+  background-color: white;
+  border-radius: 10px;
+  border: solid 1px #127996;
+}
+
+.favorite_item_link {
+  color: #127996;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  padding-left: 3%;
+}
+
+.favorite_list_title {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-style: 5vw;
+  text-align: center;
+}
