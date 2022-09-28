@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../components/Header";
 import CreateReview from "../components/CreateReview";
 import TrainActivity from "../components/TrainActivity";
 import TrainInformations from "../components/TrainInformations";
@@ -85,6 +86,7 @@ function Train() {
 
   return (
     <div className="train_main_div">
+      <Header />
       <div className="train_title_favoris_box">
         <h2 className="train_title">{train.tname}</h2>
       </div>

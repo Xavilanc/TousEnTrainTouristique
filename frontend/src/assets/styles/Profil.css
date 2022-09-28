@@ -14,27 +14,30 @@ font-face {
   font-size: 7vw;
   color: white;
   text-align: left;
-  margin-top: -85%;
+  /* margin-top: -85%; */
 }
 .profil {
   background-color: #242b35;
   padding-top: 10%;
-  padding-bottom: 105%;
+  padding-bottom: 20%;
 }
 .profil_header {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 2%;
   margin-bottom: 2%;
   margin-left: 2%;
   margin-right: 2%;
 }
+.profil_header p,
+.profil_header h3 {
+  color: azure;
+}
 .information_container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 }
 .user_information {
   font-family: "Avenir-Book";

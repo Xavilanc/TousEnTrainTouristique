@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 import "../assets/styles/AdminReview.css";
+import Header from "@components/Header";
 import { getDate } from "../services/DateManager";
 
 function ReviewDetails() {
@@ -101,6 +102,7 @@ function ReviewDetails() {
 
   return (
     <div className="Admin_Review_Main_Div">
+      <Header />
       <div className="review_details_title_box">
         <div className="review_details_user_name">
           {" "}

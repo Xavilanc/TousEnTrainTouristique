@@ -22,7 +22,9 @@ function AddImage() {
   const sendToDatabase = () => {
     if (sendData.path !== "" && url !== oldUrl) {
       axios
-        .post(`http://127.0.0.1:5000/api/${selectedDatabase}`, { ...sendData })
+        .post(`${import.meta.env.VITE_BACKEND_URL}/api/${selectedDatabase}`, {
+          ...sendData,
+        })
         .then((data) => console.warn(`${data}added`))
         .catch((error) =>
           console.warn(`Authorization failed : ${error.message}`)
