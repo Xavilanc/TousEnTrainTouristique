@@ -33,6 +33,7 @@ function UserConnectionForm() {
             window.localStorage.setItem("token", response.data.token);
             window.localStorage.setItem("mail", response.data.user.mail);
             window.localStorage.setItem("name", response.data.user.name);
+            window.localStorage.setItem("id", response.data.user.id);
 
             navigate("/profil");
           })

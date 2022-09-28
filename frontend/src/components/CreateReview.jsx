@@ -12,6 +12,7 @@ function CreateReview({ id }) {
   });
   const [rating, setRating] = useState(0); // valeur initiale de notation
   const [readOnly, setReadOnly] = useState(false); // pour bloquer les étoiles
+  const userId = window.localStorage.getItem("id");
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -22,13 +23,13 @@ function CreateReview({ id }) {
     setPosted(true);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
-        review_user_id: 1,
-        review_train_id: id,
-        review_note: rating,
-        review_comment: review.comment,
-        created_on: getDate(),
-        updated_on: null,
-        published: 0,
+        review_user_id: userId, // je suis ici
+        review_train_id: id, // récuperé avec useParams
+        review_note: rating, // valeur du state mise à jour avec le composant Rating
+        review_comment: review.comment, // valeur du state mise à jour avec le formulaire
+        created_on: getDate(), // formatage de la date
+        updated_on: null, // null par default car il s'agit d'une création de review
+        published: 0, // 0 par default car c'est l'administrateur qui valide la publication du review
       })
       .then((response) => {
         console.error(response);
