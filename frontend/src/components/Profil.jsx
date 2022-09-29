@@ -47,7 +47,7 @@ function Profil() {
     window.localStorage.removeItem("mail");
     window.localStorage.removeItem("name");
     window.localStorage.removeItem("id");
-    navigate("/connexion");
+    navigate("/");
   };
 
   return (
