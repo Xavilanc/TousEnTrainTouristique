@@ -59,3 +59,20 @@
   background-color: darkgrey;
   cursor: pointer;
 }
+
+.review_list_button_box {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 5%;
+}
+
+.review_list_title {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 5vw;
+}
+
+.addImage {
+  padding: 5%;
+}

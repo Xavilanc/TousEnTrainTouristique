@@ -23,7 +23,7 @@
 /* champs de recherche région et type */
 .area_select,
 .type_select {
-  width: 80%;
+  width: 80vw;
   height: fit-content;
   font-family: "Avenir-Book";
   color: black;
@@ -31,15 +31,16 @@
   border-radius: 10px;
   padding: 2%;
   margin-bottom: 5%;
-  margin-left: 10%;
-  background-color: #f3f3f8;
+  background-color: white;
   -webkit-appearance: none;
   -moz-appearance: none;
+  border: 2px solid #127996;
 }
 
 /* label des champs de recherche région et type */
 .train_search_label {
   text-align: left;
+  font-weight: bold;
   font-family: "Avenir-Book";
   font-size: 4vw;
   margin-left: 10%;

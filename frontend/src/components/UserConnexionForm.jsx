@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState } from "react";
 // eslint-disable-next-line import/no-unresolved
-import "@assets/styles/UserConnexionForm.css";
+import "../assets/styles/UserConnexionForm.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -33,6 +33,7 @@ function UserConnectionForm() {
             window.localStorage.setItem("token", response.data.token);
             window.localStorage.setItem("mail", response.data.user.mail);
             window.localStorage.setItem("name", response.data.user.name);
+            window.localStorage.setItem("id", response.data.user.id);
 
             navigate("/profil");
           })

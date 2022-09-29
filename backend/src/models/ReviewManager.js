@@ -120,6 +120,23 @@ class ReviewManager extends AbstractManager {
       ]
     );
   }
+
+  // Modifier un commentaire
+  updateReview(review) {
+    return this.connection.query(
+      `update ${this.table} set review_user_id = ?, review_train_id = ?, review_note = ?, review_comment = ?, updated_on = ?, published = ? where id = ?`,
+      // Ne Surtout pas oublié l'id en dernier
+      [
+        review.review_user_id,
+        review.review_train_id,
+        review.review_note,
+        review.review_comment,
+        review.updated_on,
+        review.published,
+        review.id,
+      ]
+    );
+  }
 }
 
 module.exports = ReviewManager;

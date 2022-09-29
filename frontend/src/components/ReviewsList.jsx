@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/styles/ReviewList.css";
+import { transDate } from "../services/DateManager";
 
 function ReviewsList() {
   const [reviews, setReviews] = useState([]);
@@ -35,8 +36,8 @@ function ReviewsList() {
 
   return (
     <div className="review_list_main_div">
-      <div>
-        <div>Filtrer</div>
+      <h2 className="review_list_title">Liste des commentaires</h2>
+      <div className="review_list_button_box">
         <button type="button" onClick={() => getReviewsUnpublished()}>
           Non publiés
         </button>
@@ -75,9 +76,11 @@ function ReviewsList() {
                 <td className="review_list_td">{review.train_name}</td>
                 <td className="review_list_td">{review.note}</td>
                 <td className="review_list_td">{review.comment}</td>
-                <td className="review_list_td">{review.created_on}</td>
                 <td className="review_list_td">
-                  {review.updated_on ? review.updated_on : "null"}
+                  {transDate(review.created_on)}
+                </td>
+                <td className="review_list_td">
+                  {review.updated_on ? transDate(review.updated_on) : "null"}
                 </td>
                 <td className="review_list_td review_list_integer">
                   {review.published === 1 ? "oui" : "non"}

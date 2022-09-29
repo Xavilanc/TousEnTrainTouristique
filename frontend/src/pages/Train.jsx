@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,45 +11,43 @@ import TrainActivity from "../components/TrainActivity";
 import TrainInformations from "../components/TrainInformations";
 import TrainImages from "../components/TrainImages";
 import ReviewTrainList from "../components/ReviewTrainList";
+import { getDate } from "../services/DateManager";
 import "../assets/styles/Train.css";
+import favoris from "../assets/images/favoris.png";
+import favorisVide from "../assets/images/favoris-vide.png";
 
-// const sampletrain = {
-//   tname: "Train des minou",
-//   description:
-//     "Trait d’union entre plaine et montagne, Suisse et France, le Mont-Blanc Express relie Martigny à Chamonix depuis plus d'un siècle.",
-//   description_info:
-//     "Embarquez à bord de rames panoramiques pour une traversée magique de la Vallée du Trient, entre rocs et forêts, gorges sauvages et villages alpins authentiques. Savourez des paysages grandioses au cœur d’une nature préservée. La promesse d’une spectaculaire évasion.",
-//   activities: [
-//     {
-//       activity_id: 1,
-//       activity_title: "Téléphérique de l'Aiguille du Midi",
-//       activity_description:
-//         "Découvrez le téléphérique de l'aiguille du midi, accessible depuis la gare de Chamonix. Qui n'a jamais rêvé de vivre une expérience exceptionnelle au coeur de la très haute montagne ? Ne rêvez plus, vivez-la à l'Aiguille du Midi, le plus haut téléphérique de France ! Facile d'accès, un grand parking vous attend à l'entrée de Chamonix.",
-//     },
-//     {
-//       activity_id: 2,
-//       activity_title: "Téléphérique du Brévent",
-//       activity_description:
-//         "Bienvenue au Brévent, face au Mont-Blanc ! Facilement accessible depuis le centre de la station, une télécabine vous conduit en toute sécurité jusqu'à Plan Praz (2000 m).",
-//     },
-//   ],
-
-//   creat: "2022-09-07T08:50:56.000Z",
-//   updat: "2022-09-07T09:50:56.000Z",
-//   areaName: "Auvergne-Rhône-Alpes",
-//   title: "toto",
-//   path: "https://www.zooplus.fr/magazine/wp-content/uploads/2019/06/arriv%C3%A9e-dun-chaton-%C3%A0-la-maison.jpeg",
-//   created_on: "2022-09-07T09:50:56.000Z",
-//   updated_on: "2022-09-07T09:50:56.000Z",
-//   type_id: 1,
-//   types: "A la mer",
-// };
 function Train() {
   const params = useParams();
+  const userId = window.localStorage.getItem("id");
+  const token = window.localStorage.getItem("token");
 
-  const [train, setTrain] = useState("");
-  const [activities, setActivities] = useState("");
-  const [reviews, setReviews] = useState("");
+  const [isFavorite, setIsFavorite] = useState(false);
+  const getFavorite = () => {
+    axios
+      .get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/trains/${
+          params.id
+        }/${userId}/favorite`
+      )
+      .then((response) => {
+        response.data.length !== 0 ? setIsFavorite(true) : setIsFavorite(false);
+      })
+      .catch((err) => console.warn(err));
+  };
+
+  useEffect(() => {
+    getFavorite();
+  }, [isFavorite]);
+
+  const [train, setTrain] = useState(""); // état gérant l'affichage du train, sa description et ses images
+  const [activities, setActivities] = useState(""); // état gérant l'affichage des activités de ce même train
+  const [reviews, setReviews] = useState(""); // état gérant l'affichage des commentaires liés à ce train
+  const [favoriteClass, setFavoriteClass] = useState(
+    isFavorite ? "train_favoris_image invisible" : "train_favoris_image"
+  ); // état gérant l'affichage de l'image favoris
+  const [noFavoriteClass, setNoFavoriteClass] = useState(
+    isFavorite ? "train_favoris_image invisible" : "train_favoris_image"
+  ); // état gérant l'affichage de l'image non favoris
 
   const getTrain = () => {
     axios
@@ -84,24 +86,67 @@ function Train() {
     getReviews();
   }, []);
 
+  const addFavorite = () => {
+    setFavoriteClass("train_favoris_image");
+    setNoFavoriteClass("train_favoris_image invisible");
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/favorites`, {
+      user_id: userId,
+      train_id: params.id,
+      added_on: getDate(),
+    });
+    setIsFavorite(true);
+  };
+
+  const deleteFavorite = () => {
+    setFavoriteClass("train_favoris_image invisible");
+    setNoFavoriteClass("train_favoris_image");
+    axios.delete(
+      `${import.meta.env.VITE_BACKEND_URL}/api/favorites/${params.id}`
+    );
+    setIsFavorite(false);
+  };
+
   return (
     <div className="train_main_div">
       <Header />
+      {token ? (
+        <div className="train_favoris_box">
+          {isFavorite && (
+            <img
+              className={favoriteClass}
+              src={favoris}
+              onClick={() => deleteFavorite()}
+              alt="favoris"
+            />
+          )}
+          {!isFavorite && (
+            <img
+              className={noFavoriteClass}
+              src={favorisVide}
+              onClick={() => addFavorite()}
+              alt="non favoris"
+            />
+          )}
+        </div>
+      ) : (
+        ""
+      )}
       <div className="train_title_favoris_box">
         <h2 className="train_title">{train.tname}</h2>
-        <div>favoris</div>
       </div>
       <div className="train_image_div">
         <TrainImages images={train.images} />
       </div>
       <h3 className="train_h3_title">Informations</h3>
       <TrainInformations train={train} />
-      <h3 className="train_h3_title">Activitées</h3>
+      <h3 className="train_h3_title">Activités</h3>
       <TrainActivity activities={activities.activity} />
-      <div className="train_review_title">commentaires</div>
+      <div className="train_review_title">Commentaires</div>
+
       <div className="train_review_box">
-        <ReviewTrainList reviews={reviews} />
-        <CreateReview />
+        {reviews ? <ReviewTrainList reviews={reviews} /> : "Pas de commentaire"}
+
+        {token ? <CreateReview id={params.id} /> : ""}
       </div>
     </div>
   );
