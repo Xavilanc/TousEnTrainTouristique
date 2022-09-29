@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-// eslint-disable-next-line import/no-unresolved
-import "@assets/styles/CreateUserForm.css";
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
-import jwtDecode from "jwt-decode";
+import { getDate } from "../services/DateManager";
+import "../assets/styles/CreateUserForm.css";
 
 export default function CreateTrainForm() {
   const [name, setName] = useState("");
@@ -15,6 +16,9 @@ export default function CreateTrainForm() {
   const [information, setInformation] = useState("");
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
+  const [posted, setPosted] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setToken(window.localStorage.getItem("token"));
@@ -51,86 +55,107 @@ export default function CreateTrainForm() {
       });
   }, []);
 
-  const postTrain = (e) => {
-    e.preventDefault();
+  const postTrain = () => {
+    setPosted(true);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/trains/`, {
         name,
         train_user_id: userId,
         area_id: selectedArea,
-        created_on: "2022-05-05",
-        updated_on: "2022-05-05",
+        created_on: getDate(),
+        updated_on: null,
         type_id: selectedTypes,
         published: 0,
         description,
         description_info: information,
       })
       .then((res) => console.warn(res));
+    setTimeout(() => navigate("/"), 3000);
   };
 
-  return (
-    <div className="contact1">
-      <div className="Contact">
-        <h1>Ajouter un train</h1>
-        <form onSubmit={(e) => postTrain(e)}>
-          <input
-            className="name"
-            type="text"
-            id="train"
-            value={name}
-            placeholder="Nom du train"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <select
-            className="area_select"
-            value={selectedArea}
-            id="area-select"
-            onChange={(e) => setSelectedArea(e.target.value)}
-          >
-            <option value="Partout">Partout</option>
-            {areas &&
-              areas.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.name}
-                </option>
-              ))}
-          </select>
-          <Select
-            defaultValue={selectedTypes}
-            onChange={setSelectedTypes}
-            options={types}
-            isMulti
-          />
-          <textarea
-            className="description"
-            name="description"
-            id="description"
-            cols="30"
-            rows="10"
-            value={description}
-            placeholder="Description"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <textarea
-            className="information"
-            name="information"
-            id="information"
-            cols="30"
-            rows="10"
-            value={information}
-            placeholder="Informations complémentaires"
-            onChange={(e) => setInformation(e.target.value)}
-          />
-          <div className="buttonsContainer">
-            <button className="buttonForm" type="submit">
-              Ajouter
-            </button>
-            <button className="buttonForm1" type="button">
-              Annuler
-            </button>
-          </div>
-        </form>
+  if (posted === false) {
+    return (
+      <div className="contact1">
+        <div className="Contact">
+          <h1>Ajouter un train</h1>
+          <form onSubmit={(e) => postTrain(e)}>
+            <input
+              className="name"
+              type="text"
+              id="train"
+              value={name}
+              placeholder="Nom du train"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <select
+              className="area_select"
+              value={selectedArea}
+              id="area-select"
+              onChange={(e) => setSelectedArea(e.target.value)}
+            >
+              <option value="Partout">Partout</option>
+              {areas &&
+                areas.map((item) => (
+                  <option value={item.id} key={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+            </select>
+            <Select
+              defaultValue={selectedTypes}
+              onChange={setSelectedTypes}
+              options={types}
+              isMulti
+            />
+            <textarea
+              className="description"
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+              value={description}
+              placeholder="Description"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <textarea
+              className="information"
+              name="information"
+              id="information"
+              cols="30"
+              rows="10"
+              value={information}
+              placeholder="Informations complémentaires"
+              onChange={(e) => setInformation(e.target.value)}
+            />
+            <div className="buttonsContainer">
+              <button
+                className="buttonForm"
+                type="button"
+                onClick={() => postTrain()}
+              >
+                Ajouter
+              </button>
+              <button
+                className="buttonForm1"
+                type="button"
+                onClick={() => navigate("/profil")}
+              >
+                Annuler
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  if (posted === true) {
+    return (
+      <div>
+        <div className="create_review_send">
+          Merci pour votre proposition de création de train. Elle sera validé
+          d'ici quelques jours.
+        </div>
+      </div>
+    );
+  }
 }
