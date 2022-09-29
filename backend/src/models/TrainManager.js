@@ -104,6 +104,7 @@ class TrainManager extends AbstractManager {
     );
   }
 
+  // Queries permettant le filtrage en fonction des choix, soumises à conditions
   getJoinByAreaAndType(area, type) {
     console.warn(`area${area}type :${type}`);
     if (area === "*" && type === "*") {
