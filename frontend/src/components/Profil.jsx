@@ -5,6 +5,7 @@ import "../assets/styles/Profil.css";
 import jwtDecode from "jwt-decode";
 import FavoriteList from "./FavoriteList";
 import avatarDefault from "../assets/images/avatar-default.png";
+import pencil from "../assets/images/pencil.png";
 
 /*  image avatar par défault */
 const sampleAvatar = {
@@ -54,7 +55,15 @@ function Profil() {
     <div className="profil">
       <h2 className="account_title">Mon compte</h2>
       <div className="profil_header">
-        <img className="profil_avatar" src={avatar.path} alt={avatar.title} />
+        <div className="profil_avatar_box">
+          <img
+            className="profil_avatar"
+            src={avatar.path ? avatar.path : sampleAvatar.path}
+            alt={avatar.title}
+          />
+          <img className="avatar_pencil_icon" src={pencil} alt="" />
+        </div>
+
         <h3>{userName}</h3>
         <p>{parseInt(userRight, 2) === 0 ? "Utilisateur" : "Administrateur"}</p>
       </div>
@@ -70,12 +79,14 @@ function Profil() {
           type="button"
           id="change_password"
           defaultValue="Changer de mot de passe"
+          onClick={() => navigate("/modification")}
         />
         <input
           className="add_train"
           type="button"
           id="add_train"
           defaultValue="Ajouter un train"
+          onClick={() => navigate("/creation-de-train")}
         />
       </div>
       <FavoriteList />
