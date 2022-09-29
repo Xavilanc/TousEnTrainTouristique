@@ -19,7 +19,7 @@ const read = (req, res) => {
     .findByUserId(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
-        res.sendStatus(404);
+        res.send(rows[0]);
       } else {
         res.send(rows[0]);
       }

@@ -113,4 +113,17 @@ font-face {
   height: 100px;
   object-fit: cover;
   border-radius: 100%;
+  margin-left: -10%;
+}
+
+.avatar_pencil_icon {
+  padding-top: 23%;
+  width: 8%;
+  margin-left: -20%;
+}
+
+.profil_avatar_box {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
