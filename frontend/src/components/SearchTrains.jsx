@@ -128,7 +128,7 @@ export default function FilterTrainTest() {
 
       {results.length !== 0 &&
         results.map((train) => (
-          <div>
+          <div key={train.id}>
             <TrainCard
               src={Object.values(train.path)[0]}
               title={train.tname}
