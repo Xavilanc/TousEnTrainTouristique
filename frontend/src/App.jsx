@@ -3,6 +3,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import ModifyAvatar from "@pages/ModifyAvatar";
 import ModifyPasswordPageBis from "./pages/ModifyPasswordPageBis";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/train/:id" element={<Train />} />
             <Route path="/connexion" element={<UserConnexion />} />
             <Route path="/modification/" element={<ModifyPasswordPage />} />
+            <Route path="/avatar" element={<ModifyAvatar />} />
             <Route
               path="/modification/:token"
               element={<ModifyPasswordPageBis />}
