@@ -136,7 +136,7 @@ const getAllJoinPublishedByTrainId = (req, res) => {
     .findAllJoinPublishedByTrainId(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
-        res.sendStatus(404);
+        res.send(rows);
       } else {
         res.send(rows);
       }
