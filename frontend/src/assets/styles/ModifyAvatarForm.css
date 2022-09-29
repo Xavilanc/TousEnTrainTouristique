@@ -1,0 +1,11 @@
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+.modify_avatar_title {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 5vw;
+}

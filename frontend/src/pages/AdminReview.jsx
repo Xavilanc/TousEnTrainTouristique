@@ -72,16 +72,6 @@ function ReviewDetails() {
       });
   };
 
-  // eslint-disable-next-line consistent-return
-  // const handlePublishedButton = () => {
-  //   if (review.published === 0) {
-  //     return "Publier";
-  //   }
-  //   if (review.published === 1) {
-  //     return "Dépublier";
-  //   }
-  // };
-
   return (
     <div className="Admin_Review_Main_Div">
       <Header />
@@ -131,9 +121,6 @@ function ReviewDetails() {
           <button type="button" onClick={() => handlePublished()}>
             {review.published ? "Dépublier" : "Publier"}
           </button>
-          {/* <button type="button" onClick={() => handlePublished()}>
-            {handlePublishedButton()}
-          </button> */}
           <input type="submit" value="Modifier" />
           <button type="button" onClick={() => deleteReview()}>
             Supprimer

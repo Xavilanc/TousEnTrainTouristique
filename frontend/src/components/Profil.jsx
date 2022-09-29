@@ -61,7 +61,7 @@ function Profil() {
           <img
             className="profil_avatar"
             src={avatar.path ? avatar.path : sampleAvatar.path}
-            alt={avatar.title}
+            alt="avatar"
           />
           <img className="avatar_pencil_icon" src={pencil} alt="" />
         </div>
