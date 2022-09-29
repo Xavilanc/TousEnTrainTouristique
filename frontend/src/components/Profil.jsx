@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -55,11 +57,11 @@ function Profil() {
     <div className="profil">
       <h2 className="account_title">Mon compte</h2>
       <div className="profil_header">
-        <div className="profil_avatar_box">
+        <div className="profil_avatar_box" onClick={() => navigate("/avatar")}>
           <img
             className="profil_avatar"
             src={avatar.path ? avatar.path : sampleAvatar.path}
-            alt={avatar.title}
+            alt="avatar"
           />
           <img className="avatar_pencil_icon" src={pencil} alt="" />
         </div>
