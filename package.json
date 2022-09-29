@@ -26,5 +26,10 @@
     "eslint-plugin-react": "^7.31.1",
     "husky": "^7.0.0",
     "typescript": "^4.8.2"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "react": "^18.2.0",
+    "select": "^1.1.2"
   }
 }

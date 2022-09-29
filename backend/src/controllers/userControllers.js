@@ -1,6 +1,9 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-unused-expressions */
 const models = require("../models");
 
 const getAll = (req, res) => {
+  console.warn(req);
   models.user
     .getAllUser()
     .then(([rows]) => {
@@ -30,31 +33,71 @@ const read = (req, res) => {
 
 const edit = (req, res) => {
   const user = req.body;
+  const id = parseInt(req.params.id, 10);
 
-  user.id = parseInt(req.params.id, 10);
-
-  models.type
-    .update(user)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.payload.sub !== id) {
+    res.sendStatus(403);
+    console.warn("user not autorised");
+  } else {
+    models.type
+      .update(user)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
-
-const add = (req, res) => {
+const postUser = (req, res) => {
   const user = req.body;
 
   models.user
     .insert(user)
     .then(([result]) => {
-      res.location(`/types/${result.insertId}`).sendStatus(201);
+      res.location(`/api/users/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err.code);
+      err.code === "ER_DUP_ENTRY" ? res.sendStatus(409) : res.sendStatus(500);
+    });
+};
+
+const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
+  const { mail } = req.body;
+  models.user
+    .getAllUserFromMail(mail)
+    .then(([users]) => {
+      if (users[0] == null) {
+        res.sendStatus(404);
+      } else {
+        req.user = users[0];
+        next();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+// updatePassword
+
+const getUserByEmail = (req, res, next) => {
+  const { mail } = req.body;
+  models.user
+    .getAllUserFromMail(mail)
+    .then(([users]) => {
+      if (users[0] == null) {
+        res.sendStatus(404);
+      } else {
+        req.user = users[0];
+        next();
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -62,26 +105,57 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
-  models.type
-    .delete(req.params.id)
+const updateUserForChangePassword = (req, res) => {
+  const user = req.body;
+  const id = req.payload.sub;
+
+  models.user
+    .updatePassword(user, id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.status(404).send("Not Found");
       } else {
-        res.sendStatus(204);
+        res.send("success");
+        res.sendStatus(204).send("User password edited");
       }
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send("Error editing the user");
     });
+};
+
+const deleteUser = (req, res) => {
+  const id = parseInt(req.params.id, 2);
+
+  if (req.payload.sub !== id) {
+    res.sendStatus(403);
+    console.warn("user not autorised");
+  } else {
+    models.user
+      .delete(req.params.id)
+      .then(([result]) => {
+        console.warn(result.affectedRows);
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
 
 module.exports = {
   getAll,
   read,
   edit,
-  add,
-  destroy,
+  postUser,
+  getUserByEmailWithPasswordAndPassToNext,
+  getUserByEmail,
+  updateUserForChangePassword,
+  deleteUser,
 };

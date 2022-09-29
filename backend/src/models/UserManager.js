@@ -18,12 +18,19 @@ class UserManager extends AbstractManager {
     );
   }
 
+  getAllUserFromMail(mail) {
+    return this.connection.query(
+      `SELECT id, name, hashedPassword, mail, user_right, created_on, updated_on FROM ${this.table} WHERE mail = ?`,
+      [mail]
+    );
+  }
+
   insert(user) {
     return this.connection.query(
-      `insert into ${this.table} (name, password, mail, user_right, created_on, updated_on) values ( ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (name, hashedPassword, mail, user_right, created_on, updated_on) values ( ?, ?, ?, ?, ?, ?)`,
       [
         user.name,
-        user.password,
+        user.hashedPassword,
         user.mail,
         user.user_right,
         user.created_on,
@@ -34,16 +41,23 @@ class UserManager extends AbstractManager {
 
   update(user) {
     return this.connection.query(
-      `update ${this.table} set name = ?, password = ?,mail = ?, user_right = ?, created_on = ?, updated_on = ? where id = ?`,
+      `update ${this.table} set name = ?, hashedPassword = ?,mail = ?, user_right = ?, created_on = ?, updated_on = ? where id = ?`,
       [
         user.name,
-        user.password,
+        user.hashedPassword,
         user.mail,
         user.user_right,
         user.created_on,
         user.updated_on,
         user.id,
       ]
+    );
+  }
+
+  updatePassword(user, id) {
+    return this.connection.query(
+      `update ${this.table} set hashedPassword = ? where id = ?`,
+      [user.hashedPassword, id]
     );
   }
 }

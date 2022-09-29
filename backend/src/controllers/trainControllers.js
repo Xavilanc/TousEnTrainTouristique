@@ -100,7 +100,7 @@ const readWithAreaAndId = (req, res) => {
       if (rows[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(rows);
       }
     })
     .catch((err) => {
@@ -139,7 +139,8 @@ const add = (req, res) => {
   models.train
     .insert(train)
     .then(([result]) => {
-      res.location(`/train/${result.insertId}`).sendStatus(201);
+      res.send(result.insertId.toString());
+      // res.location(`/train/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
