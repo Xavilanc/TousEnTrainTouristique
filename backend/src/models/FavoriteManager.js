@@ -18,10 +18,10 @@ class FavoriteManager extends AbstractManager {
     );
   }
 
-  findFavoritesByTrainId(id) {
+  findFavoritesByTrainId(train, id) {
     return this.connection.query(
-      `select id, user_id, train_id, added_on from  ${this.table} where train_id = ?`,
-      [id]
+      `select id, user_id, train_id, added_on from  ${this.table} where train_id = ? and user_id = ?`,
+      [train, id]
     );
   }
 

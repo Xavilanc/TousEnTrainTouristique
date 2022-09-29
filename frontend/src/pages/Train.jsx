@@ -21,17 +21,18 @@ function Train() {
   const userId = window.localStorage.getItem("id");
   const token = window.localStorage.getItem("token");
 
-  const [isFavorite, setIsFavorite] = useState("");
+  const [isFavorite, setIsFavorite] = useState(false);
   const getFavorite = () => {
     axios
       .get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}/favorite`
+        `${import.meta.env.VITE_BACKEND_URL}/api/trains/${
+          params.id
+        }/${userId}/favorite`
       )
       .then((response) => {
         response.data.length !== 0 ? setIsFavorite(true) : setIsFavorite(false);
       })
       .catch((err) => console.warn(err));
-    // .then((data) => setIsFavorite(data[0]));
   };
 
   useEffect(() => {
@@ -138,11 +139,13 @@ function Train() {
       </div>
       <h3 className="train_h3_title">Informations</h3>
       <TrainInformations train={train} />
-      <h3 className="train_h3_title">Activitées</h3>
+      <h3 className="train_h3_title">Activités</h3>
       <TrainActivity activities={activities.activity} />
-      <div className="train_review_title">commentaires</div>
+      <div className="train_review_title">Commentaires</div>
+
       <div className="train_review_box">
-        <ReviewTrainList reviews={reviews} />
+        {reviews ? <ReviewTrainList reviews={reviews} /> : "Pas de commentaire"}
+
         {token ? <CreateReview id={params.id} /> : ""}
       </div>
     </div>

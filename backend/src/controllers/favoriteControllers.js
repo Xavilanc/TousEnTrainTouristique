@@ -30,7 +30,7 @@ const readByUser = (req, res) => {
 
 const readByTrain = (req, res) => {
   models.favorite
-    .findFavoritesByTrainId(req.params.id)
+    .findFavoritesByTrainId(req.params.train, req.params.id)
     .then((favorite) => {
       if (favorite == null) {
         res.sendStatus(404);
