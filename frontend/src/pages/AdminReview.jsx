@@ -11,7 +11,7 @@ function ReviewDetails() {
   const navigate = useNavigate();
   const readOnly = true;
 
-  const [published, setPublished] = useState(false);
+  // const [published, setPublished] = useState(false);
   const [review, setReview] = useState({
     user_id: 1,
     train_id: 1,
@@ -27,7 +27,7 @@ function ReviewDetails() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/${params.id}`)
       .then((response) => response.data)
       .then((data) => setReview(data));
-  }, [published]);
+  }, [review]);
 
   const updateReview = () => {
     axios
@@ -56,49 +56,31 @@ function ReviewDetails() {
   };
 
   const handlePublished = () => {
-    setPublished(!published);
-    if (published === true) {
-      axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/${params.id}`, {
-          review_user_id: review.user_id,
-          review_train_id: review.train_id,
-          review_note: review.note,
-          review_comment: review.comment,
-          created_on: transDate(review.created_on),
-          updated_on: getDate(),
-          published: 0,
-        })
-        .then((response) => {
-          console.error(response);
-          console.error(response.data);
-        });
-    } else if (published === false) {
-      axios
-        .put(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/${params.id}`, {
-          review_user_id: review.user_id,
-          review_train_id: review.train_id,
-          review_note: review.note,
-          review_comment: review.comment,
-          created_on: transDate(review.created_on),
-          updated_on: getDate(),
-          published: 1,
-        })
-        .then((response) => {
-          console.error(response);
-          console.error(response.data);
-        });
-    }
+    axios
+      .put(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/${params.id}`, {
+        review_user_id: review.user_id,
+        review_train_id: review.train_id,
+        review_note: review.note,
+        review_comment: review.comment,
+        created_on: transDate(review.created_on),
+        updated_on: getDate(),
+        published: !review.published,
+      })
+      .then((response) => {
+        console.error(response);
+        console.error(response.data);
+      });
   };
 
   // eslint-disable-next-line consistent-return
-  const handlePublishedButton = () => {
-    if (review.published === 0) {
-      return "Publier";
-    }
-    if (review.published === 1) {
-      return "Dépublier";
-    }
-  };
+  // const handlePublishedButton = () => {
+  //   if (review.published === 0) {
+  //     return "Publier";
+  //   }
+  //   if (review.published === 1) {
+  //     return "Dépublier";
+  //   }
+  // };
 
   return (
     <div className="Admin_Review_Main_Div">
@@ -147,8 +129,11 @@ function ReviewDetails() {
         </div>
         <div className="review_details_buttons_box">
           <button type="button" onClick={() => handlePublished()}>
-            {handlePublishedButton()}
+            {review.published ? "Dépublier" : "Publier"}
           </button>
+          {/* <button type="button" onClick={() => handlePublished()}>
+            {handlePublishedButton()}
+          </button> */}
           <input type="submit" value="Modifier" />
           <button type="button" onClick={() => deleteReview()}>
             Supprimer

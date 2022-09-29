@@ -54,7 +54,11 @@ function Profil() {
     <div className="profil">
       <h2 className="account_title">Mon compte</h2>
       <div className="profil_header">
-        <img className="profil_avatar" src={avatar.path} alt={avatar.title} />
+        <img
+          className="profil_avatar"
+          src={avatar.path ? avatar.path : sampleAvatar.path}
+          alt={avatar.title}
+        />
         <h3>{userName}</h3>
         <p>{parseInt(userRight, 2) === 0 ? "Utilisateur" : "Administrateur"}</p>
       </div>
