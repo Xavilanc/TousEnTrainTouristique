@@ -45,7 +45,7 @@ font-face {
   margin-top: 1%;
   margin-bottom: 5%;
   margin-left: 9%;
-  width: 70%;
+  width: 80%;
   padding: 5%;
   border-radius: 2px;
   border: 2px solid #127996;
@@ -80,32 +80,6 @@ font-face {
   background-color: #127996;
   color: #ffffff;
 }
-.connexion {
-  font-family: "Avenir-Book";
-  font-size: 4vw;
-  align-items: right;
-  justify-content: center;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  margin-left: 9%;
-  border-radius: 8px;
-  border: 2px solid;
-  background-color: #127996;
-  color: white;
-}
-.annuler {
-  font-family: "Avenir-Book";
-  font-size: 4vw;
-  align-items: right;
-  justify-content: center;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  margin-left: 25%;
-  border-radius: 8px;
-  border: 2px solid #127996;
-  background-color: #f3f3f8;
-  color: #127996;
-}
 
 .buttonForm {
   font-family: "Avenir-Black";
@@ -113,7 +87,7 @@ font-face {
   line-height: 18px;
   border-radius: 25px;
   padding: 2%;
-  border: 2px solid white;
+  border: 2px solid #127996;
   width: 28%;
   background-color: #127996;
   color: #f3f3f8;
@@ -127,4 +101,10 @@ font-face {
   width: 28%;
   color: #127996;
   background-color: white;
+}
+
+.connect_button_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

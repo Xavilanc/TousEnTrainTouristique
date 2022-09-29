@@ -17,16 +17,14 @@ function TrainCard({ src, title, id }) {
       <div className="traincard_background_white_div">
         <img className="traincard_train_image" src={src} alt={title} />
         <div className="traincard_train_title">{title}</div>
-        <div className="traincard_subtitle_container">
-          <button
-            type="button"
-            className="traincard_subtitle"
-            onClick={() => nav(`/train/${id}`)}
-          >
-            Lire la suite
-          </button>
+        <button
+          type="button"
+          className="traincard_subtitle"
+          onClick={() => nav(`/train/${id}`)}
+        >
           <img className="traincard_chevron" src={chevron} alt="chevron" />
-        </div>
+          Lire la suite
+        </button>
         <div className="traincard_notation_container">
           <Rating
             onClick={handleRating}

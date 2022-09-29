@@ -170,6 +170,29 @@ const edit = (req, res) => {
     });
 };
 
+// Modifier un commentaire
+const putReview = (req, res) => {
+  const review = req.body;
+
+  // TODO validations (length, format...)
+
+  review.id = parseInt(req.params.id, 10);
+
+  models.review
+    .updateReview(review)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Ajouter un commentaire
 const add = (req, res) => {
   const review = req.body;
@@ -216,6 +239,7 @@ module.exports = {
   getJoinById,
   read,
   edit,
+  putReview,
   add,
   destroy,
 };
