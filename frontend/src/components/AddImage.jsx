@@ -73,8 +73,8 @@ function AddImage() {
   };
 
   return (
-    <div>
-      <p>AddImage</p>
+    <div className="add_image_main_div">
+      <p className="review_list_title">Ajouter une image</p>
 
       <div className="addImage">
         <input

@@ -65,3 +65,11 @@
   font-weight: lighter;
   font-family: "Avenir-Book";
 }
+
+.addImage {
+  padding: 5%;
+}
+
+.add_image_main_div {
+  background-color: #f3f3f8;
+}

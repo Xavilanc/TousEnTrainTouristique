@@ -10,9 +10,11 @@ const contactControllers = require("./controllers/contactControllers");
 const areaControllers = require("./controllers/areaControllers");
 const typeControllers = require("./controllers/typeControllers");
 const userControllers = require("./controllers/userControllers");
+const favoriteControllers = require("./controllers/favoriteControllers");
 
 /* Routes concernant la table train */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
+router.get("/api/trains/images/", imageTrainControllers.getAll); // Toutes les images de trains
 router.get("/api/trains/:id/images", trainControllers.getAllJoinWithImagesById); // Un train en particulier avec les images et la région
 router.get(
   "/api/trains/:id/activities",
@@ -36,7 +38,7 @@ router.delete("/api/trains/images/:id", imageTrainControllers.destroy); // Suppr
 
 /* Routes concernant la table image_avatar */
 router.get("/api/imageavatars", imageAvatarControllers.getAll);
-router.get("/api/imageavatars/:id", imageAvatarControllers.read);
+router.get("/api/imageavatars/:id", imageAvatarControllers.read); // tri par user_id
 router.put("/api/imageavatars/:id", imageAvatarControllers.edit);
 router.post("/api/imageavatars", imageAvatarControllers.add);
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);
@@ -53,7 +55,7 @@ router.get(
   reviewControllers.getAllJoinNotPublished
 ); // Uniquement les commentaires non publiés
 router.get("/api/reviews/:id", reviewControllers.getJoinById); // Un commentaire en particulier
-router.put("/api/reviews/:id", reviewControllers.edit); // Éditer un commentaire
+router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
 
@@ -75,6 +77,12 @@ router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.post("/api/types", typeControllers.add); // Créer un type de train
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
 
+router.get("/api/favorites", favoriteControllers.getAll);
+router.get("/api/users/:id/favorites", favoriteControllers.readByUser);
+router.get("/api/trains/:train/:id/favorite", favoriteControllers.readByTrain);
+router.post("/api/favorites", favoriteControllers.add);
+router.delete("/api/favorites/:id", favoriteControllers.destroy);
+
 const {
   hashPassword,
   verifyPassword,
@@ -82,6 +90,7 @@ const {
   modifyPassword,
   hashPasswordForReset,
 } = require("./controllers/auth");
+// const { route } = require("./app");
 
 router.post("/api/mail", userControllers.getUserByEmail, modifyPassword);
 router.put(

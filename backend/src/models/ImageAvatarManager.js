@@ -7,6 +7,13 @@ class ImageAvatarManager extends AbstractManager {
     super({ table: "image_avatar" });
   }
 
+  findByUserId(id) {
+    return this.connection.query(
+      `select * from  ${this.table} where user_id = ?`,
+      [id]
+    );
+  }
+
   // Post ImageAvatar data
   // Partie à modifier en fonction de la table que vous visez
   insert(ImageAvatar) {

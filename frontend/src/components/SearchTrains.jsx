@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TrainCard from "./TrainCard";
+import "../assets/styles/SearchTrains.css";
 
 export default function FilterTrainTest() {
   const [areas, setAreas] = useState([]);

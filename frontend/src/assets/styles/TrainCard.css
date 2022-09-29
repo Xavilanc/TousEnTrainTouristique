@@ -43,24 +43,22 @@
   border-radius: 10px;
 }
 
-/* box cliquable contenant lire la suite et le chevron */
-.traincard_subtitle_container {
-  display: flex;
-  padding: 2%;
-}
-
 /* sous-titre lire la suite */
 .traincard_subtitle {
   color: #127996;
+  text-align: left;
   font-family: "Avenir-Book";
+  border: none;
+  background-color: white;
   font-size: 4vw;
+  cursor: pointer;
+  width: 100%;
 }
 
 /* chevron pour lire la suite*/
 .traincard_chevron {
-  width: 6%;
-  height: 6%;
-  padding-left: 2%;
+  width: 15%;
+  padding-right: 2%;
 }
 
 /* box contenant les etoiles de notation */
