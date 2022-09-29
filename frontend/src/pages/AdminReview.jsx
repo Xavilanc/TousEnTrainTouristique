@@ -4,7 +4,7 @@ import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 import "../assets/styles/AdminReview.css";
 import Header from "@components/Header";
-import { getDate } from "../services/DateManager";
+import { getDate, transDate } from "../services/DateManager";
 
 function ReviewDetails() {
   const params = useParams();
@@ -64,8 +64,8 @@ function ReviewDetails() {
           review_train_id: review.train_id,
           review_note: review.note,
           review_comment: review.comment,
-          created_on: "2022-09-09",
-          updated_on: "2022-09-09",
+          created_on: transDate(review.created_on),
+          updated_on: getDate(),
           published: 0,
         })
         .then((response) => {
@@ -79,8 +79,8 @@ function ReviewDetails() {
           review_train_id: review.train_id,
           review_note: review.note,
           review_comment: review.comment,
-          created_on: "2022-09-09",
-          updated_on: "2022-09-09",
+          created_on: transDate(review.created_on),
+          updated_on: getDate(),
           published: 1,
         })
         .then((response) => {
