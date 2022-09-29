@@ -3,6 +3,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// eslint-disable-next-line import/no-unresolved
+import NotFoundPage from "@components/NotFoundPage";
 import ModifyPasswordPageBis from "./pages/ModifyPasswordPageBis";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -48,6 +50,7 @@ function App() {
             />
             <Route path="/profil/" element={<ProfilPage />} />
             <Route path="/creation-de-train" element={<CreateTrain />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </UserContext.Provider>
@@ -55,4 +58,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;
