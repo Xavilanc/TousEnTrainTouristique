@@ -1,15 +1,52 @@
 import "@assets/styles/Contact.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { getDate } from "@services/DateManager";
 
 export default function Contact() {
-  const [name, setName] = useState("");
+  const [senderName, setSenderName] = useState("");
+  const [subject, setSubject] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [sendMail] = useState({
+    senderName: "",
+    subject: "",
+    mail: "",
+    message: "",
+    created_on: "",
+  });
 
   function handleSubmit(e) {
+    function sendMessage() {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/api/contacts`, {
+          senderName,
+          subject,
+          email,
+          message,
+          created_on: getDate(),
+        })
+        .then((data) => console.warn(`${data}Sent`))
+        .catch((error) => console.warn(`Unable to send : ${error.message}`));
+      sendMail.senderName = "";
+      sendMail.subject = "";
+      sendMail.email = "";
+      sendMail.message = "";
+      sendMail.created_on = getDate();
+    }
+
     e.preventDefault();
-    alert(`Votre message a bien été envoyé ${name}!`);
+    alert(`Votre message a bien été envoyé ${senderName}!`);
+    sendMessage();
   }
+
+  useEffect(() => {
+    sendMail.senderName = "";
+    sendMail.subject = "";
+    sendMail.subject = "";
+    sendMail.message = "";
+    sendMail.created_on = getDate();
+  }, []);
 
   return (
     <div className="contact1">
@@ -22,9 +59,17 @@ export default function Contact() {
             className="name"
             type="text"
             id="name"
-            value={name}
+            value={senderName}
             placeholder="Nom et Prénom*"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setSenderName(e.target.value)}
+          />
+          <input
+            className="name"
+            type="text"
+            id="name"
+            value={subject}
+            placeholder="Sujet*"
+            onChange={(e) => setSubject(e.target.value)}
           />
           <input
             className="email"
