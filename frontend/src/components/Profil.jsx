@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/styles/Profil.css";
 import jwtDecode from "jwt-decode";
 import FavoriteList from "./FavoriteList";
+import AuthContext from "../contexts/AuthContext";
+import AdminContext from "../contexts/AdminContext";
 import avatarDefault from "../assets/images/avatar-default.png";
 import pencil from "../assets/images/pencil.png";
 
@@ -20,6 +25,8 @@ function Profil() {
   const [avatar, setAvatar] = useState(sampleAvatar);
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("id");
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAdmin } = useContext(AdminContext);
 
   useEffect(() => {
     setUserName(window.localStorage.getItem("name"));
@@ -42,12 +49,15 @@ function Profil() {
     getAvatar();
   }, []);
 
-  // Efface les données stocker en local pour déconnecter
+  // Efface les données stockées en local lors de la déconnection
   const logout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("mail");
     window.localStorage.removeItem("name");
     window.localStorage.removeItem("id");
+    delete axios.defaults.headers.Authorization;
+    setIsAuthenticated(false);
+    setIsAdmin(0);
     navigate("/");
   };
 
@@ -55,11 +65,11 @@ function Profil() {
     <div className="profil">
       <h2 className="account_title">Mon compte</h2>
       <div className="profil_header">
-        <div className="profil_avatar_box">
+        <div className="profil_avatar_box" onClick={() => navigate("/avatar")}>
           <img
             className="profil_avatar"
             src={avatar.path ? avatar.path : sampleAvatar.path}
-            alt={avatar.title}
+            alt="avatar"
           />
           <img className="avatar_pencil_icon" src={pencil} alt="" />
         </div>
@@ -68,6 +78,18 @@ function Profil() {
         <p>{parseInt(userRight, 2) === 0 ? "Utilisateur" : "Administrateur"}</p>
       </div>
       <div className="information_container">
+        {/* s'affiche uniquement pour les administrateurs */}
+        {parseInt(userRight, 2) === 1 ? (
+          <input
+            className="user_information"
+            type="button"
+            id="user_information"
+            defaultValue="Administration"
+            onClick={() => navigate("/administrateur")}
+          />
+        ) : (
+          ""
+        )}
         <input
           className="user_information"
           type="button"
