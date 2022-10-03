@@ -4,7 +4,7 @@ const models = require("../models");
 
 const getAll = (req, res) => {
   models.image_avatar
-    .findAll()
+    .findWithUser()
     .then(([rows]) => {
       res.send(rows);
     })

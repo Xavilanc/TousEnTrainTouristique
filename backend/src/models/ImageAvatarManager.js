@@ -14,6 +14,13 @@ class ImageAvatarManager extends AbstractManager {
     );
   }
 
+  findWithUser() {
+    return this.connection.query(
+      `select i.id, i.path, u.name from  ${this.table} as i
+      JOIN user AS u ON i.user_id = u.id`
+    );
+  }
+
   // Post ImageAvatar data
   // Partie à modifier en fonction de la table que vous visez
   insert(ImageAvatar) {
