@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { transDate } from "../services/DateManager";
+// import { transDate } from "../services/DateManager";
 
 function ImageList() {
   const [avatarList, setAvatarList] = useState("");
@@ -31,7 +31,7 @@ function ImageList() {
               <tr
                 id="review_list_map_tr"
                 key={avatar.id}
-                onClick={() => console.log("click")}
+                onClick={() => console.warn("click")}
               >
                 <td className="review_list_td">{avatar.id}</td>
                 {/* <td className="review_list_td">{avatar.path}</td> */}
@@ -40,7 +40,9 @@ function ImageList() {
                   <img src={avatar.path} alt="avatar" width="50%" />
                 </td>
                 <td className="review_list_td">
-                  <button className="btn btn-warning">Delete </button>
+                  <button type="button" className="btn btn-warning">
+                    Delete{" "}
+                  </button>
                 </td>
               </tr>
             ))}
