@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState } from "react";
-// eslint-disable-next-line import/no-unresolved
-import "../assets/styles/UserConnexionForm.css";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../contexts/AuthContext";
+import AdminContext from "../contexts/AdminContext";
+import "../assets/styles/UserConnexionForm.css";
 
 function UserConnectionForm() {
   const [mail, setMail] = useState(""); // état récupérant la saisie du mail
@@ -12,9 +13,10 @@ function UserConnectionForm() {
   const [loginFail, setLoginFail] = useState(false); // états qui affichent un message en cas
   const [passFail, setPassFail] = useState(false); // d'erreur de saisie par l'utilisateur
 
+  const { setIsAuthenticated } = useContext(AuthContext); // gestion des routes utilisateurs
+  const { setIsAdmin } = useContext(AdminContext); // gestion des routes administrateurs
+
   const navigate = useNavigate(); // hook de react-router-dom utilisé pour la redirection vers la page profil
-  // const inputMail = document.querySelector("#user_mail");
-  // const inputPass = document.querySelector("#connect_password");
 
   const login = (e) => {
     e.preventDefault();
@@ -37,7 +39,8 @@ function UserConnectionForm() {
             window.localStorage.setItem("mail", data.user.mail);
             window.localStorage.setItem("name", data.user.name);
             window.localStorage.setItem("id", data.user.id);
-            console.warn(data);
+            setIsAuthenticated(true);
+            setIsAdmin(data.user.user_right);
             // puis redirection vers la page profil
             // navigate("/profil");
           })

@@ -17,36 +17,56 @@ import UserConnexion from "./pages/UserConnexion";
 import ModifyPasswordPage from "./pages/ModifyPasswordPage";
 import ProfilPage from "./pages/ProfilPage";
 import AdminReview from "./pages/AdminReview";
-import UserContext from "./services/UserContext";
+import UserContext from "./contexts/UserContext";
 import CreateTrain from "./pages/CreateTrain";
 import AuthAPI from "./services/AuthAPI";
 import AuthContext from "./contexts/AuthContext";
+import AdminContext from "./contexts/AdminContext";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
 import "./App.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "bootstrap/dist/css/bootstrap.min.css";
 
 AuthAPI.setup();
+AuthAPI.isAdmin();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     AuthAPI.isAuthenticated
-  );
+  ); // état gérant les droits d'accès aux pages utilisateurs
+  const [isAdmin, setIsAdmin] = useState(AuthAPI.isAdmin); // état gérant les droits d'accès aux pages admin
   const [refresh, setRefresh] = useState(false);
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-      <Router>
-        <div className="App">
+      {" "}
+      {/* pour les routes réservées aux utilisateurs */}
+      <AdminContext.Provider value={{ isAdmin, setIsAdmin }}>
+        {" "}
+        {/* pour les routes réservées aux administrateurs */}
+        <Router>
           <UserContext.Provider
             value={{ refresh: refresh, setRefresh: setRefresh }}
           >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/contact" element={<ContactPage />} />
-              <Route path="/administrateur" element={<Administrator />} />
+
+              <Route
+                path="/administrateur"
+                element={
+                  <AdminRoute>
+                    <Administrator />
+                  </AdminRoute>
+                }
+              />
               <Route
                 path="/administrateur/reviews/:id"
-                element={<AdminReview />}
+                element={
+                  <AdminRoute>
+                    <AdminReview />
+                  </AdminRoute>
+                }
               />
               <Route path="/creation-de-compte" element={<CreateUser />} />
               <Route path="/train/:id" element={<Train />} />
@@ -84,8 +104,8 @@ function App() {
             </Routes>
             <Footer />
           </UserContext.Provider>
-        </div>
-      </Router>
+        </Router>
+      </AdminContext.Provider>
     </AuthContext.Provider>
   );
 }

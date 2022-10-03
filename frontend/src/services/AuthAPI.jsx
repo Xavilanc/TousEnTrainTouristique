@@ -27,6 +27,17 @@ function isCurrentUser() {
   }
 }
 
+function isAdmin() {
+  // Vérifier la présence d'un token dans le localStorage
+  const token = window.localStorage.getItem("token");
+
+  // Si token, retourne les userRight
+  if (token) {
+    const decoded = jwtDecode(token);
+    return decoded.userRight;
+  }
+}
+
 function setup() {
   // Vérifier la présence d'un token dans le localStorage
   const token = window.localStorage.getItem("token");
@@ -61,5 +72,6 @@ export default {
   setup,
   isAuthenticated,
   isCurrentUser,
+  isAdmin,
   setAxiosToken,
 };
