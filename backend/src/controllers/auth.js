@@ -67,7 +67,18 @@ const verifyToken = (req, res, next) => {
     }
     // Vérifie que le token a été écrit par le back
     req.payload = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
 
+const verifyAdmin = (req, res, next) => {
+  try {
+    if (req.payload.userRight === 0) {
+      throw new Error("Access denied");
+    }
     next();
   } catch (err) {
     console.error(err);
@@ -116,6 +127,7 @@ module.exports = {
   hashPassword,
   verifyPassword,
   verifyToken,
+  verifyAdmin,
   modifyPassword,
   hashPasswordForReset,
 };
