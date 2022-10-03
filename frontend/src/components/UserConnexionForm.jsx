@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function UserConnectionForm() {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginFail, setLoginFail] = useState(false);
-  const [passFail, setPassFail] = useState(false);
-  const navigate = useNavigate();
+  const [mail, setMail] = useState(""); // état récupérant la saisie du mail
+  const [password, setPassword] = useState(""); // état récupérant la saisie du mot de passe
+
+  const [loginFail, setLoginFail] = useState(false); // états qui affichent un message en cas
+  const [passFail, setPassFail] = useState(false); // d'erreur de saisie par l'utilisateur
+
+  const navigate = useNavigate(); // hook de react-router-dom utilisé pour la redirection vers la page profil
   // const inputMail = document.querySelector("#user_mail");
   // const inputPass = document.querySelector("#connect_password");
 
@@ -20,23 +22,27 @@ function UserConnectionForm() {
     mail !== "" &&
       password !== "" &&
       setTimeout(() => {
-        console.warn(password);
-
         axios
           .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/`, {
             mail,
             password,
           })
-          .then((response) => {
+          // stockage dans le window.localStorage de données utiles
+          // au fonctionnalités "utilisateur connecté"
+          .then((response) => response.data)
+          .then((data) => {
             // console.error(response);
-            console.warn(response.data);
-            window.localStorage.setItem("token", response.data.token);
-            window.localStorage.setItem("mail", response.data.user.mail);
-            window.localStorage.setItem("name", response.data.user.name);
-            window.localStorage.setItem("id", response.data.user.id);
-
-            navigate("/profil");
+            axios.defaults.headers.Authorization = `Bearer ${data.token}`;
+            window.localStorage.setItem("token", data.token);
+            window.localStorage.setItem("mail", data.user.mail);
+            window.localStorage.setItem("name", data.user.name);
+            window.localStorage.setItem("id", data.user.id);
+            console.warn(data);
+            // puis redirection vers la page profil
+            // navigate("/profil");
           })
+          .then(() => navigate("/profil"))
+          // si erreur, un message précise à l'utilisateur de vérifier sa saisie
           .catch((error) => {
             console.error(mail);
             error.response.status === 404

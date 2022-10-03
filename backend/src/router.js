@@ -44,16 +44,12 @@ router.post("/api/imageavatars", imageAvatarControllers.add);
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy);
 
 /* Routes concernant la table review */
-router.get("/api/reviews", reviewControllers.getAllJoin); // Tous les commentaires (publiés ou non)
-router.get("/api/reviews/published", reviewControllers.getAllJoinPublished); // Uniquement les commentaires publiés
+
 router.get(
   "/api/trains/:id/reviews",
   reviewControllers.getAllJoinPublishedByTrainId
 ); // Uniquement les commentaires d'un train en particulier
-router.get(
-  "/api/reviews/unpublished",
-  reviewControllers.getAllJoinNotPublished
-); // Uniquement les commentaires non publiés
+
 router.get("/api/reviews/:id", reviewControllers.getJoinById); // Un commentaire en particulier
 router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
@@ -87,6 +83,7 @@ const {
   hashPassword,
   verifyPassword,
   verifyToken,
+  verifyAdmin,
   modifyPassword,
   hashPasswordForReset,
 } = require("./controllers/auth");
@@ -108,6 +105,16 @@ router.post(
   verifyPassword
 );
 router.use(verifyToken);
+
+router.use(verifyAdmin);
+
+router.get("/api/reviews", reviewControllers.getAllJoin); // Tous les commentaires (publiés ou non)
+router.get("/api/reviews/published", reviewControllers.getAllJoinPublished); // Uniquement les commentaires publiés
+router.get(
+  "/api/reviews/unpublished",
+  reviewControllers.getAllJoinNotPublished
+); // Uniquement les commentaires non publiés
+
 router.delete("/api/users/:id", userControllers.deleteUser);
 
 module.exports = router;

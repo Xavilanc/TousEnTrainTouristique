@@ -1,6 +1,6 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import ModifyAvatar from "@pages/ModifyAvatar";
@@ -19,43 +19,74 @@ import ProfilPage from "./pages/ProfilPage";
 import AdminReview from "./pages/AdminReview";
 import UserContext from "./services/UserContext";
 import CreateTrain from "./pages/CreateTrain";
+import AuthAPI from "./services/AuthAPI";
+import AuthContext from "./contexts/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "bootstrap/dist/css/bootstrap.min.css";
 
+AuthAPI.setup();
+
 function App() {
-  const [refresh, setRefresh] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    AuthAPI.isAuthenticated
+  );
+  const [refresh, setRefresh] = useState(false);
   return (
-    <Router>
-      <div className="App">
-        <UserContext.Provider
-          value={{ refresh: refresh, setRefresh: setRefresh }}
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/administrateur" element={<Administrator />} />
-            <Route
-              path="/administrateur/reviews/:id"
-              element={<AdminReview />}
-            />
-            <Route path="/creation-de-compte" element={<CreateUser />} />
-            <Route path="/train/:id" element={<Train />} />
-            <Route path="/connexion" element={<UserConnexion />} />
-            <Route path="/modification/" element={<ModifyPasswordPage />} />
-            <Route path="/avatar" element={<ModifyAvatar />} />
-            <Route
-              path="/modification/:token"
-              element={<ModifyPasswordPageBis />}
-            />
-            <Route path="/profil/" element={<ProfilPage />} />
-            <Route path="/creation-de-train" element={<CreateTrain />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-          <Footer />
-        </UserContext.Provider>
-      </div>
-    </Router>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      <Router>
+        <div className="App">
+          <UserContext.Provider
+            value={{ refresh: refresh, setRefresh: setRefresh }}
+          >
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/administrateur" element={<Administrator />} />
+              <Route
+                path="/administrateur/reviews/:id"
+                element={<AdminReview />}
+              />
+              <Route path="/creation-de-compte" element={<CreateUser />} />
+              <Route path="/train/:id" element={<Train />} />
+              <Route path="/connexion" element={<UserConnexion />} />
+              <Route path="/modification/" element={<ModifyPasswordPage />} />
+              <Route
+                path="/avatar"
+                element={
+                  <PrivateRoute>
+                    <ModifyAvatar />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/modification/:token"
+                element={<ModifyPasswordPageBis />}
+              />
+              <Route
+                path="/profil/"
+                element={
+                  <PrivateRoute>
+                    <ProfilPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/creation-de-train"
+                element={
+                  <PrivateRoute>
+                    <CreateTrain />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+            <Footer />
+          </UserContext.Provider>
+        </div>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

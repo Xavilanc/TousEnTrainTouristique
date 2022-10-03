@@ -50,6 +50,7 @@ function Profil() {
     window.localStorage.removeItem("mail");
     window.localStorage.removeItem("name");
     window.localStorage.removeItem("id");
+    delete axios.defaults.headers.Authorization;
     navigate("/");
   };
 
