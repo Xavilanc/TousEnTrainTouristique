@@ -64,7 +64,7 @@ export default function CreateTrainForm() {
         area_id: selectedArea,
         created_on: getDate(),
         updated_on: null,
-        type_id: selectedTypes,
+        types: selectedTypes,
         published: 0,
         description,
         description_info: information,

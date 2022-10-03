@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const models = require("../models");
 
 // Le trainController sert à faire la liaision avec le AbstractManager et le TrainManager.
@@ -132,6 +133,31 @@ const edit = (req, res) => {
     });
 };
 
+const update = (req, res) => {
+  const train = req.body;
+
+  // TODO validations (length, format...)
+
+  models.train.update(train).then(([result]) => {
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+  models.train
+    .deleteTypes(train.id)
+    .then(() => {
+      for (let i = 0; i < train.types.length; i += 1) {
+        models.train.insertTypes(train.id, train.types[i].value);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const add = (req, res) => {
   const train = req.body;
 
@@ -140,8 +166,14 @@ const add = (req, res) => {
   models.train
     .insert(train)
     .then(([result]) => {
-      res.send(result.insertId.toString());
-      // res.location(`/train/${result.insertId}`).sendStatus(201);
+      res
+        .location(`/train/${result.insertId}`)
+        .status(201)
+        .send(`${result.insertId}`);
+      train.types &&
+        train.types.map((type) =>
+          models.train.insertTypes(`${result.insertId}`, type.value)
+        );
     })
     .catch((err) => {
       console.error(err);
@@ -171,6 +203,7 @@ module.exports = {
   getAllJoinWithImagesById,
   getAllJoinWithActivitiesById,
   read,
+  update,
   readJoin,
   readWithAreaAndId,
   edit,

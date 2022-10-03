@@ -53,7 +53,7 @@ class TrainManager extends AbstractManager {
   // Fonction ajouter pour avoir toute les données avec les jointures.
   getJoin() {
     return this.connection.query(
-      `SELECT t.name AS tname, t.id as id, t.description, t.created_on AS creat, t.updated_on AS updat, a.name AS areaName,      
+      `SELECT t.name AS tname, t.id as id, t.description, t.created_on AS creat, t.updated_on AS updat, t.published, a.name AS areaName,      
       JSON_OBJECTAGG(i.id,i.path) AS path, 
       JSON_OBJECTAGG(type.id,type.title) AS types FROM train AS t      
       JOIN image_train AS i ON i.train_id=t.id       
@@ -134,6 +134,19 @@ class TrainManager extends AbstractManager {
       JOIN train_type type ON type.train_id = t.id where area_id = ? and type_id = ?;`,
       [area, type]
     );
+  }
+
+  insertTypes(trainId, type) {
+    return this.connection.query(
+      `insert into train_type (train_id, type_id) values (?, ?)`,
+      [trainId, type]
+    );
+  }
+
+  deleteTypes(trainId) {
+    return this.connection.query(`delete from train_type where train_id = ?`, [
+      trainId,
+    ]);
   }
 }
 module.exports = TrainManager;
