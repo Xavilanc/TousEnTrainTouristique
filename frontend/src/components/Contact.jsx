@@ -11,7 +11,7 @@ export default function Contact() {
   const [sendMail] = useState({
     senderName: "",
     subject: "",
-    mail: "",
+    email: "",
     message: "",
     created_on: "",
   });
@@ -26,7 +26,6 @@ export default function Contact() {
           message,
           created_on: getDate(),
         })
-        .then((data) => console.warn(`${data}Sent`))
         .catch((error) => console.warn(`Unable to send : ${error.message}`));
       sendMail.senderName = "";
       sendMail.subject = "";
