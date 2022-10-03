@@ -12,6 +12,7 @@ export default function FilterTrainTest() {
   const [selections, setSelections] = useState("");
   const [results, setResults] = useState([]);
 
+  // Les 3 appels axios nécessaires à notre filtrage
   useEffect(() => {
     // Api Areas
     axios
@@ -36,6 +37,10 @@ export default function FilterTrainTest() {
       });
   }, []);
 
+  // Fonction permettant le filtrage par l'utilisateur
+  // utilisant ou pas les options areas et/ou types
+  // Object.getOwnPropertyNames(train.types) renvoie un tableau de toutes les propriétés
+  // car le name de type est nécessaire pour la méthode forEach
   function handleSearch() {
     const myTrains = [];
     selections.forEach((train) => {
@@ -123,7 +128,7 @@ export default function FilterTrainTest() {
 
       {results.length !== 0 &&
         results.map((train) => (
-          <div>
+          <div key={train.id}>
             <TrainCard
               src={Object.values(train.path)[0]}
               title={train.tname}

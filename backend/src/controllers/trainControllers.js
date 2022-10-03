@@ -93,6 +93,7 @@ const readJoin = (req, res) => {
     });
 };
 
+// Controller permettant à l'utilisateur le fitrage des trains par areas et types
 const readWithAreaAndId = (req, res) => {
   models.train
     .getJoinByAreaAndType(req.params.area, req.params.type)
