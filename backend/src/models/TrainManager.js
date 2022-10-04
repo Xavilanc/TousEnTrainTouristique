@@ -64,6 +64,18 @@ class TrainManager extends AbstractManager {
     );
   }
 
+  getJoinAdmin() {
+    return this.connection.query(
+      `SELECT t.name AS tname, t.id as id, t.description, t.created_on AS creat, t.updated_on AS updat, t.published, a.name AS areaName,
+      JSON_ARRAYAGG(JSON_OBJECT("id", type.id, "title", type.title)) as types
+      FROM train AS t      
+        JOIN area AS a ON a.id=t.area_id       
+        JOIN train_type  ON t.id = train_type.train_id       
+        LEFT JOIN type ON type.id = train_type.type_id       
+        group by t.id;`
+    );
+  }
+
   getJoinWithImagesById(id) {
     return this.connection.query(
       `SELECT t.name AS tname, t.id as id, t.description,t.description_info, t.created_on AS creat, t.updated_on AS updat, a.name AS areaName,

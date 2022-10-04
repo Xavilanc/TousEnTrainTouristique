@@ -94,6 +94,7 @@ router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy); // Suppr
 router.use(verifyAdmin);
 
 /* --- GET --- */
+router.get("/api/admin/trains", trainControllers.getAllJoinAdmin); // Tous les trains côté Admin (sans images)
 router.get("/api/users", userControllers.getAll); // Tous les utilisateurs
 router.get("/api/contacts", contactControllers.getAll); // Tous les messages
 router.get("/api/contacts/:id", contactControllers.read); // Un message en particulier

@@ -28,6 +28,19 @@ const getAllJoin = (req, res) => {
     });
 };
 
+/* affichage de tout les trains côté admin */
+const getAllJoinAdmin = (req, res) => {
+  models.train
+    .getJoinAdmin()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Tous les trains avec la région et les images
 const getAllJoinWithImagesById = (req, res) => {
   models.train
@@ -200,6 +213,7 @@ const destroy = (req, res) => {
 module.exports = {
   getAll,
   getAllJoin,
+  getAllJoinAdmin,
   getAllJoinWithImagesById,
   getAllJoinWithActivitiesById,
   read,

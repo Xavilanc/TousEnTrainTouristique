@@ -11,7 +11,7 @@ function TrainList() {
 
   const getTrains = () => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/`)
       .then((response) => response.data)
       .then((data) => setTrains(data));
   };
@@ -49,11 +49,10 @@ function TrainList() {
                 <td className="review_list_td">{train.areaName}</td>
                 <td className="review_list_td">
                   <ul>
-                    0
-                    {/* {train.types &&
+                    {train.types &&
                       train.types.map((type) => (
-                        <li key={Object.values(type.key)}>{Object.values(type.value)}</li>
-                      ))} */}
+                        <li key={type.id}>{type.title}</li>
+                      ))}
                   </ul>
                 </td>
                 <td className="review_list_td">{transDate(train.creat)}</td>
