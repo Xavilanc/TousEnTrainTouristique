@@ -39,13 +39,13 @@ router.get(
   "/api/trains/:id/reviews",
   reviewControllers.getAllJoinPublishedByTrainId
 ); // Uniquement les commentaires d'un train en particulier
-router.get("/api/reviews/:id", reviewControllers.getJoinById); // Un commentaire en particulier
+
 router.get("/api/areas", areaControllers.getAll); // Toutes les régions
 router.get("/api/areas/:id", areaControllers.read); // Une région en particulier
 router.get("/api/types", typeControllers.getAll); // Tous les types de trains
 router.get("/api/types/:id", typeControllers.read); // Un type de train en particulier
 
-/* --- POST --- */
+// /* --- POST --- */
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
 router.post("/api/contacts", contactControllers.add); // Envoyer un message
 router.post("/api/mail", userControllers.getUserByEmail, modifyPassword); // modifier son mot de passe
@@ -56,7 +56,7 @@ router.post(
   verifyPassword
 ); // connexion
 
-/* --- PUT --- */
+// /* --- PUT --- */
 router.put("/api/contacts/:id", contactControllers.edit); // Éditer un message
 router.put(
   "/api/mail/:token",
@@ -94,6 +94,8 @@ router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy); // Suppr
 router.use(verifyAdmin);
 
 /* --- GET --- */
+router.get("/api/admin/trains", trainControllers.getAllJoinAdmin); // Tous les trains côté Admin (sans images)
+router.get("/api/admin/trains/:id", trainControllers.readJoinAdminById); // Un train en particulier côté admin (types dans un arrayagg)
 router.get("/api/users", userControllers.getAll); // Tous les utilisateurs
 router.get("/api/contacts", contactControllers.getAll); // Tous les messages
 router.get("/api/contacts/:id", contactControllers.read); // Un message en particulier
@@ -104,6 +106,7 @@ router.get(
   reviewControllers.getAllJoinNotPublished
 ); // Uniquement les commentaires non publiés
 router.get("/api/imageavatars", imageAvatarControllers.getAll); // tous les avatars
+router.get("/api/reviews/:id", reviewControllers.getJoinById); // Un commentaire en particulier
 
 /* --- POST --- */
 router.post("/api/types", typeControllers.add); // Créer un type de train
@@ -113,7 +116,7 @@ router.post("/api/areas", areaControllers.add); // Créer une région
 router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
-router.put("/api/trains/:id", trainControllers.edit); // Modifier un train
+router.put("/api/trains/:id", trainControllers.update); // Modifier un train
 
 /* --- DELETE --- */
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire

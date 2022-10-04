@@ -24,6 +24,7 @@ import AuthContext from "./contexts/AuthContext";
 import AdminContext from "./contexts/AdminContext";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
+import AdminTrain from "./pages/AdminTrain";
 import "./App.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -65,6 +66,14 @@ function App() {
                 element={
                   <AdminRoute>
                     <AdminReview />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/administrateur/trains/:id"
+                element={
+                  <AdminRoute>
+                    <AdminTrain />
                   </AdminRoute>
                 }
               />
