@@ -30,19 +30,9 @@ class ImageTrainManager extends AbstractManager {
   // a changer en fonction de la table visé
   update(ImageTrain) {
     return this.connection.query(
-      `update ${this.table} set title = ?, path = ?, user_id = ?, train_id = ?,
-       created_on = ?, updated_on = ?, published = ? where id = ?`,
+      `update ${this.table} set published = ? where id = ?`,
       // Ne Surtout pas oublié l'id en dernier
-      [
-        ImageTrain.title,
-        ImageTrain.path,
-        ImageTrain.user_id,
-        ImageTrain.train_id,
-        ImageTrain.created_on,
-        ImageTrain.updated_on,
-        ImageTrain.published,
-        ImageTrain.id,
-      ]
+      [ImageTrain.published, ImageTrain.id]
     );
   }
 }
