@@ -76,6 +76,19 @@ class TrainManager extends AbstractManager {
     );
   }
 
+  getJoinAdminById(id) {
+    return this.connection.query(
+      `SELECT t.name AS tname, t.id as id,
+      JSON_ARRAYAGG(JSON_OBJECT("value", type.id, "label", type.title)) as types
+      FROM train AS t          
+        JOIN train_type  ON t.id = train_type.train_id       
+        LEFT JOIN type ON type.id = train_type.type_id
+        WHERE t.id= ?       
+        GROUP BY t.id;`,
+      [id]
+    );
+  }
+
   getJoinWithImagesById(id) {
     return this.connection.query(
       `SELECT t.name AS tname, t.id as id, t.description,t.description_info, t.created_on AS creat, t.updated_on AS updat, a.name AS areaName,
@@ -104,7 +117,7 @@ class TrainManager extends AbstractManager {
   // Un train en particulier avec les jointures
   getJoinById(id) {
     return this.connection.query(
-      `SELECT t.name AS tname, t.id as id, t.description,t.description_info, t.created_on AS creat, t.updated_on AS updat, a.name AS areaName,
+      `SELECT t.name AS tname, t.id as id, t.description,t.description_info, t.created_on AS creat, t.updated_on AS updat, a.id AS areaId,
       JSON_ARRAYAGG(i.path) AS images_path,
       JSON_ARRAYAGG(i.title) AS images_title        
       FROM train AS t       

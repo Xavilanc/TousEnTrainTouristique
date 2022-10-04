@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
 import { getDate } from "../services/DateManager";
 import "../assets/styles/CreateUserForm.css";
 
-export default function EditTrainForm() {
+export default function EditTrainForm({ id }) {
   const [name, setName] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
   const [areas, setAreas] = useState([]);
@@ -18,7 +18,6 @@ export default function EditTrainForm() {
   const [userId, setUserId] = useState("");
 
   const navigate = useNavigate();
-  const params = useParams();
 
   useEffect(() => {
     setToken(window.localStorage.getItem("token"));
@@ -55,27 +54,46 @@ export default function EditTrainForm() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${id}`)
+      .then((response) => response.data)
+      .then((data) => {
+        setName(data.tname);
+        setSelectedArea(data.areaId);
+        setDescription(data.description);
+        setInformation(data.description_info);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/${id}`)
+      .then((response) => response.data)
+      .then((data) => setSelectedTypes(data.types));
+  }, []);
+
   const updateTrain = () => {
     axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`, {
+      .put(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${id}`, {
         name,
         train_user_id: userId,
         area_id: selectedArea,
         created_on: getDate(),
-        updated_on: null,
+        updated_on: getDate(),
         types: selectedTypes,
         published: 0,
         description,
         description_info: information,
       })
       .then((res) => console.warn(res));
-    setTimeout(() => navigate("/"), 3000);
+    navigate("/administrateur");
   };
 
   return (
     <div className="contact1">
       <div className="Contact">
-        <h1>Ajouter un train</h1>
+        <h1>Modifier un train</h1>
         <form onSubmit={(e) => updateTrain(e)}>
           <input
             className="name"
@@ -100,6 +118,7 @@ export default function EditTrainForm() {
               ))}
           </select>
           <Select
+            value={selectedTypes}
             defaultValue={selectedTypes}
             onChange={setSelectedTypes}
             options={types}

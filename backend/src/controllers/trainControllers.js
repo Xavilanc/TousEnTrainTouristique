@@ -91,6 +91,22 @@ const read = (req, res) => {
     });
 };
 
+const readJoinAdminById = (req, res) => {
+  models.train
+    .getJoinAdminById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const readJoin = (req, res) => {
   models.train
     .getJoinById(req.params.id)
@@ -150,6 +166,7 @@ const update = (req, res) => {
   const train = req.body;
 
   // TODO validations (length, format...)
+  train.id = parseInt(req.params.id, 10);
 
   models.train.update(train).then(([result]) => {
     if (result.affectedRows === 0) {
@@ -220,6 +237,7 @@ module.exports = {
   update,
   readJoin,
   readWithAreaAndId,
+  readJoinAdminById,
   edit,
   add,
   destroy,

@@ -95,6 +95,7 @@ router.use(verifyAdmin);
 
 /* --- GET --- */
 router.get("/api/admin/trains", trainControllers.getAllJoinAdmin); // Tous les trains côté Admin (sans images)
+router.get("/api/admin/trains/:id", trainControllers.readJoinAdminById); // Un train en particulier côté admin (types dans un arrayagg)
 router.get("/api/users", userControllers.getAll); // Tous les utilisateurs
 router.get("/api/contacts", contactControllers.getAll); // Tous les messages
 router.get("/api/contacts/:id", contactControllers.read); // Un message en particulier
@@ -115,7 +116,7 @@ router.post("/api/areas", areaControllers.add); // Créer une région
 router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
-router.put("/api/trains/:id", trainControllers.edit); // Modifier un train
+router.put("/api/trains/:id", trainControllers.update); // Modifier un train
 
 /* --- DELETE --- */
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
