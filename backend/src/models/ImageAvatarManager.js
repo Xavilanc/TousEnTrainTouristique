@@ -16,7 +16,7 @@ class ImageAvatarManager extends AbstractManager {
 
   findWithUser() {
     return this.connection.query(
-      `select i.id, i.path, u.name from  ${this.table} as i
+      `select i.id, i.path,i.user_id, u.name from  ${this.table} as i
       JOIN user AS u ON i.user_id = u.id`
     );
   }
@@ -44,9 +44,10 @@ class ImageAvatarManager extends AbstractManager {
   }
 
   deleteAvatar(id) {
-    return this.connection.query(`delete from ${this.table} where id = ?`, [
-      id,
-    ]);
+    return this.connection.query(
+      `delete from ${this.table} where user_id = ?`,
+      [id]
+    );
   }
 }
 

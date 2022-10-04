@@ -18,7 +18,7 @@ function TrainList() {
 
   useEffect(() => {
     getTrains();
-  }, [trains]);
+  }, []);
 
   return (
     <div className="review_list_main_div">

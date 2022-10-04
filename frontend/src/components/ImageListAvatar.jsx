@@ -55,7 +55,7 @@ function ImageList() {
                   <button
                     type="button"
                     className="btn btn-warning"
-                    onClick={(e) => handleClick(e, avatar.id)}
+                    onClick={(e) => handleClick(e, avatar.user_id)}
                   >
                     Delete
                   </button>
