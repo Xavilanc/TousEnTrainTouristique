@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import { transDate } from "../services/DateManager";
 
 function ImageList() {
-  const [avatarList, setAvatarList] = useState("");
+  const [avatarList, setAvatarList] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {

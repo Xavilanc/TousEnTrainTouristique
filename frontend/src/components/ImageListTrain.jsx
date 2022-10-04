@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-expressions */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "../assets/styles/ImageList.css";
 // import { transDate } from "../services/DateManager";
 
 function ImageListTrain() {
-  const [avatarList, setAvatarList] = useState("");
   const [trainImages, setTrainImages] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
@@ -30,7 +31,23 @@ function ImageListTrain() {
       .then(() => handleRefresh())
       .catch((err) => console.warn(err));
   };
-  const handleUpdate = (e, id) => {};
+  const handleUpdate = (e, avatar) => {
+    e.preventDefault();
+    let { published } = avatar;
+    console.warn(published);
+    published === 0 ? (published = 1) : (published = 0);
+    console.warn(published);
+    console.warn(`update image id : ${avatar.id}`);
+    axios
+      .put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/trains/images/${avatar.id}`,
+        { published }
+      )
+      .then((response) => console.warn(response))
+      .then(() => handleRefresh())
+      .catch((err) => console.warn(err));
+  };
+
   return (
     <div className="imageList">
       {" "}
@@ -59,11 +76,19 @@ function ImageListTrain() {
                 </td>
                 <td className="review_list_td">
                   {avatar.published ? (
-                    <button type="button" className="btn btn-warning">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      onClick={(e) => handleUpdate(e, avatar)}
+                    >
                       Published
                     </button>
                   ) : (
-                    <button type="button" className="btn btn-danger">
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={(e) => handleUpdate(e, avatar)}
+                    >
                       Unpublished
                     </button>
                   )}
