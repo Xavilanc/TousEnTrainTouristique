@@ -1,10 +1,12 @@
 import React from "react";
 import AddImage from "../components/AddImage";
 import Header from "../components/Header";
-import ImageList from "../components/ImageList";
+import ImageList from "../components/ImageListAvatar";
 import ReviewsList from "../components/ReviewsList";
+import TrainList from "../components/TrainList";
 import "../assets/styles/Administrator.css";
 import ImageListTrain from "../components/ImageListTrain";
+import ImageManager from "@components/ImageManager";
 
 const administrator = () => {
   return (
@@ -12,9 +14,9 @@ const administrator = () => {
       <Header />
       <p>Admin Area</p>
       <ReviewsList />
-      <ImageList />
-      <ImageListTrain />
+      <ImageManager />
       <AddImage />
+      <TrainList />
     </div>
   );
 };

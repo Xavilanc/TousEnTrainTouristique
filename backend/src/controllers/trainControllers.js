@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const models = require("../models");
 
 // Le trainController sert à faire la liaision avec le AbstractManager et le TrainManager.
@@ -18,6 +19,19 @@ const getAll = (req, res) => {
 const getAllJoin = (req, res) => {
   models.train
     .getJoin()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+/* affichage de tout les trains côté admin */
+const getAllJoinAdmin = (req, res) => {
+  models.train
+    .getJoinAdmin()
     .then(([rows]) => {
       res.send(rows);
     })
@@ -64,6 +78,22 @@ const getAllJoinWithActivitiesById = (req, res) => {
 const read = (req, res) => {
   models.train
     .find(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const readJoinAdminById = (req, res) => {
+  models.train
+    .getJoinAdminById(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -132,6 +162,32 @@ const edit = (req, res) => {
     });
 };
 
+const update = (req, res) => {
+  const train = req.body;
+
+  // TODO validations (length, format...)
+  train.id = parseInt(req.params.id, 10);
+
+  models.train.update(train).then(([result]) => {
+    if (result.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+  models.train
+    .deleteTypes(train.id)
+    .then(() => {
+      for (let i = 0; i < train.types.length; i += 1) {
+        models.train.insertTypes(train.id, train.types[i].value);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const add = (req, res) => {
   const train = req.body;
 
@@ -140,8 +196,14 @@ const add = (req, res) => {
   models.train
     .insert(train)
     .then(([result]) => {
-      res.send(result.insertId.toString());
-      // res.location(`/train/${result.insertId}`).sendStatus(201);
+      res
+        .location(`/train/${result.insertId}`)
+        .status(201)
+        .send(`${result.insertId}`);
+      train.types &&
+        train.types.map((type) =>
+          models.train.insertTypes(`${result.insertId}`, type.value)
+        );
     })
     .catch((err) => {
       console.error(err);
@@ -168,11 +230,14 @@ const destroy = (req, res) => {
 module.exports = {
   getAll,
   getAllJoin,
+  getAllJoinAdmin,
   getAllJoinWithImagesById,
   getAllJoinWithActivitiesById,
   read,
+  update,
   readJoin,
   readWithAreaAndId,
+  readJoinAdminById,
   edit,
   add,
   destroy,

@@ -5,7 +5,6 @@ import AdminContext from "../contexts/AdminContext";
 
 function AdminRoute({ children }) {
   const { isAdmin } = useContext(AdminContext);
-  console.warn(isAdmin);
 
   return isAdmin === 1 ? children : <Navigate to="/profil" />;
 }
