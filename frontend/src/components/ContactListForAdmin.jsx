@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { transDate } from "../services/DateManager";
+import { getDate } from "../services/DateManager";
 
 function ContactList() {
   const [messages, setMessages] = useState([]);
@@ -43,9 +43,7 @@ function ContactList() {
               <tr
                 id="review_list_map_tr"
                 key={message.id}
-                onClick={() =>
-                  navigate(`/administrateur/contacts/${message.id}`)
-                }
+                onClick={() => navigate(`/api/contacts/${message.id}`)}
               >
                 <td className="review_list_td">{message.id}</td>
                 <td className="review_list_td">{message.senderName}</td>
@@ -53,7 +51,7 @@ function ContactList() {
                 <td className="review_list_td">{message.email}</td>
                 <td className="review_list_td">{message.message}</td>
                 <td className="review_list_td">
-                  {transDate(message.created_on)}
+                  {getDate(message.created_on)}
                 </td>
               </tr>
             ))}

@@ -1,7 +1,7 @@
 import "@assets/styles/Contact.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getDate } from "@services/DateManager";
+import { getDate } from "../services/DateManager";
 
 export default function Contact() {
   const [senderName, setSenderName] = useState("");

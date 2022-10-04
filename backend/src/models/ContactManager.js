@@ -20,8 +20,9 @@ class ContactManager extends AbstractManager {
 
   update(contact) {
     return this.connection.query(
-      `update ${this.table} set subject = ?, mail = ?, message = ?, created_on = ? where id = ?`,
+      `update ${this.table} set senderName = ?, subject = ?, mail = ?, message = ?, created_on = ? where id = ?`,
       [
+        contact.senderName,
         contact.subject,
         contact.mail,
         contact.message,
