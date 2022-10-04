@@ -1,0 +1,11 @@
+.btn {
+  padding: 0.2rem;
+  font-size: 0.6rem;
+}
+
+.imageManager {
+  text-align: center;
+}
+.imageManager button {
+  margin: 1rem;
+}
