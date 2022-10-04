@@ -44,10 +44,9 @@ class ImageAvatarManager extends AbstractManager {
   }
 
   deleteAvatar(id) {
-    return this.connection.query(
-      `delete from ${this.table} where user_id = ?`,
-      [id]
-    );
+    return this.connection.query(`delete from ${this.table} where id = ?`, [
+      id,
+    ]);
   }
 }
 

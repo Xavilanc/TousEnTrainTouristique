@@ -108,7 +108,6 @@ const getUserByEmail = (req, res, next) => {
 const updateUserForChangePassword = (req, res) => {
   const user = req.body;
   const id = req.payload.sub;
-
   models.user
     .updatePassword(user, id)
     .then(([result]) => {
@@ -116,7 +115,6 @@ const updateUserForChangePassword = (req, res) => {
         res.status(404).send("Not Found");
       } else {
         res.send("success");
-        res.sendStatus(204).send("User password edited");
       }
     })
     .catch((err) => {
