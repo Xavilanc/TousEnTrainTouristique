@@ -27,8 +27,10 @@ function ModifyPasswordWithMail() {
         password,
       })
       .then((response) => {
-        response === "success" ? nav("/login") : setpassChangeSuccess(false);
-        console.warn(response);
+        response.data === "success"
+          ? nav("/connexion")
+          : setpassChangeSuccess(false);
+        console.warn(response.data);
       })
       .catch((error) => {
         setpassChangeSuccess(false);

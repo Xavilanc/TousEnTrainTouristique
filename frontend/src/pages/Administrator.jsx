@@ -1,3 +1,5 @@
+import React from "react";
+import ImageManager from "../components/ImageManager";
 import AddImage from "../components/AddImage";
 import Header from "../components/Header";
 import ReviewsList from "../components/ReviewsList";
@@ -11,6 +13,7 @@ const administrator = () => {
       <Header />
       <p>Admin Area</p>
       <ReviewsList />
+      <ImageManager />
       <AddImage />
       <TrainList />
       <ContactList />

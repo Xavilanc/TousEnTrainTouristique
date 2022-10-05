@@ -116,6 +116,7 @@ router.post("/api/areas", areaControllers.add); // Créer une région
 router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
+router.put("/api/trains/images/:id", imageTrainControllers.edit); // Modifier une image
 router.put("/api/trains/:id", trainControllers.update); // Modifier un train
 
 /* --- DELETE --- */
