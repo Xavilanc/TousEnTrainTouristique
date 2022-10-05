@@ -56,18 +56,6 @@ export default function EditTrainForm({ id }) {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${id}`)
-  //     .then((response) => response.data)
-  //     .then((data) => {
-  //       setName(data.tname);
-  //       setSelectedArea(data.areaId);
-  //       setDescription(data.description);
-  //       setInformation(data.description_info);
-  //     });
-  // }, []);
-
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/${id}`)
