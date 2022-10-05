@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
@@ -81,10 +80,11 @@ export default function CreateTrainForm() {
         <div className="Contact">
           <h1>Ajouter un train</h1>
           <form onSubmit={(e) => postTrain(e)}>
-            <label className="create_train_form_label">
+            <label className="create_train_form_label" htmlFor="train_name">
               Indiquez ici le nom du train
             </label>
             <input
+              name="train_name"
               required
               className="create_train_form_name"
               type="text"
@@ -93,10 +93,11 @@ export default function CreateTrainForm() {
               placeholder="Nom du train"
               onChange={(e) => setName(e.target.value)}
             />
-            <label className="create_train_form_label">
+            <label className="create_train_form_label" htmlFor="area">
               Sélectionnez une région
             </label>
             <select
+              name="area"
               required
               className="create_train_form_area"
               value={selectedArea}
@@ -111,17 +112,18 @@ export default function CreateTrainForm() {
                   </option>
                 ))}
             </select>
-            <label className="create_train_form_label">
+            <label className="create_train_form_label" htmlFor="type">
               Sélectionnez un ou plusieurs types
             </label>
             <Select
+              name="type"
               className="create_train_form_type"
               defaultValue={selectedTypes}
               onChange={setSelectedTypes}
               options={types}
               isMulti
             />
-            <label className="create_train_form_label">
+            <label className="create_train_form_label" htmlFor="description">
               Indiquez ici la description de ce train
             </label>
             <textarea
@@ -135,7 +137,7 @@ export default function CreateTrainForm() {
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <label className="create_train_form_label">
+            <label className="create_train_form_label" htmlFor="information">
               Indiquez ici des Informations complémentaires sur ce train
             </label>
             <textarea
