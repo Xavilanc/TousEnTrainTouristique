@@ -63,3 +63,9 @@
   color: #8de8fe;
   padding: 2%;
 }
+
+@media screen and (min-width: 768px) {
+  .header_main_container {
+    padding: 1%;
+  }
+}

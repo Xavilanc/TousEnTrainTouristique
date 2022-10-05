@@ -100,16 +100,26 @@ export default function EditTrainForm({ id }) {
       <div className="Contact">
         <h1>Modifier un train</h1>
         <form onSubmit={(e) => updateTrain(e)}>
+          <label className="create_train_form_label" htmlFor="train_name">
+            Nom du train
+          </label>
           <input
-            className="name"
+            name="train_name"
+            required
+            className="create_train_form_name"
             type="text"
             id="train"
             value={name}
             placeholder="Nom du train"
             onChange={(e) => setName(e.target.value)}
           />
+          <label className="create_train_form_label" htmlFor="area">
+            Région
+          </label>
           <select
-            className="area_select"
+            name="area"
+            required
+            className="create_train_form_area"
             value={selectedArea}
             id="area-select"
             onChange={(e) => setSelectedArea(e.target.value)}
@@ -122,15 +132,24 @@ export default function EditTrainForm({ id }) {
                 </option>
               ))}
           </select>
+          <label className="create_train_form_label" htmlFor="type">
+            Type(s)
+          </label>
           <Select
+            name="type"
+            className="create_train_form_type"
             value={selectedTypes}
             defaultValue={selectedTypes}
             onChange={setSelectedTypes}
             options={types}
             isMulti
           />
+          <label className="create_train_form_label" htmlFor="description">
+            Description
+          </label>
           <textarea
-            className="description"
+            required
+            className="create_train_form_description"
             name="description"
             id="description"
             cols="30"
@@ -139,8 +158,12 @@ export default function EditTrainForm({ id }) {
             placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           />
+          <label className="create_train_form_label" htmlFor="information">
+            Informations complémentaires
+          </label>
           <textarea
-            className="information"
+            required
+            className="create_train_form_information"
             name="information"
             id="information"
             cols="30"
@@ -150,11 +173,7 @@ export default function EditTrainForm({ id }) {
             onChange={(e) => setInformation(e.target.value)}
           />
           <div className="buttonsContainer">
-            <button
-              className="buttonForm"
-              type="button"
-              onClick={() => updateTrain()}
-            >
+            <button className="buttonForm" type="submit">
               Modifier
             </button>
             <button
