@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
@@ -18,6 +18,8 @@ export default function EditTrainForm({ id }) {
   const [userId, setUserId] = useState("");
 
   const navigate = useNavigate();
+
+  const params = useParams();
 
   useEffect(() => {
     setToken(window.localStorage.getItem("token"));
@@ -56,21 +58,15 @@ export default function EditTrainForm({ id }) {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/${id}`)
       .then((response) => response.data)
       .then((data) => {
+        setSelectedTypes(data.types);
         setName(data.tname);
         setSelectedArea(data.areaId);
         setDescription(data.description);
         setInformation(data.description_info);
       });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/${id}`)
-      .then((response) => response.data)
-      .then((data) => setSelectedTypes(data.types));
   }, []);
 
   const updateTrain = () => {
@@ -88,6 +84,15 @@ export default function EditTrainForm({ id }) {
       })
       .then((res) => console.warn(res));
     navigate("/administrateur");
+  };
+
+  const deleteTrain = () => {
+    if (window.confirm("Voulez-vous vraiment supprimer ce train ?")) {
+      axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`
+      );
+      navigate("/administrateur");
+    }
   };
 
   return (
@@ -150,12 +155,19 @@ export default function EditTrainForm({ id }) {
               type="button"
               onClick={() => updateTrain()}
             >
-              Ajouter
+              Modifier
+            </button>
+            <button
+              className="buttonForm5"
+              type="button"
+              onClick={() => deleteTrain()}
+            >
+              Supprimer
             </button>
             <button
               className="buttonForm1"
               type="button"
-              onClick={() => navigate("/profil")}
+              onClick={() => navigate("/administrateur")}
             >
               Annuler
             </button>
