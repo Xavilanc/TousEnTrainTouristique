@@ -169,6 +169,23 @@ class TrainManager extends AbstractManager {
     );
   }
 
+  insertImage(trainId, imageTrain) {
+    return this.connection.query(
+      `insert into image_train (title, path, user_id, train_id, created_on, updated_on, published) values (?, ?, ?, ?, ?, ?, ?)`,
+      // Dois correspondre à la table visé au dessus et en dessous,
+      // ne pas oublier de verifier que le nombre de ? est egale au nombre de champs dans la base
+      [
+        imageTrain.title,
+        imageTrain.path,
+        imageTrain.user_id,
+        trainId,
+        imageTrain.created_on,
+        imageTrain.updated_on,
+        imageTrain.published,
+      ]
+    );
+  }
+
   deleteTypes(trainId) {
     return this.connection.query(`delete from train_type where train_id = ?`, [
       trainId,

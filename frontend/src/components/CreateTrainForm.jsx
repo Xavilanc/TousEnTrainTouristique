@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
 import { getDate } from "../services/DateManager";
+import AddImageTrain from "../services/AddImageTrain";
 import "../assets/styles/CreateUserForm.css";
 
 export default function CreateTrainForm() {
@@ -14,20 +14,28 @@ export default function CreateTrainForm() {
   const [types, setTypes] = useState([]);
   const [description, setDescription] = useState("");
   const [information, setInformation] = useState("");
-  const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("");
+  const userId = window.localStorage.getItem("id");
   const [posted, setPosted] = useState(false);
+  const [sendImage, setSendImage] = useState({
+    title: "",
+    path: "",
+    user_id: 0,
+    train_id: 0,
+    created_on: "2022-10-05",
+    updated_on: "2022-10-05",
+    published: 0,
+  });
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setToken(window.localStorage.getItem("token"));
+  // useEffect(() => {
+  //   setToken(window.localStorage.getItem("token"));
 
-    if (token) {
-      const decoded = jwtDecode(token);
-      setUserId(decoded.sub);
-    }
-  }, [token]);
+  //   if (token) {
+  //     const decoded = jwtDecode(token);
+  //     setUserId(decoded.sub);
+  //   }
+  // }, [token]);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/areas/`)
@@ -65,6 +73,7 @@ export default function CreateTrainForm() {
         created_on: getDate(),
         updated_on: null,
         types: selectedTypes,
+        image: sendImage,
         published: 0,
         description,
         description_info: information,
@@ -127,6 +136,7 @@ export default function CreateTrainForm() {
               placeholder="Informations complémentaires"
               onChange={(e) => setInformation(e.target.value)}
             />
+            <AddImageTrain sendData={sendImage} setSendData={setSendImage} />
             <div className="buttonsContainer">
               <button
                 className="buttonForm"
