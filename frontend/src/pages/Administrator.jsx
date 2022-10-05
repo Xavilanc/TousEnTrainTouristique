@@ -4,6 +4,7 @@ import AddImage from "../components/AddImage";
 import Header from "../components/Header";
 import ReviewsList from "../components/ReviewsList";
 import TrainList from "../components/TrainList";
+import ContactList from "../components/ContactListForAdmin";
 import "../assets/styles/Administrator.css";
 
 const administrator = () => {
@@ -15,6 +16,7 @@ const administrator = () => {
       <ImageManager />
       <AddImage />
       <TrainList />
+      <ContactList />
     </div>
   );
 };
