@@ -59,7 +59,8 @@ class TrainManager extends AbstractManager {
       JOIN image_train AS i ON i.train_id=t.id       
       JOIN area AS a ON a.id=t.area_id       
       JOIN train_type  ON t.id = train_type.train_id       
-      LEFT JOIN type ON type.id = train_type.type_id       
+      LEFT JOIN type ON type.id = train_type.type_id 
+      where t.published = 1      
       group by t.id;`
     );
   }
@@ -78,9 +79,10 @@ class TrainManager extends AbstractManager {
 
   getJoinAdminById(id) {
     return this.connection.query(
-      `SELECT t.name AS tname, t.id as id,
+      `SELECT t.name AS tname, t.id as id, t.description, t.description_info, t.created_on AS creat, t.updated_on AS updat, a.name as areaName, a.id as areaId,
       JSON_ARRAYAGG(JSON_OBJECT("value", type.id, "label", type.title)) as types
-      FROM train AS t          
+      FROM train AS t
+        JOIN area AS a ON a.id=t.area_id         
         JOIN train_type  ON t.id = train_type.train_id       
         LEFT JOIN type ON type.id = train_type.type_id
         WHERE t.id= ?       

@@ -140,3 +140,19 @@ font-face {
   border-radius: 10px;
   border: 1px solid #127996;
 }
+@media screen and (min-width: 768px) {
+  .account_title {
+    font-size: 5vw;
+  }
+
+  .profil_avatar {
+    width: 200px;
+    height: 200px;
+  }
+
+  .avatar_pencil_icon {
+    padding-top: 40%;
+    width: 8%;
+    margin-left: -20%;
+  }
+}

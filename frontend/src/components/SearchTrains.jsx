@@ -76,66 +76,71 @@ export default function FilterTrainTest() {
 
   return (
     <div className="train_search_form">
-      <form id="train_search">
-        <label className="train_search_label" htmlFor="area_select">
-          Je vais
-          <br />
-          <select
-            className="area_select"
-            value={areaSelected}
-            id="area-select"
-            onChange={(e) => {
-              setAreaSelected(e.target.value);
-            }}
-            onClick={(e) => {
-              setAreaSelected(e.target.value);
-              handleSearch();
-            }}
-          >
-            <option value="*">Partout</option>
-            {areas &&
-              areas.map((area) => (
-                <option value={area.name} key={area.id}>
-                  {area.name}
-                </option>
-              ))}
-          </select>
-        </label>{" "}
-        <br />
-        <label className="train_search_label" htmlFor="type-select">
-          Je recherche des idées
-          <br />
-          <select
-            className="type_select"
-            value={typeSelected}
-            id="type-select"
-            onChange={(e) => setTypeSelected(e.target.value)}
-            onClick={(e) => {
-              setTypeSelected(e.target.value);
-              handleSearch();
-            }}
-          >
-            <option value="*">Pour tous les gouts</option>
-            {types &&
-              types.map((type) => (
-                <option value={type.id} key={type.id}>
-                  {type.title}
-                </option>
-              ))}
-          </select>
-        </label>
-      </form>
+      <div className="train_search">
+        <div className="search_train_select">
+          <label className="train_search_label" htmlFor="area_select">
+            Je vais
+            <br />
+            <select
+              className="area_select"
+              value={areaSelected}
+              id="area-select"
+              onChange={(e) => {
+                setAreaSelected(e.target.value);
+              }}
+              onClick={(e) => {
+                setAreaSelected(e.target.value);
+                handleSearch();
+              }}
+            >
+              <option value="*">Partout</option>
+              {areas &&
+                areas.map((area) => (
+                  <option value={area.name} key={area.id}>
+                    {area.name}
+                  </option>
+                ))}
+            </select>
+          </label>{" "}
+        </div>
+        <div className="search_train_select">
+          <label className="train_search_label" htmlFor="type-select">
+            Je recherche des idées
+            <br />
+            <select
+              className="type_select"
+              value={typeSelected}
+              id="type-select"
+              onChange={(e) => setTypeSelected(e.target.value)}
+              onClick={(e) => {
+                setTypeSelected(e.target.value);
+                handleSearch();
+              }}
+            >
+              <option value="*">Pour tous les gouts</option>
+              {types &&
+                types.map((type) => (
+                  <option value={type.id} key={type.id}>
+                    {type.title}
+                  </option>
+                ))}
+            </select>
+          </label>
+        </div>
+      </div>
+      <div className="traincard_box">
+        {results.length !== 0 &&
+          results.map((train) => (
+            <div key={train.id}>
+              <TrainCard
+                src={Object.values(train.path)[0]}
+                title={train.tname}
+                id={train.id}
+              />
+            </div>
+          ))}
+      </div>
 
-      {results.length !== 0 &&
-        results.map((train) => (
-          <div key={train.id}>
-            <TrainCard
-              src={Object.values(train.path)[0]}
-              title={train.tname}
-              id={train.id}
-            />
-          </div>
-        ))}
       {results.length === 0 && <p>Pas de train trouvé</p>}
     </div>
   );

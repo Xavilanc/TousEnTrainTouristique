@@ -1,0 +1,42 @@
+/* police pour texte normal */
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
+}
+
+.create_train_form_name,
+.create_train_form_area {
+  width: 90%;
+  padding: 1%;
+  margin: 5%;
+  margin-top: 0;
+  border: solid 2px #127996;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.create_train_form_label {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 3vw;
+  margin-left: 5%;
+}
+
+.create_train_form_type {
+  width: 90%;
+  margin: 5%;
+  margin-top: 0;
+  border: solid 2px #127996;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.create_train_form_description,
+.create_train_form_information {
+  width: 90%;
+  margin: 5%;
+  margin-top: 0;
+  border: solid 2px #127996;
+}

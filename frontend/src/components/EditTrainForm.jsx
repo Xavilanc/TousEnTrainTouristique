@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
@@ -18,6 +18,8 @@ export default function EditTrainForm({ id }) {
   const [userId, setUserId] = useState("");
 
   const navigate = useNavigate();
+
+  const params = useParams();
 
   useEffect(() => {
     setToken(window.localStorage.getItem("token"));
@@ -56,21 +58,15 @@ export default function EditTrainForm({ id }) {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/${id}`)
       .then((response) => response.data)
       .then((data) => {
+        setSelectedTypes(data.types);
         setName(data.tname);
         setSelectedArea(data.areaId);
         setDescription(data.description);
         setInformation(data.description_info);
       });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/trains/${id}`)
-      .then((response) => response.data)
-      .then((data) => setSelectedTypes(data.types));
   }, []);
 
   const updateTrain = () => {
@@ -90,21 +86,40 @@ export default function EditTrainForm({ id }) {
     navigate("/administrateur");
   };
 
+  const deleteTrain = () => {
+    if (window.confirm("Voulez-vous vraiment supprimer ce train ?")) {
+      axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}`
+      );
+      navigate("/administrateur");
+    }
+  };
+
   return (
     <div className="contact1">
       <div className="Contact">
         <h1>Modifier un train</h1>
         <form onSubmit={(e) => updateTrain(e)}>
+          <label className="create_train_form_label" htmlFor="train_name">
+            Nom du train
+          </label>
           <input
-            className="name"
+            name="train_name"
+            required
+            className="create_train_form_name"
             type="text"
             id="train"
             value={name}
             placeholder="Nom du train"
             onChange={(e) => setName(e.target.value)}
           />
+          <label className="create_train_form_label" htmlFor="area">
+            Région
+          </label>
           <select
-            className="area_select"
+            name="area"
+            required
+            className="create_train_form_area"
             value={selectedArea}
             id="area-select"
             onChange={(e) => setSelectedArea(e.target.value)}
@@ -117,15 +132,24 @@ export default function EditTrainForm({ id }) {
                 </option>
               ))}
           </select>
+          <label className="create_train_form_label" htmlFor="type">
+            Type(s)
+          </label>
           <Select
+            name="type"
+            className="create_train_form_type"
             value={selectedTypes}
             defaultValue={selectedTypes}
             onChange={setSelectedTypes}
             options={types}
             isMulti
           />
+          <label className="create_train_form_label" htmlFor="description">
+            Description
+          </label>
           <textarea
-            className="description"
+            required
+            className="create_train_form_description"
             name="description"
             id="description"
             cols="30"
@@ -134,8 +158,12 @@ export default function EditTrainForm({ id }) {
             placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           />
+          <label className="create_train_form_label" htmlFor="information">
+            Informations complémentaires
+          </label>
           <textarea
-            className="information"
+            required
+            className="create_train_form_information"
             name="information"
             id="information"
             cols="30"
@@ -145,17 +173,20 @@ export default function EditTrainForm({ id }) {
             onChange={(e) => setInformation(e.target.value)}
           />
           <div className="buttonsContainer">
+            <button className="buttonForm" type="submit">
+              Modifier
+            </button>
             <button
-              className="buttonForm"
+              className="buttonForm5"
               type="button"
-              onClick={() => updateTrain()}
+              onClick={() => deleteTrain()}
             >
-              Ajouter
+              Supprimer
             </button>
             <button
               className="buttonForm1"
               type="button"
-              onClick={() => navigate("/profil")}
+              onClick={() => navigate("/administrateur")}
             >
               Annuler
             </button>
