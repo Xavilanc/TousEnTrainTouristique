@@ -27,7 +27,7 @@ function ReviewDetails() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/${params.id}`)
       .then((response) => response.data)
       .then((data) => setReview(data));
-  }, [review]);
+  }, []);
 
   const updateReview = () => {
     axios

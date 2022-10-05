@@ -127,3 +127,16 @@ font-face {
   justify-content: center;
   cursor: pointer;
 }
+
+.delete_account {
+  font-family: "Avenir-Book";
+  margin: 5%;
+  padding: 2%;
+  width: 90%;
+  text-align: center;
+  font-size: 4vw;
+  background-color: red;
+  color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #127996;
+}

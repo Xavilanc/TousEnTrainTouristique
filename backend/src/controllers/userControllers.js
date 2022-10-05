@@ -124,9 +124,9 @@ const updateUserForChangePassword = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  const id = parseInt(req.params.id, 2);
+  const id = parseInt(req.params.id, 10);
 
-  if (req.payload.sub !== id) {
+  if (req.payload.sub !== id && req.payload.userRight === 0) {
     res.sendStatus(403);
     console.warn("user not autorised");
   } else {

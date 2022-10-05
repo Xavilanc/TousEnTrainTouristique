@@ -86,6 +86,7 @@ router.post("/api/trains", trainControllers.add); // Ajouter un train
 /* --- DELETE --- */
 router.delete("/api/favorites/:id", favoriteControllers.destroy); // Supprimer un favoris
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy); // Supprimer un avatar
+router.delete("/api/users/:id", userControllers.deleteUser); // Supprimer un utilisateur
 
 /* ----------------------*/
 /* ----ADMINISTRATEURS---*/
@@ -121,7 +122,6 @@ router.put("/api/trains/:id", trainControllers.update); // Modifier un train
 
 /* --- DELETE --- */
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
-router.delete("/api/users/:id", userControllers.deleteUser); // Supprimer un utilisateur
 router.delete("/api/types/:id", typeControllers.destroy); // Supprimer un type de train
 router.delete("/api/areas/:id", areaControllers.destroy); // Supprimer une région
 router.delete("/api/contacts/:id", contactControllers.destroy); // Supprimer un message
