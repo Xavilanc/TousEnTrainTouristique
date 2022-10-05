@@ -78,3 +78,17 @@
   width: 4%;
   padding-bottom: 0.6%;
 }
+
+@media screen and (min-width: 768px) {
+  .traincard_main_div {
+    width: 45vw;
+  }
+
+  .traincard_train_title {
+    font-size: 3vw;
+  }
+
+  .traincard_subtitle {
+    font-size: 2vw;
+  }
+}

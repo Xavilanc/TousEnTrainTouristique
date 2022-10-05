@@ -46,16 +46,33 @@
   margin-left: 10%;
 }
 
-/* bouton je trouve */
-.train_search_button {
-  margin-left: 10%;
-  height: fit-content;
-  font-family: "Avenir-Black";
-  font-size: 4vw;
-  border-radius: 25px;
-  padding: 2%;
-  width: 30%;
-  border: none;
-  color: white;
-  background-color: #127996;
+.train_search {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .train_search {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .train_search_label {
+    font-size: 3vw;
+  }
+
+  .area_select,
+  .type_select {
+    width: 35vw;
+    font-size: 3vw;
+  }
+
+  .train_search_label {
+    margin-left: 0;
+  }
+
+  .traincard_box {
+    display: flex;
+    margin-left: 5%;
+  }
 }
