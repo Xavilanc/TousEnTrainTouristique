@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
 .administrator_main_div {
   background-color: #f3f3f8;
 }

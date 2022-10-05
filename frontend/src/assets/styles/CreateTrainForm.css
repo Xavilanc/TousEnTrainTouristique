@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
 /* police pour texte normal */
 @font-face {
   font-family: "Avenir-Book";
@@ -23,6 +28,13 @@
   margin-left: 5%;
 }
 
+.create_train_form_label span {
+  font-weight: normal;
+  font-size: 2vw;
+  padding-left: 2%;
+  color: red;
+}
+
 .create_train_form_type {
   width: 90%;
   margin: 5%;
@@ -39,4 +51,48 @@
   margin: 5%;
   margin-top: 0;
   border: solid 2px #127996;
+}
+
+.create_train_title {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+}
+
+.button-form-create {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  line-height: 18px;
+  border-radius: 25px;
+  padding: 2%;
+  border: 2px solid white;
+  width: 28%;
+  background-color: #127996;
+  color: #f3f3f8;
+  cursor: pointer;
+}
+.button-form-create2 {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  border-radius: 25px;
+  padding: 2%;
+  border: 2px solid #127996;
+  width: 28%;
+  color: #127996;
+  background-color: white;
+  cursor: pointer;
+}
+
+.button-form-create3 {
+  font-weight: bold;
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  border-radius: 25px;
+  padding: 2%;
+  border: 2px solid black;
+  width: 28%;
+  color: white;
+  background-color: #fb0808bd;
+  cursor: pointer;
 }

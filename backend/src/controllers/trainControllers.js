@@ -64,7 +64,7 @@ const getAllJoinWithActivitiesById = (req, res) => {
     .getJoinWithActivityById(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
-        res.sendStatus(404);
+        res.send("no content").status(204);
       } else {
         res.send(rows[0]);
       }
@@ -153,7 +153,7 @@ const edit = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.sendStatus(200);
       }
     })
     .catch((err) => {
@@ -172,7 +172,7 @@ const update = (req, res) => {
     if (result.affectedRows === 0) {
       res.sendStatus(404);
     } else {
-      res.sendStatus(204);
+      res.sendStatus(200);
     }
   });
   models.train

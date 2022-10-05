@@ -20,10 +20,10 @@ export default function CreateTrainForm() {
   const [sendImage, setSendImage] = useState({
     title: "",
     path: "",
-    user_id: 0,
+    user_id: userId,
     train_id: 0,
-    created_on: "2022-10-05",
-    updated_on: "2022-10-05",
+    created_on: getDate(),
+    updated_on: null,
     published: 0,
   });
 
@@ -159,6 +159,21 @@ export default function CreateTrainForm() {
               value={information}
               placeholder="Informations complémentaires"
               onChange={(e) => setInformation(e.target.value)}
+            />
+            <label className="create_train_form_label" htmlFor="image_name">
+              Ajouter une image
+            </label>
+            <input
+              name="image_name"
+              required
+              className="create_train_form_name"
+              type="text"
+              id="train"
+              value={sendImage.title}
+              placeholder="Titre de l'image"
+              onChange={(e) =>
+                setSendImage({ ...sendImage, title: e.target.value })
+              }
             />
             <AddImageTrain sendData={sendImage} setSendData={setSendImage} />
             <div className="buttonsContainer">

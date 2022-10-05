@@ -79,7 +79,7 @@ class TrainManager extends AbstractManager {
 
   getJoinAdminById(id) {
     return this.connection.query(
-      `SELECT t.name AS tname, t.id as id, t.description, t.description_info, t.created_on AS creat, t.updated_on AS updat, a.name as areaName, a.id as areaId,
+      `SELECT t.name AS tname, t.id as id, t.description, t.description_info, t.created_on AS creat, t.updated_on AS updat, t.published, a.name as areaName, a.id as areaId,
       JSON_ARRAYAGG(JSON_OBJECT("value", type.id, "label", type.title)) as types
       FROM train AS t
         JOIN area AS a ON a.id=t.area_id         
