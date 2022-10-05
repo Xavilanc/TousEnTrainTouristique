@@ -5,6 +5,7 @@ import Select from "react-select";
 import { getDate } from "../services/DateManager";
 import AddImageTrain from "../services/AddImageTrain";
 import "../assets/styles/CreateUserForm.css";
+import "../assets/styles/CreateTrainForm.css";
 
 export default function CreateTrainForm() {
   const [name, setName] = useState("");
@@ -64,7 +65,6 @@ export default function CreateTrainForm() {
   }, []);
 
   const postTrain = () => {
-    setPosted(true);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/trains/`, {
         name,
@@ -79,6 +79,7 @@ export default function CreateTrainForm() {
         description_info: information,
       })
       .then((res) => console.warn(res));
+    setPosted(true);
     setTimeout(() => navigate("/"), 3000);
   };
 
@@ -88,16 +89,26 @@ export default function CreateTrainForm() {
         <div className="Contact">
           <h1>Ajouter un train</h1>
           <form onSubmit={(e) => postTrain(e)}>
+            <label className="create_train_form_label" htmlFor="train_name">
+              Indiquez ici le nom du train
+            </label>
             <input
-              className="name"
+              name="train_name"
+              required
+              className="create_train_form_name"
               type="text"
               id="train"
               value={name}
               placeholder="Nom du train"
               onChange={(e) => setName(e.target.value)}
             />
+            <label className="create_train_form_label" htmlFor="area">
+              Sélectionnez une région
+            </label>
             <select
-              className="area_select"
+              name="area"
+              required
+              className="create_train_form_area"
               value={selectedArea}
               id="area-select"
               onChange={(e) => setSelectedArea(e.target.value)}
@@ -110,39 +121,48 @@ export default function CreateTrainForm() {
                   </option>
                 ))}
             </select>
+            <label className="create_train_form_label" htmlFor="type">
+              Sélectionnez un ou plusieurs types
+            </label>
             <Select
+              name="type"
+              className="create_train_form_type"
               defaultValue={selectedTypes}
               onChange={setSelectedTypes}
               options={types}
               isMulti
             />
+            <label className="create_train_form_label" htmlFor="description">
+              Indiquez ici la description de ce train
+            </label>
             <textarea
-              className="description"
+              className="create_train_form_description"
               name="description"
               id="description"
               cols="30"
               rows="10"
+              required
               value={description}
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
             />
+            <label className="create_train_form_label" htmlFor="information">
+              Indiquez ici des Informations complémentaires sur ce train
+            </label>
             <textarea
-              className="information"
+              className="create_train_form_information"
               name="information"
               id="information"
               cols="30"
               rows="10"
+              required
               value={information}
               placeholder="Informations complémentaires"
               onChange={(e) => setInformation(e.target.value)}
             />
             <AddImageTrain sendData={sendImage} setSendData={setSendImage} />
             <div className="buttonsContainer">
-              <button
-                className="buttonForm"
-                type="button"
-                onClick={() => postTrain()}
-              >
+              <button className="buttonForm" type="submit">
                 Ajouter
               </button>
               <button

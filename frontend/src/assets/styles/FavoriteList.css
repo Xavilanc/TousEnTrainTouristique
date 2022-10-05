@@ -60,3 +60,9 @@
 .favorite_item_chevron {
   width: 10%;
 }
+
+@media screen and (min-width: 768px) {
+  .favorite_list_title {
+    font-size: 4vw;
+  }
+}
