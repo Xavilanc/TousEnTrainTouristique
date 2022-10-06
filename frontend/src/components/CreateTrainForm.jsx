@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
 import { getDate } from "../services/DateManager";
+import AddImageTrain from "../services/AddImageTrain";
 import "../assets/styles/CreateUserForm.css";
 import "../assets/styles/CreateTrainForm.css";
 
@@ -15,20 +15,28 @@ export default function CreateTrainForm() {
   const [types, setTypes] = useState([]);
   const [description, setDescription] = useState("");
   const [information, setInformation] = useState("");
-  const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("");
+  const userId = window.localStorage.getItem("id");
   const [posted, setPosted] = useState(false);
+  const [sendImage, setSendImage] = useState({
+    title: "",
+    path: "",
+    user_id: userId,
+    train_id: 0,
+    created_on: getDate(),
+    updated_on: null,
+    published: 0,
+  });
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setToken(window.localStorage.getItem("token"));
+  // useEffect(() => {
+  //   setToken(window.localStorage.getItem("token"));
 
-    if (token) {
-      const decoded = jwtDecode(token);
-      setUserId(decoded.sub);
-    }
-  }, [token]);
+  //   if (token) {
+  //     const decoded = jwtDecode(token);
+  //     setUserId(decoded.sub);
+  //   }
+  // }, [token]);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/areas/`)
@@ -65,6 +73,7 @@ export default function CreateTrainForm() {
         created_on: getDate(),
         updated_on: null,
         types: selectedTypes,
+        image: sendImage,
         published: 0,
         description,
         description_info: information,
@@ -151,6 +160,22 @@ export default function CreateTrainForm() {
               placeholder="Informations complémentaires"
               onChange={(e) => setInformation(e.target.value)}
             />
+            <label className="create_train_form_label" htmlFor="image_name">
+              Ajouter une image
+            </label>
+            <input
+              name="image_name"
+              required
+              className="create_train_form_name"
+              type="text"
+              id="train"
+              value={sendImage.title}
+              placeholder="Titre de l'image"
+              onChange={(e) =>
+                setSendImage({ ...sendImage, title: e.target.value })
+              }
+            />
+            <AddImageTrain sendData={sendImage} setSendData={setSendImage} />
             <div className="buttonsContainer">
               <button className="buttonForm" type="submit">
                 Ajouter

@@ -36,7 +36,6 @@ function ReviewsList() {
 
   return (
     <div className="review_list_main_div">
-      <h2 className="review_list_title">Liste des commentaires</h2>
       <div className="review_list_button_box">
         <button type="button" onClick={() => getReviewsUnpublished()}>
           Non publiés

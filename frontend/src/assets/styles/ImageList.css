@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
 .btn {
   padding: 0.2rem;
   font-size: 0.6rem;

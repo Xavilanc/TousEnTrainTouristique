@@ -64,7 +64,7 @@ const getAllJoinWithActivitiesById = (req, res) => {
     .getJoinWithActivityById(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
-        res.sendStatus(404);
+        res.send("no content").status(204);
       } else {
         res.send(rows[0]);
       }
@@ -153,7 +153,7 @@ const edit = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.sendStatus(200);
       }
     })
     .catch((err) => {
@@ -172,7 +172,7 @@ const update = (req, res) => {
     if (result.affectedRows === 0) {
       res.sendStatus(404);
     } else {
-      res.sendStatus(204);
+      res.sendStatus(200);
     }
   });
   models.train
@@ -193,20 +193,23 @@ const add = (req, res) => {
 
   // TODO validations (length, format...)
 
-  models.train.insert(train).then(([result]) => {
-    res
-      .location(`/train/${result.insertId}`)
-      .status(201)
-      .send(`${result.insertId}`);
-    train.types &&
-      train.types.map((type) =>
-        models.train.insertTypes(`${result.insertId}`, type.value)
-      );
-  });
-  // .catch((err) => {
-  //   console.error(err);
-  //   res.sendStatus(500);
-  // });
+  models.train
+    .insert(train)
+    .then(([result]) => {
+      res
+        .location(`/train/${result.insertId}`)
+        .status(201)
+        .send(`${result.insertId}`);
+      train.types &&
+        train.types.map((type) =>
+          models.train.insertTypes(`${result.insertId}`, type.value)
+        );
+      models.train.insertImage(`${result.insertId}`, train.image);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 const destroy = (req, res) => {

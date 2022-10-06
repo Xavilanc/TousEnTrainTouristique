@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Avenir-Black";
+  src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
+}
+
 /* police pour texte normal */
 @font-face {
   font-family: "Avenir-Book";

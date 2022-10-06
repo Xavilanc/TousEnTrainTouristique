@@ -22,8 +22,6 @@ function TrainList() {
 
   return (
     <div className="review_list_main_div">
-      <h2 className="review_list_title">Liste des trains</h2>
-
       <table className="review_list_table">
         <thead className="review_list_thead">
           <tr>
