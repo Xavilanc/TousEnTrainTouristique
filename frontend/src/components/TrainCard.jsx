@@ -6,7 +6,6 @@ import chevron from "../assets/images/chevron.png";
 import "../assets/styles/TrainCard.css";
 
 function TrainCard({ src, title, id }) {
-  // const [rating, setRating] = useState(0); // valeur initiale de notation
   const [readOnly] = useState(true); // pour bloquer les étoiles
   const [note, setNote] = useState(""); // note moyenne d'un train
   const nav = useNavigate();
@@ -22,10 +21,6 @@ function TrainCard({ src, title, id }) {
     getNote();
   }, []);
 
-  // const handleRating = (rate) => {
-  //   setRating(rate);
-  //   setReadOnly(true);
-  // };
   return (
     <div className="traincard_main_div">
       <div className="traincard_background_white_div">
