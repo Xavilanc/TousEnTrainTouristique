@@ -195,6 +195,7 @@ export default function EditTrainForm({ id }) {
             </button>
             <button
               className="button-form-create2"
+              np
               type="button"
               onClick={() => navigate("/administrateur")}
             >
