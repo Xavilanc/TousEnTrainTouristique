@@ -61,15 +61,6 @@ function Profil() {
     navigate("/");
   };
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    if (window.confirm("Voulez-vous vraiment supprimer votre compte?")) {
-      axios
-        .delete(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`)
-        .then(logout());
-    }
-  };
-
   return (
     <div className="profil">
       <h2 className="account_title">Mon compte</h2>
@@ -104,6 +95,7 @@ function Profil() {
           type="button"
           id="user_information"
           defaultValue="Mes informations"
+          onClick={() => navigate("/moncompte")}
         />
         <input
           className="change_password"
@@ -118,13 +110,6 @@ function Profil() {
           id="add_train"
           defaultValue="Ajouter un train"
           onClick={() => navigate("/creation-de-train")}
-        />
-        <input
-          className="delete_account"
-          type="button"
-          id="del_account"
-          defaultValue="Effacer mon compte"
-          onClick={(e) => handleDelete(e)}
         />
       </div>
       <FavoriteList />

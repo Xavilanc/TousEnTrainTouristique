@@ -142,6 +142,17 @@
   border-radius: 10px;
   border: 1px solid #127996;
 }
+.edit_user {
+  font-family: "Avenir-Book";
+  margin: 5%;
+  padding: 2%;
+  width: 90%;
+  text-align: left;
+  font-size: 4vw;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  border: 1px solid #088587;
+}
 @media screen and (min-width: 768px) {
   .account_title {
     font-size: 5vw;
