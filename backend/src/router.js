@@ -39,6 +39,7 @@ router.get(
   "/api/trains/:id/reviews",
   reviewControllers.getAllJoinPublishedByTrainId
 ); // Uniquement les commentaires d'un train en particulier
+router.get("/api/reviews/notes/:id", reviewControllers.getNote); // Note moyenne d'un train
 
 router.get("/api/areas", areaControllers.getAll); // Toutes les régions
 router.get("/api/areas/:id", areaControllers.read); // Une région en particulier
