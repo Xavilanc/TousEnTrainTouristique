@@ -83,6 +83,9 @@ router.post("/api/imageavatars", imageAvatarControllers.add); // Ajouter un avat
 router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une image d'un train
 router.post("/api/trains", trainControllers.add); // Ajouter un train
 
+/* --- PUT --- */
+router.put("/api/users/:id", userControllers.edit); // Un utilisateur en particulier
+
 /* --- DELETE --- */
 router.delete("/api/favorites/:id", favoriteControllers.destroy); // Supprimer un favoris
 router.delete("/api/imageavatars/:id", imageAvatarControllers.destroy); // Supprimer un avatar

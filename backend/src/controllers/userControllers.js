@@ -39,8 +39,8 @@ const edit = (req, res) => {
     res.sendStatus(403);
     console.warn("user not autorised");
   } else {
-    models.type
-      .update(user)
+    models.user
+      .update(user, id)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
