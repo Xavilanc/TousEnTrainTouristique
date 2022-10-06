@@ -39,7 +39,6 @@ function EditAccount() {
         mail,
         updated_on: updatedOn,
       })
-      .then((response) => console.warn(response))
       .then(window.localStorage.setItem("name", name))
       .then(window.localStorage.setItem("mail", mail))
       .then(navigate("/profil"));

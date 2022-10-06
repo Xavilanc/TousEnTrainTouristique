@@ -35,9 +35,11 @@ function Train() {
       .catch((err) => console.warn(err));
   };
 
-  useEffect(() => {
-    getFavorite();
-  }, [isFavorite]);
+  token
+    ? useEffect(() => {
+        getFavorite();
+      }, [isFavorite])
+    : "";
 
   const [train, setTrain] = useState(""); // état gérant l'affichage du train, sa description et ses images
   const [activities, setActivities] = useState(""); // état gérant l'affichage des activités de ce même train
