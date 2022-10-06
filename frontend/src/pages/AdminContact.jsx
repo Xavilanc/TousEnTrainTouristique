@@ -26,7 +26,7 @@ function AdminContact() {
   const deleteMessage = () => {
     if (window.confirm("Voulez-vous vraiment supprimer ce message ?")) {
       axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/message/${params.id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/contacts/${params.id}`
       );
       navigate("/administrateur");
     }
