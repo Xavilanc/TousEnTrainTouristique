@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import axios from "axios";
 import "../assets/styles/AdminReview.css";
-import Header from "@components/Header";
+import Header from "../components/Header";
 import { getDate, transDate } from "../services/DateManager";
 
 function ReviewDetails() {
@@ -11,7 +11,6 @@ function ReviewDetails() {
   const navigate = useNavigate();
   const readOnly = true;
 
-  // const [published, setPublished] = useState(false);
   const [review, setReview] = useState({
     user_id: 1,
     train_id: 1,

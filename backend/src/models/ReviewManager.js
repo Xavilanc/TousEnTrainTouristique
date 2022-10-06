@@ -80,6 +80,13 @@ class ReviewManager extends AbstractManager {
     );
   }
 
+  findNote(trainId) {
+    return this.connection.query(
+      `SELECT avg(review_note) as note FROM review WHERE review_train_id= ?;`,
+      [trainId]
+    );
+  }
+
   // Partie à modifier en fonction de la table que vous visez
 
   // Ajouter un commentaire
