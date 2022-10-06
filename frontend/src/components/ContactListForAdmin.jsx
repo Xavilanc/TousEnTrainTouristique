@@ -33,7 +33,9 @@ function ContactList() {
               <tr
                 id="review_list_map_tr"
                 key={message.id}
-                onClick={() => navigate(`/api/contacts/${message.id}`)}
+                onClick={() =>
+                  navigate(`/administrateur/contact/${message.id}`)
+                }
               >
                 <td className="review_list_td">{message.id}</td>
                 <td className="review_list_td">{message.senderName}</td>

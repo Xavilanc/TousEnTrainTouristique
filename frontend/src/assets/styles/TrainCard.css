@@ -30,7 +30,8 @@
 
 /* titre du train */
 .traincard_train_title {
-  font-family: "Avenir-Black";
+  font-weight: bold;
+  font-family: "Avenir-Book";
   font-size: 5vw;
   padding: 1.5%;
   padding-bottom: 2%;

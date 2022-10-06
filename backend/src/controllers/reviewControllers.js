@@ -147,6 +147,23 @@ const getAllJoinPublishedByTrainId = (req, res) => {
     });
 };
 
+/* calculer la note moyenne d'un train */
+const getNote = (req, res) => {
+  models.review
+    .findNote(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 // Modifier un commentaire
 const edit = (req, res) => {
   const review = req.body;
@@ -237,6 +254,7 @@ module.exports = {
   getAllJoinPublishedByTrainId,
   getAllPublishedByTrainId,
   getJoinById,
+  getNote,
   read,
   edit,
   putReview,

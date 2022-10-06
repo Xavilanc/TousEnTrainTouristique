@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Rating } from "react-simple-star-rating";
-import chevron from "@assets/images/chevron.png";
-import "@assets/styles/TrainCard.css";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import chevron from "../assets/images/chevron.png";
+import "../assets/styles/TrainCard.css";
 
 function TrainCard({ src, title, id }) {
-  const [rating, setRating] = useState(0); // valeur initiale de notation
-  const [readOnly, setReadOnly] = useState(false); // pour bloquer les étoiles
+  const [readOnly] = useState(true); // pour bloquer les étoiles
+  const [note, setNote] = useState(""); // note moyenne d'un train
   const nav = useNavigate();
-  const handleRating = (rate) => {
-    setRating(rate);
-    setReadOnly(true);
+
+  const getNote = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/notes/${id}`)
+      .then((response) => response.data)
+      .then((data) => setNote(data.note));
   };
+
+  useEffect(() => {
+    getNote();
+  }, []);
+
   return (
     <div className="traincard_main_div">
       <div className="traincard_background_white_div">
@@ -26,11 +35,7 @@ function TrainCard({ src, title, id }) {
           Lire la suite
         </button>
         <div className="traincard_notation_container">
-          <Rating
-            onClick={handleRating}
-            ratingValue={rating}
-            readonly={readOnly}
-          />
+          <Rating ratingValue={note} initialValue={0} readonly={readOnly} />
         </div>
       </div>
     </div>

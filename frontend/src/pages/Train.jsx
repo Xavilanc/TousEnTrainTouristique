@@ -135,11 +135,11 @@ function Train() {
         <h2 className="train_title">{train.tname}</h2>
       </div>
       <div className="train_image_div">
-        {train.image && <TrainImages images={train.images} />}
+        <TrainImages images={train.images} />
       </div>
       <h3 className="train_h3_title">Informations</h3>
       <TrainInformations train={train} />
-      <h3 className="train_h3_title">Activités</h3>
+      {activities.activity ? <h3 className="train_h3_title">Activités</h3> : ""}
       {activities.activity && (
         <TrainActivity activities={activities.activity} />
       )}
