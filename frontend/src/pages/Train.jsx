@@ -139,7 +139,7 @@ function Train() {
       </div>
       <h3 className="train_h3_title">Informations</h3>
       <TrainInformations train={train} />
-      <h3 className="train_h3_title">Activités</h3>
+      {activities.activity ? <h3 className="train_h3_title">Activités</h3> : ""}
       {activities.activity && (
         <TrainActivity activities={activities.activity} />
       )}
