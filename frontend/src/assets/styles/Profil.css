@@ -1,4 +1,4 @@
-font-face {
+@font-face {
   font-family: "Avenir-Black";
   src: url("src/assets/fonts/Avenir-Black.otf") format("opentype");
 }
@@ -87,7 +87,8 @@ font-face {
 }
 
 .buttonForm3 {
-  font-family: "Avenir-Black";
+  font-weight: bold;
+  font-family: "Avenir-Book";
   font-size: 4vw;
   line-height: 18px;
   border-radius: 25px;
@@ -98,7 +99,8 @@ font-face {
   color: #f3f3f8;
 }
 .buttonForm4 {
-  font-family: "Avenir-Black";
+  font-weight: bold;
+  font-family: "Avenir-Book";
   font-size: 4vw;
   border-radius: 25px;
   padding: 2%;

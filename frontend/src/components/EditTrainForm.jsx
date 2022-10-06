@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Select from "react-select";
 import { getDate } from "../services/DateManager";
@@ -14,21 +13,13 @@ export default function EditTrainForm({ id }) {
   const [types, setTypes] = useState([]);
   const [description, setDescription] = useState("");
   const [information, setInformation] = useState("");
-  const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("");
+  const [published, setPublished] = useState(0);
+  const userId = window.localStorage.getItem("id");
 
   const navigate = useNavigate();
 
   const params = useParams();
 
-  useEffect(() => {
-    setToken(window.localStorage.getItem("token"));
-
-    if (token) {
-      const decoded = jwtDecode(token);
-      setUserId(decoded.sub);
-    }
-  }, [token]);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/areas/`)
@@ -66,10 +57,12 @@ export default function EditTrainForm({ id }) {
         setSelectedArea(data.areaId);
         setDescription(data.description);
         setInformation(data.description_info);
+        setPublished(data.published);
       });
   }, []);
 
-  const updateTrain = () => {
+  const updateTrain = (e) => {
+    e.preventDefault();
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${id}`, {
         name,
@@ -78,7 +71,7 @@ export default function EditTrainForm({ id }) {
         created_on: getDate(),
         updated_on: getDate(),
         types: selectedTypes,
-        published: 0,
+        published,
         description,
         description_info: information,
       })
@@ -95,10 +88,19 @@ export default function EditTrainForm({ id }) {
     }
   };
 
+  const handlePublished = () => {
+    if (published === 0) {
+      setPublished(1);
+    }
+    if (published === 1) {
+      setPublished(0);
+    }
+  };
+
   return (
     <div className="contact1">
       <div className="Contact">
-        <h1>Modifier un train</h1>
+        <h1 className="create_train_title">Modifier un train</h1>
         <form onSubmit={(e) => updateTrain(e)}>
           <label className="create_train_form_label" htmlFor="train_name">
             Nom du train
@@ -172,19 +174,27 @@ export default function EditTrainForm({ id }) {
             placeholder="Informations complémentaires"
             onChange={(e) => setInformation(e.target.value)}
           />
+          <div className="create_train_form_label">
+            {" "}
+            Train publié :{" "}
+            <button type="button" onClick={() => handlePublished()}>
+              {published === 1 ? "Oui" : "Non"}
+            </button>
+            <span>(validez la saisie en cliquant sur modifier)</span>
+          </div>
           <div className="buttonsContainer">
-            <button className="buttonForm" type="submit">
+            <button className="button-form-create" type="submit">
               Modifier
             </button>
             <button
-              className="buttonForm5"
+              className="button-form-create3"
               type="button"
               onClick={() => deleteTrain()}
             >
               Supprimer
             </button>
             <button
-              className="buttonForm1"
+              className="button-form-create2"
               type="button"
               onClick={() => navigate("/administrateur")}
             >

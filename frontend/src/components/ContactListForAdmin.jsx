@@ -16,7 +16,6 @@ function ContactList() {
 
   return (
     <div className="review_list_main_div">
-      <h2 className="review_list_title">Liste des messages</h2>
       <table className="review_list_table">
         <thead className="review_list_thead">
           <tr>

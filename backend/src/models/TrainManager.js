@@ -79,7 +79,7 @@ class TrainManager extends AbstractManager {
 
   getJoinAdminById(id) {
     return this.connection.query(
-      `SELECT t.name AS tname, t.id as id, t.description, t.description_info, t.created_on AS creat, t.updated_on AS updat, a.name as areaName, a.id as areaId,
+      `SELECT t.name AS tname, t.id as id, t.description, t.description_info, t.created_on AS creat, t.updated_on AS updat, t.published, a.name as areaName, a.id as areaId,
       JSON_ARRAYAGG(JSON_OBJECT("value", type.id, "label", type.title)) as types
       FROM train AS t
         JOIN area AS a ON a.id=t.area_id         
@@ -167,6 +167,23 @@ class TrainManager extends AbstractManager {
     return this.connection.query(
       `insert into train_type (train_id, type_id) values (?, ?)`,
       [trainId, type]
+    );
+  }
+
+  insertImage(trainId, imageTrain) {
+    return this.connection.query(
+      `insert into image_train (title, path, user_id, train_id, created_on, updated_on, published) values (?, ?, ?, ?, ?, ?, ?)`,
+      // Dois correspondre à la table visé au dessus et en dessous,
+      // ne pas oublier de verifier que le nombre de ? est egale au nombre de champs dans la base
+      [
+        imageTrain.title,
+        imageTrain.path,
+        imageTrain.user_id,
+        trainId,
+        imageTrain.created_on,
+        imageTrain.updated_on,
+        imageTrain.published,
+      ]
     );
   }
 
