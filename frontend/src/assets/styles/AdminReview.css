@@ -78,3 +78,35 @@
 .add_image_main_div {
   background-color: #f3f3f8;
 }
+
+.review_details_contact_box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2%;
+}
+
+.contact_text_area {
+  font-family: "Avenir-Book";
+  font-size: 4vw;
+  margin: 2%;
+  padding: 2%;
+  background-color: white;
+  border-radius: 10px;
+  border: solid 2px #127996;
+}
+
+.contact_item {
+  margin-top: 3%;
+}
+
+.contact_delete_button {
+  margin-bottom: 5%;
+}
+
+.contact_button_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 5%;
+}
