@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ModifyPassword() {
   const [mail, setMail] = useState("");
   const [userExist, setUserExist] = useState("");
   const [mailSent, setMailSent] = useState("");
+  const nav = useNavigate();
 
   const sendMail = (e) => {
     e.preventDefault();
@@ -37,6 +39,7 @@ function ModifyPassword() {
               value={mail}
               placeholder="Mail *"
               onChange={(e) => setMail(e.target.value)}
+              required
             />
             {userExist ? <p>Utilisateur non existant</p> : ""}
             {mailSent ? <p>Mail envoyé</p> : ""}
@@ -49,7 +52,11 @@ function ModifyPassword() {
             >
               Valider
             </button>
-            <button className="buttonForm1" type="submit">
+            <button
+              className="buttonForm1"
+              type="button"
+              onClick={() => nav("/profil")}
+            >
               Annuler
             </button>
           </div>

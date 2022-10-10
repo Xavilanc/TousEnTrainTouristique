@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { transDate } from "../services/DateManager";
 
 function ImageList() {
   const [avatarList, setAvatarList] = useState([]);
@@ -35,7 +34,6 @@ function ImageList() {
         <thead className="review_list_thead">
           <tr>
             <th className="review_list_th review_list_id">id</th>
-            {/* <th className="review_list_th">path</th> */}
             <th className="review_list_th review_list_train">userId</th>
             <th className="review_list_th review_list_train">Preview</th>
             <th className="review_list_th review_list_train">Delete</th>
@@ -46,7 +44,6 @@ function ImageList() {
             avatarList.map((avatar) => (
               <tr id="review_list_map_tr" key={avatar.id}>
                 <td className="review_list_td">{avatar.id}</td>
-                {/* <td className="review_list_td">{avatar.path}</td> */}
                 <td className="review_list_td">{avatar.name}</td>
                 <td className="review_list_td">
                   <img src={avatar.path} alt="avatar" width="50%" />

@@ -35,9 +35,6 @@ function ModifyPasswordWithMail() {
       .catch((error) => {
         setpassChangeSuccess(false);
         console.warn(error);
-        // error.response.status === 404
-        //   ? setUserExist(true)
-        //   : setUserExist(false);
       });
   };
   return (
@@ -54,6 +51,7 @@ function ModifyPasswordWithMail() {
               value={newPassword}
               placeholder="Nouveau mot de passe*"
               onChange={(e) => setNewPassword(e.target.value)}
+              required
             />
             <input
               className="createuser_confirm_password"
@@ -62,6 +60,7 @@ function ModifyPasswordWithMail() {
               value={confirmNewPassword}
               placeholder="Confirmez le nouveau mot de passe*"
               onChange={(e) => setConfirmNewPassword(e.target.value)}
+              required
             />
           </div>
           {passChangeSuccess ? "" : <p>Echec de mise a jour du mot de passe</p>}
@@ -73,12 +72,16 @@ function ModifyPasswordWithMail() {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                equalTest === true ? editPass(e) : "";
+                equalTest === true && !regBool ? editPass(e) : "";
               }}
             >
               Valider
             </button>
-            <button className="buttonForm1" type="submit">
+            <button
+              className="buttonForm1"
+              type="button"
+              onClick={() => nav("/")}
+            >
               Annuler
             </button>
           </div>
