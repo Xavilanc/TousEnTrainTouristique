@@ -31,8 +31,9 @@ import "./App.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// vérifie la présence d'un token et sa date de validité
+// si token, execute la méthode isAdmin pour vérifier les userRight
 AuthAPI.setup();
-AuthAPI.isAdmin();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -91,7 +92,14 @@ function App() {
               <Route path="/train/:id" element={<Train />} />
               <Route path="/connexion" element={<UserConnexion />} />
               <Route path="/modification/" element={<ModifyPasswordPage />} />
-              <Route path="/moncompte/" element={<EditAccount />} />
+              <Route
+                path="/moncompte/"
+                element={
+                  <PrivateRoute>
+                    <EditAccount />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/avatar"
                 element={

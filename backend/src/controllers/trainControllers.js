@@ -194,16 +194,19 @@ const add = (req, res) => {
   // TODO validations (length, format...)
 
   models.train
+    // 1: insertion du train dans la table train
     .insert(train)
     .then(([result]) => {
       res
         .location(`/train/${result.insertId}`)
         .status(201)
         .send(`${result.insertId}`);
+      // 2: insertion des types dans la table de jointure train_type
       train.types &&
         train.types.map((type) =>
           models.train.insertTypes(`${result.insertId}`, type.value)
         );
+      // 3: insertion de l'image dans la table image_train
       models.train.insertImage(`${result.insertId}`, train.image);
     })
     .catch((err) => {

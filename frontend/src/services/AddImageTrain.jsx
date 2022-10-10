@@ -2,15 +2,16 @@ function AddImageTrain({ sendData, setSendData }) {
   // Fonction utilisant cloudinary pour poster nos images sur leur service cloud
   const uploadImage = (e) => {
     const data = new FormData();
-    data.append("file", e.target.files[0]);
-    data.append("upload_preset", "photos");
-    data.append("cloud_name", "dqi8p5mh9");
+    data.append("file", e.target.files[0]); // fichier sélectionné par l'utilisateur
+    data.append("upload_preset", "photos"); // dossier  sur Cloudinary
+    data.append("cloud_name", "dqi8p5mh9"); // nom du Cloud
     fetch("  https://api.cloudinary.com/v1_1/dqi8p5mh9/image/upload", {
       method: "post",
       body: data,
     })
       .then((resp) => resp.json())
       .then((dataUrl) => {
+        // transmission de l'url au state sendData
         setSendData({ ...sendData, path: dataUrl.url });
       })
       .catch((err) => console.warn(err));

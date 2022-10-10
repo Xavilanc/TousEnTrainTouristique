@@ -7,7 +7,8 @@ font-face {
   src: url("/src/assets/fonts/Avenir-Book.otf") format("opentype");
 }
 .user {
-  font-family: "Avenir-Black";
+  font-weight: bold;
+  font-family: "Avenir-Book";
   font-size: 5vw;
   color: #000000;
   text-align: center;
@@ -106,7 +107,8 @@ font-face {
 }
 
 .buttonForm5 {
-  font-family: "Avenir-Black";
+  font-weight: bold;
+  font-family: "Avenir-Book";
   font-size: 4vw;
   border-radius: 25px;
   padding: 2%;
