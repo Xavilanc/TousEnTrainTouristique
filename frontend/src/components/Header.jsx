@@ -12,7 +12,6 @@ function Header() {
 
     if (token) {
       setIsLogged(true);
-      // setUserRight(decoded.userRight);
     } else {
       setIsLogged(false);
     }

@@ -33,7 +33,6 @@ function UserConnectionForm() {
           // au fonctionnalités "utilisateur connecté"
           .then((response) => response.data)
           .then((data) => {
-            // console.error(response);
             axios.defaults.headers.Authorization = `Bearer ${data.token}`;
             window.localStorage.setItem("token", data.token);
             window.localStorage.setItem("mail", data.user.mail);
@@ -42,7 +41,6 @@ function UserConnectionForm() {
             setIsAuthenticated(true);
             setIsAdmin(data.user.user_right);
             // puis redirection vers la page profil
-            // navigate("/profil");
           })
           .then(() => navigate("/profil"))
           // si erreur, un message précise à l'utilisateur de vérifier sa saisie
