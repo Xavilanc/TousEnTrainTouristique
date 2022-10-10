@@ -9,7 +9,6 @@ function AddAvatar() {
   const [url, setUrl] = useState("");
   const [posted, setPosted] = useState(false);
   const [oldUrl, setOldUrl] = useState("");
-
   const [sendData] = useState({
     path: "",
     user_id: 0,
