@@ -61,6 +61,7 @@ export default function EditTrainForm({ id }) {
       });
   }, []);
 
+  // méthode pour envoyer les données modifiés par l'administrateur vers le serveur
   const updateTrain = (e) => {
     e.preventDefault();
     axios
@@ -79,6 +80,7 @@ export default function EditTrainForm({ id }) {
     navigate("/administrateur");
   };
 
+  // méthode utilisée par l'administrateur pour supprimer un train
   const deleteTrain = () => {
     if (window.confirm("Voulez-vous vraiment supprimer ce train ?")) {
       axios.delete(

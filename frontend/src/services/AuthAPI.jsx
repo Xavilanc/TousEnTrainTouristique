@@ -47,7 +47,7 @@ function setup() {
     const { exp: expiration } = jwtDecode(token);
     if (expiration * 1000 > new Date().getTime()) {
       setAxiosToken(token);
-      isCurrentUser();
+      isAdmin();
     }
   }
 }

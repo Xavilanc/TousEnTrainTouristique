@@ -29,14 +29,6 @@ export default function CreateTrainForm() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setToken(window.localStorage.getItem("token"));
-
-  //   if (token) {
-  //     const decoded = jwtDecode(token);
-  //     setUserId(decoded.sub);
-  //   }
-  // }, [token]);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/areas/`)
@@ -64,6 +56,7 @@ export default function CreateTrainForm() {
       });
   }, []);
 
+  // méthode pour envoyer les données saisies par l'utilisateur vers le serveur
   const postTrain = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/trains/`, {
@@ -193,6 +186,7 @@ export default function CreateTrainForm() {
       </div>
     );
   }
+  // message affiché à l'utilisateur une fois que le formulaire a été envoyé
   if (posted === true) {
     return (
       <div>
