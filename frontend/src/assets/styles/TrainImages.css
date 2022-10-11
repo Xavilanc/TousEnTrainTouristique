@@ -21,4 +21,33 @@
   font-family: "Avenir-Book";
   font-size: 3vw;
   text-align: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .train_image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .train_image_image_div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .train_image_title_box {
+    width: 50%;
+    height: 28.125vw;
+    padding: 5%;
+  }
+
+  .train_image_title {
+    font-family: "Avenir-Book";
+    font-size: 2vw;
+    text-align: center;
+    width: 100%;
+  }
 }

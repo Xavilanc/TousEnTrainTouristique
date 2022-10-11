@@ -19,13 +19,14 @@
   display: flex;
   flex-direction: column;
   background-color: #f3f3f8;
-  padding: 3%;
+  padding: 3.9%;
 }
 
 /* div contenant tous les éléments du composant TrainCard sauf marge (pour fond blanc)*/
 .traincard_background_white_div {
   background-color: white;
   border-radius: 10px;
+  width: auto;
 }
 
 /* titre du train */
@@ -40,7 +41,8 @@
 /* image d'illustration pour le train concerné */
 .traincard_train_image {
   width: 100%;
-  height: 100%;
+  height: 50.625vw;
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -91,5 +93,10 @@
 
   .traincard_subtitle {
     font-size: 2vw;
+  }
+
+  .traincard_train_image {
+    width: 100%;
+    height: 22.5vw;
   }
 }
