@@ -29,7 +29,7 @@
 
 /* div contenant les images du train */
 .train_image_div {
-  padding: 2%;
+  padding: 4%;
 }
 
 /* sous-titre informations et activitées */
@@ -38,14 +38,14 @@
   font-family: "Avenir-Book";
   font-size: 5vw;
   color: #127996;
-  padding: 2%;
+  padding: 4%;
 }
 
 /* paragraphes sur la page train */
 .train_paragraphe {
   font-family: "Avenir-Book";
   font-size: 4vw;
-  padding: 2%;
+  padding: 4%;
 }
 
 /* titre de la partie commentaires */
@@ -58,7 +58,7 @@
 
 /* box contenant les commentaires*/
 .train_review_box {
-  padding: 2%;
+  padding: 4%;
 }
 
 /* box contenant les icones favoris */
@@ -66,8 +66,8 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
 }
 
 .train_favoris_image {
@@ -76,4 +76,61 @@
 
 .invisible {
   display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .train_image_div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .train_h3_title {
+    font-size: 2vw;
+  }
+
+  .informations_paragraphe,
+  .activity_paragraphe {
+    font-size: 2vw;
+    padding: 1%;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .activity_title {
+    font-size: 2vw;
+    padding-left: 3%;
+  }
+
+  .train_title {
+    font-size: 5vw;
+  }
+
+  .review_train_list_username {
+    font-size: 2vw;
+  }
+
+  .review_train_list_comment {
+    font-family: "Avenir-Book";
+    font-size: 2vw;
+  }
+
+  .create_review_send {
+    font-size: 2vw;
+  }
+
+  .create_review_comment_label {
+    font-size: 2vw;
+  }
+
+  .create_review_submit_btn {
+    font-weight: bold;
+    font-family: "Avenir-Book";
+    font-size: 2vw;
+    border-radius: 25px;
+    padding: 2%;
+    border: 2px solid white;
+    width: 18%;
+    background-color: #127996;
+    color: #f3f3f8;
+  }
 }
