@@ -34,7 +34,7 @@ function CreateUserForm() {
     validatePassword();
     setUserExist(false);
 
-    if (equalTest && userName !== "" && email !== "") {
+    if (equalTest && userName !== "" && email !== "" && !regBool) {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/api/users/`, {
           name: userName,
@@ -44,9 +44,7 @@ function CreateUserForm() {
           created_on: getDate(),
           updated_on: getDate(),
         })
-        .then((response) => {
-          // console.error(response);
-          console.warn(response.data);
+        .then(() => {
           navigate("/connexion");
         })
         .catch((error) =>
