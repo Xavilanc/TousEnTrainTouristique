@@ -112,7 +112,11 @@ function CreateUserForm() {
               autoComplete="off"
             />
             {equalTest ? "" : <p>Mot de passe différent</p>}
-            {regBool ? <p>Mot de passe ne respectant pas les critères</p> : ""}
+            {regBool && confirmPassword ? (
+              <p>Mot de passe ne respectant pas les critères</p>
+            ) : (
+              ""
+            )}
             {userExist ? <p>Utilisateur déjà enregistré</p> : ""}
           </div>
           <div className="buttonsContainer">

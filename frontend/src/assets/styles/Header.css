@@ -75,7 +75,7 @@
     width: 100%;
     text-align: center;
     padding-left: 0;
-    margin-left: -100px;
+    margin-left: -132px;
   }
   .header_logo_img {
     padding: 2%;
@@ -86,7 +86,6 @@
   .header_links {
     font-size: 1.3rem;
     padding: 1%;
-    margin-left: -100px;
   }
   .header_links_title_container {
     width: 100%;
