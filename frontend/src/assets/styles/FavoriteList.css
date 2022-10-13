@@ -26,8 +26,9 @@
 /* image dans la liste des favoris */
 .favorite_list_image {
   width: 40vw;
-  height: fit-content;
+  height: 22.5vw;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .favorite_item_title {
