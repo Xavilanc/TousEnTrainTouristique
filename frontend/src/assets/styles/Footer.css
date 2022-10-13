@@ -69,3 +69,26 @@
 .footer_contact {
   color: #8de8fe;
 }
+
+@media screen and (min-width: 768px) {
+  .footer__container {
+    font-size: 1rem;
+  }
+  .footer__container__social__instagram {
+    margin-left: 1%;
+  }
+  .footer__container__social__instagram,
+  .footer__container__social__twitter,
+  .footer__container__social__facebook {
+    padding-top: 0.5%;
+    width: 4.5%;
+  }
+  .footer__container__left,
+  .footer__container__middle,
+  .footer__container__right {
+    margin-top: 0.5%;
+  }
+  .footer {
+    padding-bottom: 0;
+  }
+}

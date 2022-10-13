@@ -67,6 +67,17 @@
 
 @media screen and (min-width: 768px) {
   .header_main_container {
-    padding: 1%;
+    padding: 0%;
+    padding-bottom: 1%;
+  }
+  .header_title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .header_logo_img {
+    width: 170px;
+  }
+  .header_links {
+    font-size: 1.3rem;
   }
 }
