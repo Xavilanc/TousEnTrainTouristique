@@ -68,7 +68,7 @@ function CreateUserForm() {
               type="mail"
               id="createuser_mail"
               value={email}
-              placeholder="Adresse e-mail(exemple@mail.fr*"
+              placeholder="Adresse e-mail(exemple@mail.fr)*"
               onChange={(e) => setEmail(e.target.value)}
               required="required"
               autoComplete="off"
