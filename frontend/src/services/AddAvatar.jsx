@@ -92,7 +92,7 @@ function AddAvatar() {
     return (
       <div>
         <div className="create_review_send">
-          Votre avatar à bien été mis à jour
+          Votre avatar a bien été mis à jour
         </div>
         <button
           type="button"
