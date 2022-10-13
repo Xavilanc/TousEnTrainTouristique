@@ -95,6 +95,10 @@ function CreateUserForm() {
               required="required"
               autoComplete="new-password"
             />
+            <p className="passwordRegex">
+              Une majuscule, une minuscule, un charactère spécial et 8
+              charactères minimum
+            </p>
             <input
               className="createuser_confirm_password"
               type="password"

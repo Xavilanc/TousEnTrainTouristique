@@ -68,7 +68,23 @@
 }
 
 @media screen and (min-width: 768px) {
+  .favorite_list_box .favorite_list_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  .favorite_list_image {
+    width: 200px;
+    height: 150px;
+  }
+  .favorite_item_link {
+    font-size: 1.5rem;
+  }
   .favorite_list_title {
-    font-size: 4vw;
+    font-size: 1.75rem;
+  }
+  .favorite_item_title {
+    font-size: 1.6rem;
   }
 }

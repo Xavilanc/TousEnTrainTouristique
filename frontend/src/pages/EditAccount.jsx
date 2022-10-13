@@ -63,26 +63,27 @@ function EditAccount() {
             className="edit_user"
             onChange={(e) => setMail(e.target.value)}
           />
-
-          <input
-            type="onsubmit"
-            defaultValue="Modifier"
-            className="user_information"
-            onClick={(e) => handleClick(e)}
-          />
-          <input
-            type="button"
-            defaultValue="Retour"
-            className="user_information"
-            onClick={() => navigate("/profil")}
-          />
-          <input
-            className="delete_account"
-            type="button"
-            id="del_account"
-            defaultValue="Effacer mon compte"
-            onClick={(e) => handleDelete(e)}
-          />
+          <div className="buttonPart">
+            <input
+              type="onsubmit"
+              defaultValue="Modifier"
+              className="user_information"
+              onClick={(e) => handleClick(e)}
+            />
+            <input
+              type="button"
+              defaultValue="Retour"
+              className="user_information"
+              onClick={() => navigate("/profil")}
+            />
+            <input
+              className="delete_account"
+              type="button"
+              id="del_account"
+              defaultValue="Effacer mon compte"
+              onClick={(e) => handleDelete(e)}
+            />
+          </div>
         </form>
       )}
     </div>
