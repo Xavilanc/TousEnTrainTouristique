@@ -1,5 +1,6 @@
-import "@assets/styles/Contact.css";
+import "../assets/styles/Contact.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getDate } from "../services/DateManager";
 
@@ -15,6 +16,9 @@ export default function Contact() {
     message: "",
     created_on: "",
   });
+
+  const [posted, setPosted] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     function sendMessage() {
@@ -35,8 +39,11 @@ export default function Contact() {
     }
 
     e.preventDefault();
-    alert(`Votre message a bien été envoyé ${senderName}!`);
     sendMessage();
+    setPosted(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   }
 
   useEffect(() => {
@@ -47,57 +54,69 @@ export default function Contact() {
     sendMail.created_on = getDate();
   }, []);
 
-  return (
-    <div className="contact1">
-      <div className="Contact">
-        <h1>Contact</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="champs">*champs obligatoires</div>
+  if (posted === false) {
+    return (
+      <div className="contact1">
+        <div className="Contact">
+          <h1>Contact</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="champs">*champs obligatoires</div>
 
-          <input
-            className="name"
-            type="text"
-            id="name"
-            value={senderName}
-            placeholder="Nom et Prénom*"
-            onChange={(e) => setSenderName(e.target.value)}
-          />
-          <input
-            className="name"
-            type="text"
-            id="name"
-            value={subject}
-            placeholder="Sujet*"
-            onChange={(e) => setSubject(e.target.value)}
-          />
-          <input
-            className="email"
-            type="email"
-            id="email"
-            value={email}
-            placeholder="Adresse e-mail*"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <textarea
-            className="message"
-            name="message"
-            id="message"
-            cols="30"
-            rows="10"
-            value={message}
-            placeholder="Votre message*"
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <div className="buttonsContainer">
-            <button className="buttonForm" type="submit">
-              Envoyer
-            </button>
-            <button className="buttonForm1" type="submit">
-              Annuler
-            </button>
-          </div>
-        </form>
+            <input
+              className="name"
+              type="text"
+              id="name"
+              value={senderName}
+              placeholder="Nom et Prénom*"
+              onChange={(e) => setSenderName(e.target.value)}
+            />
+            <input
+              className="name"
+              type="text"
+              id="name"
+              value={subject}
+              placeholder="Sujet*"
+              onChange={(e) => setSubject(e.target.value)}
+            />
+            <input
+              className="email"
+              type="email"
+              id="email"
+              value={email}
+              placeholder="Adresse e-mail*"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <textarea
+              className="message"
+              name="message"
+              id="message"
+              cols="30"
+              rows="10"
+              value={message}
+              placeholder="Votre message*"
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <div className="buttonsContainer">
+              <button className="buttonForm" type="submit">
+                Envoyer
+              </button>
+              <button className="buttonForm1" type="submit">
+                Annuler
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (posted === true) {
+    return (
+      <div>
+        <div className="create_review_send">
+          Nous avons bien reçu votre message
+        </div>
+      </div>
+    );
+  }
 }
