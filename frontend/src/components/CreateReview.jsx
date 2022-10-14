@@ -20,7 +20,6 @@ function CreateReview({ id }) {
   };
 
   const postReview = () => {
-    setPosted(true);
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
         review_user_id: userId, // récupéré avec localstorage
@@ -35,6 +34,7 @@ function CreateReview({ id }) {
         console.error(response);
         console.error(response.data);
       });
+    setPosted(true);
   };
 
   if (posted === false) {
