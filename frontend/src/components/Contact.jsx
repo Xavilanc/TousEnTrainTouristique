@@ -43,7 +43,7 @@ export default function Contact() {
     setPosted(true);
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 3000);
   }
 
   useEffect(() => {
