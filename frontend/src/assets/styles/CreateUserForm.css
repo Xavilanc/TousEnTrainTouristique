@@ -14,13 +14,12 @@
   font-size: 5vw;
   color: #000000;
   text-align: center;
-  margin-top: -5%;
   margin-bottom: 7%;
 }
 .contact1 {
   background-color: #f3f3f8;
   padding-top: 10%;
-  padding-bottom: 105%;
+  padding-bottom: 1rem;
 }
 .createuser_subtitle {
   text-align: right;
@@ -93,4 +92,43 @@
   width: 28%;
   color: #127996;
   background-color: white;
+}
+.passwordRegex {
+  margin: 0 1rem;
+  margin-top: -5%;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .contact1 {
+    padding-bottom: 2rem;
+    padding-top: 0rem;
+  }
+  .addImage {
+    padding: 0 5%;
+  }
+  .createuser_title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  .createuser_subtitle {
+    font-size: 1.5rem;
+  }
+  .createuser_mail,
+  .createuser_username,
+  .createuser_password,
+  .createuser_confirm_password {
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 1%;
+  }
+  .buttonsContainer {
+    margin-top: 0;
+  }
+  .passwordRegex {
+    margin: 0 1rem;
+    margin-top: 0;
+    text-align: center;
+  }
 }

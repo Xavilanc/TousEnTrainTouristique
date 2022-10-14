@@ -68,7 +68,7 @@ function CreateUserForm() {
               type="mail"
               id="createuser_mail"
               value={email}
-              placeholder="Adresse e-mail(exemple@mail.fr*"
+              placeholder="Adresse e-mail(exemple@mail.fr)*"
               onChange={(e) => setEmail(e.target.value)}
               required="required"
               autoComplete="off"
@@ -95,6 +95,10 @@ function CreateUserForm() {
               required="required"
               autoComplete="new-password"
             />
+            <p className="passwordRegex">
+              Une majuscule, une minuscule, un chiffre, un charactère spécial et
+              8 charactères minimum
+            </p>
             <input
               className="createuser_confirm_password"
               type="password"
@@ -108,7 +112,11 @@ function CreateUserForm() {
               autoComplete="off"
             />
             {equalTest ? "" : <p>Mot de passe différent</p>}
-            {regBool ? <p>Mot de passe ne respectant pas les critères</p> : ""}
+            {regBool && confirmPassword ? (
+              <p>Mot de passe ne respectant pas les critères</p>
+            ) : (
+              ""
+            )}
             {userExist ? <p>Utilisateur déjà enregistré</p> : ""}
           </div>
           <div className="buttonsContainer">

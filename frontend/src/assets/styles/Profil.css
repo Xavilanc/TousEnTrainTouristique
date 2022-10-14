@@ -154,18 +154,57 @@
   border: 1px solid #088587;
 }
 @media screen and (min-width: 768px) {
+  .profil {
+    padding-top: 1%;
+    padding-bottom: 2%;
+  }
   .account_title {
-    font-size: 5vw;
+    font-size: 2rem;
   }
 
   .profil_avatar {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
   }
 
   .avatar_pencil_icon {
-    padding-top: 40%;
+    padding-top: 35%;
     width: 8%;
+    height: 8%;
     margin-left: -20%;
+  }
+  .profil_header {
+    margin: 1%;
+  }
+  .user_information,
+  .change_password,
+  .add_train {
+    margin: 1%;
+    padding: 1%;
+    width: auto;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+  .buttonForm3,
+  .buttonForm4,
+  .buttonForm,
+  .buttonForm1 {
+    font-size: 1.75rem;
+    padding: 1rem;
+    width: auto;
+  }
+  .delete_account {
+    font-size: 1.5rem;
+    margin: 1rem;
+    width: auto;
+  }
+  .buttonPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .edit_user {
+    font-size: 1.2rem;
+    margin: 2%;
   }
 }

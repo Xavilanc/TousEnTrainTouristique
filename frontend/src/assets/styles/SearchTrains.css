@@ -64,17 +64,22 @@
   .area_select,
   .type_select {
     width: 35vw;
-    font-size: 3vw;
+    font-size: 1.1rem;
   }
 
   .train_search_label {
     margin-left: 0;
+    font-size: 1.3rem;
   }
 
+  .train_search_form {
+    padding-top: 1%;
+  }
   .traincard_box {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: 5%;
+    /* margin-left: 5%; */
+    justify-content: space-around;
   }
 }
