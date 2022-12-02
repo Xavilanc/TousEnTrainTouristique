@@ -88,6 +88,10 @@ function Train() {
     getReviews();
   }, []);
 
+  useEffect(() => {
+    document.title = `Tous en Trains Touristiques | ${train.tname}`;
+  }, [train]);
+
   const addFavorite = () => {
     setFavoriteClass("train_favoris_image");
     setNoFavoriteClass("train_favoris_image invisible");
