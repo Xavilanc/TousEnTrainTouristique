@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import CreateReview from "../components/CreateReview";
@@ -40,6 +40,8 @@ function Train() {
         getFavorite();
       }, [isFavorite])
     : "";
+
+  const updateFavorite = useCallback(() => setIsFavorite({}), []);
 
   const [train, setTrain] = useState(""); // état gérant l'affichage du train, sa description et ses images
   const [activities, setActivities] = useState(""); // état gérant l'affichage des activités de ce même train
@@ -95,21 +97,27 @@ function Train() {
   const addFavorite = () => {
     setFavoriteClass("train_favoris_image");
     setNoFavoriteClass("train_favoris_image invisible");
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/favorites`, {
-      user_id: userId,
-      train_id: params.id,
-      added_on: getDate(),
-    });
-    setIsFavorite(true);
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/favorites`, {
+        user_id: userId,
+        train_id: params.id,
+        added_on: getDate(),
+      })
+      .then(() => {
+        setIsFavorite(true);
+        updateFavorite();
+      });
   };
 
   const deleteFavorite = () => {
     setFavoriteClass("train_favoris_image invisible");
     setNoFavoriteClass("train_favoris_image");
-    axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}/api/favorites/${params.id}`
-    );
-    setIsFavorite(false);
+    axios
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/api/favorites/${params.id}`)
+      .then(() => {
+        setIsFavorite(false);
+        updateFavorite();
+      });
   };
 
   return (
