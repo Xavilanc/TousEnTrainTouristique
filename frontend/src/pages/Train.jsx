@@ -45,9 +45,6 @@ function Train() {
       }, [isFavorite])
     : "";
 
-  // mise à jour de l'affichage d'un favoris
-  // const updateFavorite = useCallback(() => setIsFavorite({}), []);
-
   const [train, setTrain] = useState(""); // état gérant l'affichage du train, sa description et ses images
   const [activities, setActivities] = useState(""); // état gérant l'affichage des activités de ce même train
   const [reviews, setReviews] = useState(""); // état gérant l'affichage des commentaires liés à ce train
@@ -114,7 +111,6 @@ function Train() {
         setFavoriteClass("train_favoris_image");
         setNoFavoriteClass("train_favoris_image invisible");
         setIsFavorite(true);
-        // updateFavorite();
       });
   };
 
@@ -126,7 +122,6 @@ function Train() {
         setFavoriteClass("train_favoris_image invisible");
         setNoFavoriteClass("train_favoris_image");
         setIsFavorite(false);
-        // updateFavorite();
       });
   };
 
