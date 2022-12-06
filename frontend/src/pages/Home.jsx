@@ -8,7 +8,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <Header />
+      <Header role="banner" />
       <SearchTrain />
     </div>
   );

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
 import { getDate } from "../services/DateManager";
 import "../assets/styles/CreateReview.css";
+import "../assets/styles/loader.css";
 
 function CreateReview({ id }) {
   const [posted, setPosted] = useState(false);
@@ -14,22 +16,28 @@ function CreateReview({ id }) {
   const [readOnly, setReadOnly] = useState(false); // pour bloquer les étoiles
   const userId = window.localStorage.getItem("id");
 
+  const navigate = useNavigate();
+
   const handleRating = (rate) => {
     setRating(rate);
     setReadOnly(true);
   };
 
   const postReview = () => {
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
-      review_user_id: userId, // récupéré avec localstorage
-      review_train_id: id, // récuperé avec useParams
-      review_note: rating, // valeur du state mise à jour avec le composant Rating
-      review_comment: review.comment, // valeur du state mise à jour avec le formulaire
-      created_on: getDate(), // formatage de la date
-      updated_on: null, // null par default car il s'agit d'une création de review
-      published: 0, // 0 par default car c'est l'administrateur qui valide la publication du review
-    });
-    setPosted(true);
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/reviews/`, {
+        review_user_id: userId, // récupéré avec localstorage
+        review_train_id: id, // récuperé avec useParams
+        review_note: rating, // valeur du state mise à jour avec le composant Rating
+        review_comment: review.comment, // valeur du state mise à jour avec le formulaire
+        created_on: getDate(), // formatage de la date
+        updated_on: null, // null par default car il s'agit d'une création de review
+        published: 0, // 0 par default car c'est l'administrateur qui valide la publication du review
+      })
+      .then(() => {
+        setPosted(true); // affichage du loader
+        setTimeout(() => navigate("/"), 4000); // redirection vers la page d'accueil
+      });
   };
 
   if (posted === false) {
@@ -91,6 +99,12 @@ function CreateReview({ id }) {
         <div className="create_review_send">
           Nous avons bien reçu votre commentaire. Il sera validé dans quelques
           heures.
+        </div>
+        <div className="lds-ellipsis">
+          <div />
+          <div />
+          <div />
+          <div />
         </div>
       </div>
     );
