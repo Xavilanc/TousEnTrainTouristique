@@ -69,6 +69,7 @@
   flex-direction: row;
   justify-content: flex-end;
   width: 20vw;
+  height: 12vw;
 }
 
 .train_favoris_image {
