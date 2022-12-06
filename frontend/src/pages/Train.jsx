@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import CreateReview from "../components/CreateReview";
@@ -22,6 +22,8 @@ function Train() {
   const token = window.localStorage.getItem("token");
 
   const [isFavorite, setIsFavorite] = useState(false);
+
+  // chargement de l'état de favoris ou non du train pour l'utilisateur
   const getFavorite = () => {
     axios
       .get(
@@ -35,13 +37,16 @@ function Train() {
       .catch((err) => console.warn(err));
   };
 
+  // le useEffect se déclenche uniquement s'il y a un token
+  // car seul les utilisateurs peuvent avoir des favoris
   token
     ? useEffect(() => {
         getFavorite();
       }, [isFavorite])
     : "";
 
-  const updateFavorite = useCallback(() => setIsFavorite({}), []);
+  // mise à jour de l'affichage d'un favoris
+  // const updateFavorite = useCallback(() => setIsFavorite({}), []);
 
   const [train, setTrain] = useState(""); // état gérant l'affichage du train, sa description et ses images
   const [activities, setActivities] = useState(""); // état gérant l'affichage des activités de ce même train
@@ -53,6 +58,7 @@ function Train() {
     isFavorite ? "train_favoris_image invisible" : "train_favoris_image"
   ); // état gérant l'affichage de l'image non favoris
 
+  // chargement des données du train
   const getTrain = () => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/trains/${params.id}/images`)
@@ -60,6 +66,7 @@ function Train() {
       .then((data) => setTrain(data));
   };
 
+  // chargement des activitées liées à ce train
   const getActivities = () => {
     axios
       .get(
@@ -69,6 +76,7 @@ function Train() {
       .then((data) => setActivities(data));
   };
 
+  // chargement des commentaires liés à ce train
   const getReviews = () => {
     axios
       .get(
@@ -94,9 +102,8 @@ function Train() {
     document.title = `Tous en Trains Touristiques | ${train.tname}`;
   }, [train]);
 
+  // ajout en favoris de ce train
   const addFavorite = () => {
-    setFavoriteClass("train_favoris_image");
-    setNoFavoriteClass("train_favoris_image invisible");
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/favorites`, {
         user_id: userId,
@@ -104,19 +111,22 @@ function Train() {
         added_on: getDate(),
       })
       .then(() => {
+        setFavoriteClass("train_favoris_image");
+        setNoFavoriteClass("train_favoris_image invisible");
         setIsFavorite(true);
-        updateFavorite();
+        // updateFavorite();
       });
   };
 
+  // suppression de ce train des favoris
   const deleteFavorite = () => {
-    setFavoriteClass("train_favoris_image invisible");
-    setNoFavoriteClass("train_favoris_image");
     axios
       .delete(`${import.meta.env.VITE_BACKEND_URL}/api/favorites/${params.id}`)
       .then(() => {
+        setFavoriteClass("train_favoris_image invisible");
+        setNoFavoriteClass("train_favoris_image");
         setIsFavorite(false);
-        updateFavorite();
+        // updateFavorite();
       });
   };
 
