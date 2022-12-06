@@ -6,6 +6,7 @@ import { getDate } from "../services/DateManager";
 import AddImageTrain from "../services/AddImageTrain";
 import "../assets/styles/CreateUserForm.css";
 import "../assets/styles/CreateTrainForm.css";
+import "../assets/styles/loader.css";
 
 export default function CreateTrainForm() {
   const [name, setName] = useState("");
@@ -193,6 +194,12 @@ export default function CreateTrainForm() {
         <div className="create_review_send">
           Merci pour votre proposition de création de train. Elle sera validé
           d'ici quelques jours.
+        </div>
+        <div className="lds-ellipsis">
+          <div />
+          <div />
+          <div />
+          <div />
         </div>
       </div>
     );
