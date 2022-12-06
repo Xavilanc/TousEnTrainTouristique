@@ -123,30 +123,32 @@ function Train() {
   return (
     <div className="train_main_div">
       <Header />
-      {token ? (
-        <div className="train_favoris_box">
-          {isFavorite && (
-            <img
-              className={favoriteClass}
-              src={favoris}
-              onClick={() => deleteFavorite()}
-              alt="favoris"
-            />
-          )}
-          {!isFavorite && (
-            <img
-              className={noFavoriteClass}
-              src={favorisVide}
-              onClick={() => addFavorite()}
-              alt="non favoris"
-            />
-          )}
+      <div className="train_name_favoris">
+        <div className="train_title_favoris_box">
+          <h2 className="train_title">{train.tname}</h2>
         </div>
-      ) : (
-        ""
-      )}
-      <div className="train_title_favoris_box">
-        <h2 className="train_title">{train.tname}</h2>
+        {token ? (
+          <div className="train_favoris_box">
+            {isFavorite && (
+              <img
+                className={favoriteClass}
+                src={favoris}
+                onClick={() => deleteFavorite()}
+                alt="favoris"
+              />
+            )}
+            {!isFavorite && (
+              <img
+                className={noFavoriteClass}
+                src={favorisVide}
+                onClick={() => addFavorite()}
+                alt="non favoris"
+              />
+            )}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className="train_image_div">
         <TrainImages images={train.images} />
