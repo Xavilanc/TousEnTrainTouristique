@@ -20,6 +20,8 @@ const {
   hashPasswordForReset,
 } = require("./controllers/auth");
 
+const validator = require("./controllers/validator");
+
 /* --- GET --- */
 router.get("/api/trains", trainControllers.getAllJoin); // Tous les trains (avec jointures)
 router.get("/api/trains/images/", imageTrainControllers.getAll); // Toutes les images de trains
@@ -50,7 +52,12 @@ router.get("/api/types/:id", typeControllers.read); // Un type de train en parti
 router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
 router.post("/api/contacts", contactControllers.add); // Envoyer un message
 router.post("/api/mail", userControllers.getUserByEmail, modifyPassword); // modifier son mot de passe
-router.post("/api/users", hashPassword, userControllers.postUser); // Création de compte
+router.post(
+  "/api/users",
+  validator.validateUser,
+  hashPassword,
+  userControllers.postUser
+); // Création de compte
 router.post(
   "/api/login",
   userControllers.getUserByEmailWithPasswordAndPassToNext,
