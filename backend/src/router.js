@@ -48,8 +48,7 @@ router.get("/api/areas/:id", areaControllers.read); // Une région en particulie
 router.get("/api/types", typeControllers.getAll); // Tous les types de trains
 router.get("/api/types/:id", typeControllers.read); // Un type de train en particulier
 
-// /* --- POST --- */
-router.post("/api/reviews", reviewControllers.add); // Ajouter un commentaire
+/* --- POST --- */
 router.post("/api/contacts", contactControllers.add); // Envoyer un message
 router.post("/api/mail", userControllers.getUserByEmail, modifyPassword); // modifier son mot de passe
 router.post(
@@ -64,7 +63,7 @@ router.post(
   verifyPassword
 ); // connexion
 
-// /* --- PUT --- */
+/* --- PUT --- */
 router.put("/api/contacts/:id", contactControllers.edit); // Éditer un message
 router.put(
   "/api/mail/:token",
@@ -86,13 +85,14 @@ router.get("/api/users/:id/favorites", favoriteControllers.readByUser); // affic
 router.get("/api/trains/:train/:id/favorite", favoriteControllers.readByTrain); // Affichage du favori par train
 
 /* --- POST --- */
+router.post("/api/reviews", validator.validateReview, reviewControllers.add); // Ajouter un commentaire
 router.post("/api/favorites", favoriteControllers.add); // Ajouter un favoris
 router.post("/api/imageavatars", imageAvatarControllers.add); // Ajouter un avatar
 router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une image d'un train
 router.post("/api/trains", trainControllers.add); // Ajouter un train
 
 /* --- PUT --- */
-router.put("/api/users/:id", userControllers.edit); // Un utilisateur en particulier
+router.put("/api/users/:id", validator.validateUser, userControllers.edit); // Un utilisateur en particulier
 
 /* --- DELETE --- */
 router.delete("/api/favorites/:id", favoriteControllers.destroy); // Supprimer un favoris
@@ -125,7 +125,11 @@ router.post("/api/types", typeControllers.add); // Créer un type de train
 router.post("/api/areas", areaControllers.add); // Créer une région
 
 /* --- PUT --- */
-router.put("/api/reviews/:id", reviewControllers.putReview); // Éditer un commentaire
+router.put(
+  "/api/reviews/:id",
+  validator.validateReview,
+  reviewControllers.putReview
+); // Éditer un commentaire
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
 router.put("/api/trains/images/:id", imageTrainControllers.edit); // Modifier une image

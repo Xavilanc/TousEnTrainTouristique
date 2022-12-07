@@ -1,8 +1,8 @@
-import Header from "@components/Header";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDate } from "../services/DateManager";
+import Header from "../components/Header";
 
 function EditAccount() {
   const [name, setName] = useState(window.localStorage.getItem("name"));
