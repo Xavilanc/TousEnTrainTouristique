@@ -89,7 +89,7 @@ router.post("/api/reviews", validator.validateReview, reviewControllers.add); //
 router.post("/api/favorites", favoriteControllers.add); // Ajouter un favoris
 router.post("/api/imageavatars", imageAvatarControllers.add); // Ajouter un avatar
 router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une image d'un train
-router.post("/api/trains", trainControllers.add); // Ajouter un train
+router.post("/api/trains", validator.validateTrain, trainControllers.add); // Ajouter un train
 
 /* --- PUT --- */
 router.put("/api/users/:id", validator.validateUser, userControllers.edit); // Un utilisateur en particulier
@@ -133,7 +133,7 @@ router.put(
 router.put("/api/types/:id", typeControllers.edit); // Modifier un type de train
 router.put("/api/areas/:id", areaControllers.edit); // Modifier une région
 router.put("/api/trains/images/:id", imageTrainControllers.edit); // Modifier une image
-router.put("/api/trains/:id", trainControllers.update); // Modifier un train
+router.put("/api/trains/:id", validator.validateTrain, trainControllers.update); // Modifier un train
 
 /* --- DELETE --- */
 router.delete("/api/reviews/:id", reviewControllers.destroy); // Supprimer un commentaire
