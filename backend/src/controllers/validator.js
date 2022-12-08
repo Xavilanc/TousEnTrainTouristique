@@ -58,12 +58,17 @@ const validateUpdateUser = [
 ];
 
 const validateReview = [
+  body("review_user_id").isInt().notEmpty(),
+  body("review_train_id").isInt().notEmpty(),
+  body("review_note").isFloat(),
   body("review_comment")
     .isLength({ max: 255 })
     .notEmpty()
     .blacklist("<>")
     .blacklist("/")
     .blacklist("{}"),
+  body("created_on").notEmpty(),
+  body("published").isBoolean().notEmpty(),
   (req, res, next) => {
     const errors = validationResult(req);
 
