@@ -78,7 +78,7 @@ router.put(
 router.use(verifyToken);
 
 /* --- GET --- */
-router.get("/api/users/:id", userControllers.read); // Un utilisateur en particulier
+router.get("/api/users/:id", userControllers.getUserToUpdate); // Un utilisateur en particulier
 router.get("/api/imageavatars/:id", imageAvatarControllers.read); // avatar par user_id
 router.get("/api/favorites", favoriteControllers.getAll); // Tous les favoris
 router.get("/api/users/:id/favorites", favoriteControllers.readByUser); // affichage des favoris sur la page profil
@@ -92,7 +92,11 @@ router.post("/api/trains/images", imageTrainControllers.add); // Ajouter une ima
 router.post("/api/trains", validator.validateTrain, trainControllers.add); // Ajouter un train
 
 /* --- PUT --- */
-router.put("/api/users/:id", validator.validateUser, userControllers.edit); // Un utilisateur en particulier
+router.put(
+  "/api/users/:id",
+  validator.validateUpdateUser,
+  userControllers.edit
+); // Un utilisateur en particulier
 
 /* --- DELETE --- */
 router.delete("/api/favorites/:id", favoriteControllers.destroy); // Supprimer un favoris
