@@ -9,7 +9,6 @@ const validateUser = [
     .blacklist("{}"),
   body("mail")
     .trim()
-    .normalizeEmail()
     .isEmail()
     .withMessage("Invalid mail")
     .isLength({ max: 255 }),
