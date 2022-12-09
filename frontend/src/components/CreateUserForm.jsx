@@ -39,6 +39,7 @@ function CreateUserForm() {
         .post(`${import.meta.env.VITE_BACKEND_URL}/api/users/`, {
           name: userName,
           password: pass,
+          confirmPassword,
           mail: email,
           user_right: 0,
           created_on: getDate(),

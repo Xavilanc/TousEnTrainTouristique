@@ -22,12 +22,19 @@ const validateUser = [
       minSymbols: 1,
     })
     .notEmpty(),
+  body("confirmPassword").custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error("Password confirmation does not match password");
+    }
+    return true;
+  }),
   (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       res.status(422).json({ validationErrors: errors.array() });
     } else {
+      delete req.body.confirmPassword;
       next();
     }
   },
