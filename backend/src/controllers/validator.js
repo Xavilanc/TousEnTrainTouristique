@@ -11,7 +11,8 @@ const validateUser = [
     .trim()
     .isEmail()
     .withMessage("Invalid mail")
-    .isLength({ max: 255 }),
+    .isLength({ max: 255 })
+    .notEmpty(),
   body("password")
     .isStrongPassword({
       minLength: 8,
@@ -21,12 +22,14 @@ const validateUser = [
       minSymbols: 1,
     })
     .notEmpty(),
-  body("confirmPassword").custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error("Password confirmation does not match password");
-    }
-    return true;
-  }),
+  body("confirmPassword")
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Password confirmation does not match password");
+      }
+      return true;
+    })
+    .notEmpty(),
   (req, res, next) => {
     const errors = validationResult(req);
 
